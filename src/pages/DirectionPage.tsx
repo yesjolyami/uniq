@@ -28,19 +28,19 @@ const countriesData: Record<string, CountryInfo> = {
         title: 'Учеба в Японии',
         description: 'Откройте для себя престижные языковые школы и университеты. Погружение в культуру и язык в идеальной среде для академического роста.',
         icon: GraduationCap,
-        image: 'https://images.unsplash.com/photo-1542055990-2521eab93258?q=80&w=2938&auto=format&fit=crop'
+        image: 'learn.jpg'
       },
       {
         title: 'Работа в Японии',
         description: 'Легальное трудоустройство в стране с высочайшим уровнем жизни. Вакансии для специалистов и начинающих.',
         icon: Briefcase,
-        image: 'https://images.unsplash.com/photo-1525230071276-4a87f42f469e?q=80&w=2940&auto=format&fit=crop'
+        image: 'tourism.jpg'
       },
       {
         title: 'Туризм и отдых',
         description: 'Незабываемые впечатления от древних храмов Киото до неоновых улиц Токио. Индивидуальные и групповые туры.',
         icon: Plane,
-        image: 'https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=2940&auto=format&fit=crop'
+        image: 'work.jpg'
       }
     ]
   },
@@ -54,19 +54,19 @@ const countriesData: Record<string, CountryInfo> = {
         title: 'Учеба в Германии',
         description: 'Бесплатное высшее образование или недорогие языковые курсы. Дипломы, которые признаются во всем мире.',
         icon: GraduationCap,
-        image: 'https://images.unsplash.com/photo-1525251649969-ce47ed2261ea?q=80&w=2940&auto=format&fit=crop'
+        image: 'learn_germany.jpg'
       },
       {
         title: 'Работа в Германии',
         description: 'Востребованные профессии, высокие зарплаты и возможность получить Голубую карту ЕС.',
         icon: Briefcase,
-        image: 'https://images.unsplash.com/photo-1529154036614-a60975f5c760?q=80&w=2948&auto=format&fit=crop'
+        image: 'work_germany.jpg'
       },
       {
         title: 'Туризм и отдых',
         description: 'От замков Баварии до современного Берлина. Мы подберем для вас лучший тур.',
         icon: Plane,
-        image: 'https://images.unsplash.com/photo-1534346061329-a1b7e51c8a16?q=80&w=2940&auto=format&fit=crop'
+        image: 'tourism_germany.jpg'
       }
     ]
   }

@@ -1,6 +1,5 @@
 import { CheckCircle2, Globe2, Users, Map, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
-import React from 'react';
 
 const benefits = [
   'Опыт и профессионализм с 2019 года',

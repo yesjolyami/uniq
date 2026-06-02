@@ -27,17 +27,12 @@ export default function Header() {
       <header className="fixed w-full top-0 bg-white z-50 shadow-[0_4px_30px_rgb(0,0,0,0.03)] border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative z-50 bg-white">
           <Link to="/" className="flex items-center gap-3 cursor-pointer group" onClick={() => window.scrollTo(0, 0)}>
-            <div className="flex items-center justify-center w-11 h-11 bg-white border border-gray-100 rounded-full font-black text-lg tracking-tighter shadow-md">
+            <div className="flex items-center justify-center w-11 h-11 font-black text-lg tracking-tighter ">
               <span className="text-[#f5963b]">U</span>
               <span className="text-[#e62020]">K</span>
               <span className="text-[#e62020]">G</span>
             </div>
-            <div className="flex flex-col justify-center translate-y-0.5">
-              <span className="font-bold text-xl leading-none text-primary tracking-wide">UNIQUE ASIA</span>
-              <span className="text-[0.55rem] text-primary/70 font-medium uppercase tracking-[0.2em] leading-tight mt-1">
-                Международные возможности
-              </span>
-            </div>
+ 
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">

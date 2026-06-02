@@ -1,5 +1,4 @@
-import { Globe, Mail, MapPin, Phone, Instagram } from 'lucide-react';
-import React from 'react';
+import { Mail, MapPin, Phone, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -44,11 +43,7 @@ export default function Footer() {
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">Япония</a></li>
                   <li><a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">Германия</a></li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">Турция</a>
                   </li>
-                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">ОАЭ</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">США</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">Другие страны</a></li>
             </ul>
           </div>
 
@@ -57,7 +52,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-gray-400" />
-                <a href="tel:+77771234567" className="text-gray-300 hover:text-white transition-colors text-sm">+7 777 123 45 67</a>
+                <a href="tel:+77771234567" className="text-gray-300 hover:text-white transition-colors text-sm">+996 508 979 747</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-gray-400" />
@@ -65,11 +60,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Instagram className="w-5 h-5 text-gray-400" />
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">@uniqueasia.company</a>
+                <a href="https://www.instagram.com/unique_asia_kg" className="text-gray-300 hover:text-white transition-colors text-sm">@unique_asia_kg</a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gray-400 shrink-0" />
-                <span className="text-gray-300 text-sm">Алматы, Казахстан</span>
+                <span className="text-gray-300 text-sm">Бишкек, Кыргызстан</span>
               </li>
             </ul>
           </div>

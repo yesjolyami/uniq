@@ -52,11 +52,11 @@ export default function CTA() {
     <section id="cta" className="relative py-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2842&auto=format&fit=crop" 
+          src="cta.png" 
           alt="Freedom Mountains" 
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/95 via-white/80 to-transparent sm:from-white/95 sm:via-white/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/95 via-white/80 to-transparent sm:from-white/35 sm:via-white/20"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -71,7 +71,7 @@ export default function CTA() {
             <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6 leading-tight">
               Готовы к новым <span className="block mt-1">возможностям?</span>
             </h2>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed font-medium">
+            <p className="text-lg text-black-700 mb-8 leading-relaxed font-medium">
               Оставьте заявку прямо сейчас — и наши специалисты свяжутся с вами для бесплатной консультации!
             </p>
           </motion.div>

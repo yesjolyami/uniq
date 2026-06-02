@@ -1,6 +1,5 @@
 import { Briefcase, Plane, FileText, Ticket, GraduationCap, Headphones } from 'lucide-react';
 import { motion } from 'motion/react';
-import React from 'react';
 
 const services = [
   {
