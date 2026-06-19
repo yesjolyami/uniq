@@ -3,11 +3,76 @@
 
 @theme {
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #15171a;
-  --color-primary-light: #2a2e35;
+  --color-primary: #27272a;
+  --color-primary-light: #3f3f46;
+  --color-brand: #e62020;
+  --color-brand-soft: #fff0eb;
+  --color-sand: #f8fafc;
+  --color-sand-light: #ffffff;
+  --color-cream: #fbf6f0;
+  --color-cream-deep: #f3e7da;
+  --color-cocoa: #725447;
 }
 
 body {
   font-family: var(--font-sans);
   color: #1f2937;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  color: #27272a;
+  background: #f7c4ad;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #e62020;
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+a,
+label {
+  overflow-wrap: anywhere;
+}
+
+html[lang="de"] {
+  hyphens: auto;
+}
+
+@layer components {
+  .admin-input {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    padding: 0.75rem 0.875rem;
+    font-size: 0.8125rem;
+    color: #27272a;
+    transition: border-color 150ms, background-color 150ms;
+  }
+
+  .admin-input:focus {
+    border-color: #e62020;
+    background: #ffffff;
+    outline: none;
+  }
 }

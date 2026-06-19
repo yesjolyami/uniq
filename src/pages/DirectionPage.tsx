@@ -3,6 +3,7 @@ import { Briefcase, Plane, GraduationCap } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLocation } from 'react-router-dom';
 import CTA from '../components/CTA';
+import { useI18n } from '../i18n/I18nContext';
 
 interface CountryInfo {
   id: string;
@@ -75,6 +76,7 @@ const countriesData: Record<string, CountryInfo> = {
 export default function DirectionPage({ countryId }: { countryId: 'japan' | 'germany' }) {
   const data = countriesData[countryId];
   const { pathname } = useLocation();
+  const { t } = useI18n();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -84,25 +86,25 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
 
   return (
     <main className="pt-20">
-      <section className="relative py-24 lg:py-32 overflow-hidden bg-primary">
+      <section className="relative overflow-hidden bg-slate-50 py-24 lg:py-32">
         <div className="absolute inset-0 z-0">
-          <img src={data.heroImage} alt={data.title} className="w-full h-full object-cover mix-blend-overlay opacity-30" />
+          <img src={data.heroImage} alt={t(data.title)} className="h-full w-full object-cover opacity-25 mix-blend-multiply" />
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 text-center text-primary sm:px-6 lg:px-8">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl lg:text-7xl font-black mb-6"
           >
-            {data.title}
+            {t(data.title)}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto"
+            className="mx-auto max-w-2xl text-lg text-gray-600 md:text-xl"
           >
-            {data.subtitle}
+            {t(data.subtitle)}
           </motion.p>
         </div>
       </section>
@@ -120,8 +122,8 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
               >
                 <div className="w-full lg:w-1/2">
                   <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative group">
-                    <img src={opp.image} alt={opp.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <img src={opp.image} alt={t(opp.title)} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#4b3830]/55 to-transparent"></div>
                     <div className="absolute bottom-6 left-6 text-white flex items-center gap-3">
                       <div className="bg-[#e62020] p-3 rounded-full">
                         <opp.icon className="w-6 h-6" />
@@ -130,13 +132,13 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
                   </div>
                 </div>
                 <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                  <h2 className="text-3xl font-bold text-primary mb-4">{opp.title}</h2>
-                  <p className="text-gray-600 text-lg leading-relaxed mb-8">{opp.description}</p>
+                  <h2 className="text-3xl font-bold text-primary mb-4">{t(opp.title)}</h2>
+                  <p className="text-gray-600 text-lg leading-relaxed mb-8">{t(opp.description)}</p>
                   <button 
                     onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
                     className="inline-flex items-center justify-center w-fit bg-gradient-to-r from-[#f5963b] to-[#e62020] hover:opacity-90 text-white px-8 py-3.5 rounded-full font-semibold transition-all shadow-md"
                   >
-                    Узнать больше
+                    {t('Узнать больше')}
                   </button>
                 </div>
               </motion.div>

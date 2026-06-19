@@ -1,61 +1,221 @@
-import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight, FileCheck2, MessageCircle } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { siteContentApi } from '../api/siteContent';
+import { useI18n } from '../i18n/I18nContext';
+import { defaultSiteContent, type SiteContent } from '../types/siteContent';
+
+const slides = [
+  { image: '/hero.png', alt: 'Путешественники на фоне японского храма', position: 'object-center md:object-right' },
+  { image: '/cta.png', alt: 'Горный маршрут в Кыргызстане', position: 'object-center' },
+  { image: '/tourism_germany.jpg', alt: 'Путешествие по Германии', position: 'object-center' },
+  { image: '/learn_germany.jpg', alt: 'Международная языковая программа', position: 'object-center' },
+];
 
 export default function Hero() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [content, setContent] = useState<SiteContent>(defaultSiteContent);
+  const { t } = useI18n();
+  const hero = content.hero;
+
+  useEffect(() => {
+    siteContentApi.getPublic().then(setContent).catch(() => undefined);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % slides.length);
+    }, 5500);
+
+    return () => window.clearInterval(interval);
+  }, [isPaused]);
+
+  const showPrevious = () => {
+    setActiveSlide((current) => (current - 1 + slides.length) % slides.length);
+  };
+
+  const showNext = () => {
+    setActiveSlide((current) => (current + 1) % slides.length);
+  };
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section className="relative flex items-center min-h-[100svh] md:min-h-[85vh] pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-slate-50">
+    <section
+      className="relative flex min-h-[82svh] items-end overflow-hidden bg-[#f7f4ef] pb-20 pt-24 md:min-h-[78vh] md:items-center md:pb-24 md:pt-32"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
+      aria-roledescription={t('слайдер')}
+      aria-label={t('Основные направления Unique Asia')}
+    >
       <div className="absolute inset-0 z-0">
-        <img 
-          src="hero.png" 
-          alt="Travel Background" 
-          fetchPriority="high"
-          className="w-full h-full object-cover object-center md:object-right"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-transparent md:bg-gradient-to-r md:from-white/75 md:via-white/30 md:to-transparent"></div>
+        <AnimatePresence initial={false}>
+          <motion.img
+            key={slides[activeSlide].image}
+            src={slides[activeSlide].image}
+            alt={t(slides[activeSlide].alt)}
+            fetchPriority={activeSlide === 0 ? 'high' : 'auto'}
+            initial={{ opacity: 0, scale: 1.03 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ opacity: { duration: 0.8 }, scale: { duration: 5.5, ease: 'linear' } }}
+            className={`absolute inset-0 h-full w-full object-cover ${slides[activeSlide].position}`}
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#f7f4ef_0%,rgba(247,244,239,.92)_42%,rgba(247,244,239,.38)_100%)]" />
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-2xl">
-          <motion.h1 
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-end gap-8 lg:grid-cols-[0.92fr_0.42fr] lg:items-center">
+        <div className="max-w-3xl text-primary">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.16em] text-brand"
+          >
+            <span className="h-px w-8 bg-brand" />
+            {t(hero.eyebrow)}
+          </motion.span>
+
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.15] tracking-tight mb-6"
+            className="mb-5 max-w-4xl text-4xl font-black leading-[1.05] sm:text-5xl lg:text-[3.5rem]"
           >
-            UNIQUE ASIA — 
-            <span className="block py-1 font-black text-transparent bg-clip-text bg-gradient-to-r from-[#f5963b] to-[#e62020]">
-              ваш надежный партнер
-            </span>
-            в мире международных возможностей.
+            {t(hero.title)}
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg text-gray-900 mb-8 sm:mb-10 leading-relaxed max-w-[500px]"
+            className="mb-7 max-w-2xl text-sm leading-7 text-gray-700 sm:text-base"
           >
-            С 2019 года мы помогаем людям открывать новые горизонты через путешествия, образование и работу за рубежом.
+            {t(hero.subtitle)}
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.32 }}
+            className="mb-7 flex flex-wrap gap-2"
+          >
+            {['Туризм', 'Трудоустройство', 'Обучение'].map((item) => (
+              <button
+                key={item}
+                type="button"
+                onClick={() => scrollTo('услуги')}
+                className="rounded-full border border-primary/10 bg-white/35 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-primary transition-colors hover:border-brand hover:text-brand"
+              >
+                {t(item)}
+              </button>
+            ))}
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+            className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
           >
-            <button 
-              onClick={() => document.getElementById('услуги')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto bg-gradient-to-r from-[#f5963b] to-[#e62020] hover:opacity-90 active:scale-[0.98] text-white px-8 py-3.5 rounded-full text-base font-semibold transition-all shadow-lg hover:shadow-xl"
+            <button
+              type="button"
+              onClick={() => scrollTo('cta')}
+              className="w-full rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand active:scale-[0.98] sm:w-auto"
             >
-              Наши услуги
+              {t(hero.primaryCta)}
             </button>
-            <button 
-              onClick={() => document.getElementById('о компании')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto bg-white/30 backdrop-blur-sm sm:bg-transparent border border-slate-500 sm:border-slate-800 hover:bg-slate-50 hover:border-slate-900 text-slate-900 px-8 py-3.5 rounded-full text-base font-semibold transition-all active:scale-[0.98]"
+            <button
+              type="button"
+              onClick={() => scrollTo('услуги')}
+              className="w-full rounded-full border border-primary/30 bg-transparent px-7 py-3.5 text-sm font-bold text-primary transition-all hover:border-brand hover:text-brand active:scale-[0.98] sm:w-auto"
             >
-              О компании
+              {t(hero.secondaryCta)}
             </button>
+            <a
+              href="https://wa.me/996508979747"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#159447]/35 bg-transparent px-7 py-3.5 text-sm font-bold text-[#159447] transition-all hover:bg-white/60 active:scale-[0.98] sm:w-auto"
+            >
+              <MessageCircle className="h-4 w-4" />
+              {t(hero.whatsappLabel)}
+            </a>
           </motion.div>
+        </div>
+
+        <motion.aside
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.28 }}
+          className="max-w-md rounded-[1.5rem] border border-primary/10 bg-white/56 p-5 text-primary shadow-sm backdrop-blur-sm lg:ml-auto"
+        >
+          <div className="mb-6 flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-brand/30 text-brand">
+              <FileCheck2 className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="mb-1 text-[11px] font-black uppercase tracking-[0.18em] text-brand">{t('Рабочая зона')}</p>
+              <h2 className="text-lg font-black leading-tight">{t('Документы, маршрут и связь с менеджером в одном процессе')}</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 overflow-hidden rounded-2xl border border-primary/10">
+            {hero.facts.map((fact) => (
+              <div key={fact.value} className="border-r border-primary/10 px-3 py-4 last:border-r-0">
+                <strong className="block text-xl font-black text-primary">{fact.value}</strong>
+                <span className="mt-2 block text-[11px] font-semibold leading-4 text-gray-600">{t(fact.label)}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 text-xs leading-6 text-gray-600">
+            {t('Для трудоустройства отдельно фиксируем страну, работодателя, контракт и список документов до покупки билетов.')}
+          </p>
+        </motion.aside>
+        </div>
+
+        <div className="absolute bottom-[-1.25rem] left-4 right-4 flex items-center justify-between sm:left-6 sm:right-6 md:bottom-[-2rem] lg:left-auto lg:right-8 lg:w-auto lg:gap-5">
+          <div className="flex items-center gap-2" role="tablist" aria-label={t('Выбор слайда')}>
+            {slides.map((slide, index) => (
+              <button
+                key={slide.image}
+                type="button"
+                role="tab"
+                aria-selected={activeSlide === index}
+                aria-label={`${t('Показать слайд')} ${index + 1}`}
+                onClick={() => setActiveSlide(index)}
+                className={`h-1.5 rounded-full transition-all ${
+                  activeSlide === index ? 'w-10 bg-brand' : 'w-5 bg-primary/20 hover:bg-primary/40'
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={showPrevious}
+              aria-label={t('Предыдущий слайд')}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-[#f4f1eb]/80 text-primary shadow-sm backdrop-blur transition-colors hover:border-brand hover:text-brand"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={showNext}
+              aria-label={t('Следующий слайд')}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white shadow-md transition-colors hover:bg-brand"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

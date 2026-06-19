@@ -1,5 +1,6 @@
 import { CheckCircle2, Globe2, Users, Map, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useI18n } from '../i18n/I18nContext';
 
 const benefits = [
   'Опыт и профессионализм с 2019 года',
@@ -17,6 +18,8 @@ const stats = [
 ];
 
 export default function WhyUs() {
+  const { t } = useI18n();
+
   return (
     <section id="преимущества" className="relative py-24 overflow-hidden bg-primary">
       <div className="absolute inset-0 z-0">
@@ -38,7 +41,7 @@ export default function WhyUs() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-white mb-6 leading-tight">
-              Почему выбирают <span className="block mt-1">UNIQUE ASIA?</span>
+              {t('Почему выбирают')} <span className="block mt-1">UNIQUE ASIA?</span>
             </h2>
             <div className="flex items-center mb-10">
               <div className="h-[1px] w-8 bg-gray-600"></div>
@@ -50,7 +53,7 @@ export default function WhyUs() {
               {benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start gap-4">
                   <CheckCircle2 className="w-[22px] h-[22px] text-[#f5963b] shrink-0 mt-[3px]" strokeWidth={2} />
-                  <span className="text-gray-100 text-[16px] leading-relaxed">{benefit}</span>
+                  <span className="text-gray-100 text-[16px] leading-relaxed">{t(benefit)}</span>
                 </li>
               ))}
             </ul>
@@ -69,9 +72,9 @@ export default function WhyUs() {
                 <stat.icon className="w-10 h-10 text-white mb-4 opacity-90" strokeWidth={1} />
                 <div className="text-[2rem] font-bold text-white mb-1 flex items-baseline gap-1">
                   {stat.value}
-                  {stat.label && <span className="text-[1.1rem] font-medium">{stat.label}</span>}
+                  {stat.label && <span className="text-[1.1rem] font-medium">{t(stat.label)}</span>}
                 </div>
-                <div className="text-gray-300 text-[13px] font-medium tracking-wide uppercase">{stat.sublabel}</div>
+                <div className="text-gray-300 text-[13px] font-medium tracking-wide uppercase">{t(stat.sublabel)}</div>
               </motion.div>
             ))}
           </div>

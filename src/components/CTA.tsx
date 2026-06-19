@@ -1,27 +1,29 @@
 import { motion } from 'motion/react';
 import React, { useState } from 'react';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 export default function CTA() {
   const [formData, setFormData] = useState({ name: '', phone: '' });
   const [errors, setErrors] = useState({ name: '', phone: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { t } = useI18n();
 
   const validate = () => {
     let valid = true;
     const newErrors = { name: '', phone: '' };
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Пожалуйста, введите ваше имя';
+      newErrors.name = t('Пожалуйста, введите ваше имя');
       valid = false;
     }
 
     const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Пожалуйста, введите номер телефона';
+      newErrors.phone = t('Пожалуйста, введите номер телефона');
       valid = false;
     } else if (!phoneRegex.test(formData.phone)) {
-      newErrors.phone = 'Некорректный формат телефона';
+      newErrors.phone = t('Некорректный формат телефона');
       valid = false;
     }
 
@@ -49,18 +51,18 @@ export default function CTA() {
   };
 
   return (
-    <section id="cta" className="relative py-24 overflow-hidden">
+    <section id="cta" className="relative overflow-hidden bg-slate-50 py-28 md:py-36">
       <div className="absolute inset-0 z-0">
         <img 
           src="cta.png" 
           alt="Freedom Mountains" 
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/95 via-white/80 to-transparent sm:from-white/35 sm:via-white/20"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#f8fafc_0%,rgba(248,250,252,.94)_48%,rgba(248,250,252,.36)_100%)]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_0.72fr]">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -68,11 +70,12 @@ export default function CTA() {
             transition={{ duration: 0.8 }}
             className="max-w-xl"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6 leading-tight">
-              Готовы к новым <span className="block mt-1">возможностям?</span>
+            <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Заявка без продажи в лоб')}</span>
+            <h2 className="mb-5 text-3xl font-black leading-tight text-primary md:text-4xl">
+              {t('Сначала уточняем задачу, потом предлагаем маршрут действий')}
             </h2>
-            <p className="text-lg text-black-700 mb-8 leading-relaxed font-medium">
-              Оставьте заявку прямо сейчас — и наши специалисты свяжутся с вами для бесплатной консультации!
+            <p className="max-w-lg text-sm font-medium leading-6 text-gray-600">
+              {t('Менеджер спросит страну, цель поездки, сроки и текущие документы. После этого вы получите ближайший понятный шаг, а не общий рекламный ответ.')}
             </p>
           </motion.div>
 
@@ -81,28 +84,31 @@ export default function CTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 relative overflow-hidden max-w-md mx-auto w-full lg:ml-auto"
+            className="relative mx-auto w-full max-w-md overflow-hidden rounded-[1.35rem] border border-gray-200 bg-white p-8 shadow-sm lg:ml-auto sm:p-9"
           >
             {isSubmitted ? (
               <div className="flex flex-col items-center justify-center h-full min-h-[280px] text-center">
-                <CheckCircle2 className="w-16 h-16 text-green-500 mb-4" />
-                <h3 className="text-2xl font-bold text-primary mb-2">Заявка отправлена!</h3>
-                <p className="text-gray-600">Мы свяжемся с вами в ближайшее время.</p>
+                <CheckCircle2 className="mb-4 h-16 w-16 text-brand" />
+                <h3 className="text-2xl font-bold text-primary mb-2">{t('Заявка отправлена!')}</h3>
+                <p className="text-gray-600">{t('Мы свяжемся с вами в ближайшее время.')}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                <h3 className="text-xl font-bold text-primary mb-4 text-center">Оставить заявку</h3>
+                <div className="mb-5">
+                  <span className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-brand">{t('Бесплатная консультация')}</span>
+                  <h3 className="min-h-8 text-xl font-black text-primary">{t('Оставить заявку')}</h3>
+                </div>
                 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Ваше имя</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">{t('Ваше имя')}</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-primary'} focus:outline-none focus:ring-2 transition-all`}
-                    placeholder="Иван Иванов"
+                    className={`w-full rounded-xl border bg-slate-50 px-4 py-3.5 ${errors.name ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-brand focus:outline-none`}
+                    placeholder={t('Иван Иванов')}
                   />
                   {errors.name && (
                     <p className="mt-1.5 text-sm text-red-500 flex items-center gap-1">
@@ -112,14 +118,14 @@ export default function CTA() {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Номер телефона</label>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">{t('Номер телефона')}</label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-primary'} focus:outline-none focus:ring-2 transition-all`}
+                    className={`w-full rounded-xl border bg-slate-50 px-4 py-3.5 ${errors.phone ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-brand focus:outline-none`}
                     placeholder="+996 555 000 000"
                   />
                   {errors.phone && (
@@ -132,13 +138,13 @@ export default function CTA() {
                 <div className="pt-2">
                   <button 
                     type="submit" 
-                    className="w-full bg-primary hover:bg-primary-light text-white px-8 py-3.5 rounded-xl text-[15px] font-semibold transition-all shadow-md hover:shadow-lg"
+                    className="w-full rounded-xl bg-primary px-8 py-3.5 text-[14px] font-bold text-white shadow-md transition-colors hover:bg-brand"
                   >
-                    Отправить
+                    {t('Отправить')}
                   </button>
                 </div>
                 <p className="text-xs text-gray-400 text-center mt-4">
-                  Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.
+                  {t('Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.')}
                 </p>
               </form>
             )}

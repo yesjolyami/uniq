@@ -1,6 +1,6 @@
 {
   "name": "UNIQUE ASIA",
-  "description": "Лендинг международного агентства UNIQUE ASIA, помогающего с трудоустройством, визами и образованием за рубежом.",
+  "description": "Сайт Unique Asia о туризме, обучении, визовой поддержке, авиабилетах и легальном трудоустройстве за рубежом.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
