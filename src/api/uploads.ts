@@ -25,11 +25,15 @@ export async function uploadAsset(token: string, file: File): Promise<UploadResu
   });
 
   if (!response.ok) {
+    const payload = (await response.json().catch(() => null)) as { message?: string } | null;
+
     if (response.status === 413) {
-      throw new Error(`Файл слишком большой. Максимальный размер видео: ${maxUploadMegabytes} МБ`);
+      throw new Error(
+        payload?.message ||
+        `Сервер отклонил файл по лимиту размера. Для видео до ${maxUploadMegabytes} МБ нужно увеличить client_max_body_size в Nginx и перезагрузить Nginx.`,
+      );
     }
 
-    const payload = (await response.json().catch(() => null)) as { message?: string } | null;
     throw new Error(payload?.message || 'Не удалось загрузить файл');
   }
 
