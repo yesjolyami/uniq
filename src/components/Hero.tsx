@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { siteContentApi } from '../api/siteContent';
 import { useI18n } from '../i18n/I18nContext';
 import { defaultSiteContent, type SiteContent } from '../types/siteContent';
+import { getLocalizedText } from '../types/localized';
 
 const slides = [
   { image: '/hero.png', alt: 'Путешественники на фоне японского храма', position: 'object-center md:object-right' },
@@ -16,8 +17,9 @@ export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const hero = content.hero;
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
 
   useEffect(() => {
     siteContentApi.getPublic().then(setContent).catch(() => undefined);
@@ -81,7 +83,7 @@ export default function Hero() {
             className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.16em] text-brand"
           >
             <span className="h-px w-8 bg-brand" />
-            {t(hero.eyebrow)}
+            {text(hero.eyebrow)}
           </motion.span>
 
           <motion.h1
@@ -90,7 +92,7 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="mb-5 max-w-4xl text-4xl font-black leading-[1.05] sm:text-5xl lg:text-[3.5rem]"
           >
-            {t(hero.title)}
+            {text(hero.title)}
           </motion.h1>
 
           <motion.p
@@ -99,7 +101,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-7 max-w-2xl text-sm leading-7 text-gray-700 sm:text-base"
           >
-            {t(hero.subtitle)}
+            {text(hero.subtitle)}
           </motion.p>
 
           <motion.div
@@ -131,14 +133,14 @@ export default function Hero() {
               onClick={() => scrollTo('cta')}
               className="w-full rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand active:scale-[0.98] sm:w-auto"
             >
-              {t(hero.primaryCta)}
+              {text(hero.primaryCta)}
             </button>
             <button
               type="button"
               onClick={() => scrollTo('услуги')}
               className="w-full rounded-full border border-primary/30 bg-transparent px-7 py-3.5 text-sm font-bold text-primary transition-all hover:border-brand hover:text-brand active:scale-[0.98] sm:w-auto"
             >
-              {t(hero.secondaryCta)}
+              {text(hero.secondaryCta)}
             </button>
             <a
               href="https://wa.me/996508979747"
@@ -147,7 +149,7 @@ export default function Hero() {
               className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#159447]/35 bg-transparent px-7 py-3.5 text-sm font-bold text-[#159447] transition-all hover:bg-white/60 active:scale-[0.98] sm:w-auto"
             >
               <MessageCircle className="h-4 w-4" />
-              {t(hero.whatsappLabel)}
+              {text(hero.whatsappLabel)}
             </a>
           </motion.div>
         </div>
@@ -171,7 +173,7 @@ export default function Hero() {
             {hero.facts.map((fact) => (
               <div key={fact.value} className="border-r border-primary/10 px-3 py-4 last:border-r-0">
                 <strong className="block text-xl font-black text-primary">{fact.value}</strong>
-                <span className="mt-2 block text-[11px] font-semibold leading-4 text-gray-600">{t(fact.label)}</span>
+                <span className="mt-2 block text-[11px] font-semibold leading-4 text-gray-600">{text(fact.label)}</span>
               </div>
             ))}
           </div>

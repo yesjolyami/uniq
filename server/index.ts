@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import express, { type NextFunction, type Request, type Response } from 'express';
 import multer from 'multer';
 import { newsCategories, type NewsInput } from '../src/types/news';
+import { localeCodes, normalizeLocalizedText } from '../src/types/localized';
 import { createNews, deleteNews, getAllNews, getPublishedNews, updateNews } from './newsStore';
 import { getSiteContent, normalizeSiteContent, updateSiteContent } from './siteContentStore';
 
@@ -109,18 +110,21 @@ function validateNewsInput(value: unknown): { data?: NewsInput; message?: string
   }
 
   const input = value as Record<string, unknown>;
-  const title = typeof input.title === 'string' ? input.title.trim() : '';
-  const excerpt = typeof input.excerpt === 'string' ? input.excerpt.trim() : '';
+  const title = normalizeLocalizedText(input.title, '', 180);
+  const excerpt = normalizeLocalizedText(input.excerpt, '', 600);
   const category = input.category;
   const date = typeof input.date === 'string' ? input.date : '';
   const image = typeof input.image === 'string' ? input.image.trim() : '';
   const order = Number(input.order);
 
-  if (title.length < 3 || title.length > 180) {
-    return { message: 'Заголовок должен содержать от 3 до 180 символов' };
+  const titleErrorLocale = localeCodes.find((locale) => title[locale].length < 3 || title[locale].length > 180);
+  const excerptErrorLocale = localeCodes.find((locale) => excerpt[locale].length < 10 || excerpt[locale].length > 600);
+
+  if (titleErrorLocale) {
+    return { message: 'Заголовок должен быть заполнен на всех языках и содержать от 3 до 180 символов' };
   }
-  if (excerpt.length < 10 || excerpt.length > 600) {
-    return { message: 'Описание должно содержать от 10 до 600 символов' };
+  if (excerptErrorLocale) {
+    return { message: 'Описание должно быть заполнено на всех языках и содержать от 10 до 600 символов' };
   }
   if (!newsCategories.includes(category as NewsInput['category'])) {
     return { message: 'Выберите корректную категорию' };

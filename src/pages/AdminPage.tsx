@@ -22,20 +22,103 @@ import {
 import { newsApi } from '../api/news';
 import { siteContentApi } from '../api/siteContent';
 import { maxUploadBytes, maxUploadMegabytes, uploadAsset } from '../api/uploads';
-import { newsCategories, type NewsInput, type NewsItem } from '../types/news';
+import { createEmptyNewsText, newsCategories, type NewsInput, type NewsItem } from '../types/news';
 import { defaultSiteContent, type SiteContent } from '../types/siteContent';
+import {
+  createLocalizedText,
+  getLocalizedText,
+  languageLabels,
+  localeCodes,
+  type Locale,
+  type LocalizedText,
+} from '../types/localized';
 
 const tokenKey = 'unique-asia-admin-token';
 
 const emptyForm = (): NewsInput => ({
-  title: '',
-  excerpt: '',
+  ...createEmptyNewsText(),
   category: 'Туризм',
   date: new Date().toISOString().slice(0, 10),
   image: '/tourism.jpg',
   published: true,
   order: 1,
 });
+
+type LocalizedFieldProps = {
+  label: string;
+  value: LocalizedText;
+  onChange: (value: LocalizedText) => void;
+  multiline?: boolean;
+  rows?: number;
+  minLength?: number;
+  maxLength?: number;
+  placeholder?: string;
+};
+
+function LocalizedField({
+  label,
+  value,
+  onChange,
+  multiline = false,
+  rows = 2,
+  minLength,
+  maxLength,
+  placeholder,
+}: LocalizedFieldProps) {
+  const updateLocale = (locale: Locale, nextValue: string) => {
+    onChange({ ...value, [locale]: nextValue });
+  };
+
+  return (
+    <fieldset className="space-y-2">
+      <legend className="mb-1.5 block text-xs font-bold text-gray-700">{label}</legend>
+      <div className="grid gap-2">
+        {localeCodes.map((locale) => (
+          <label key={locale} className="grid gap-1 sm:grid-cols-[82px_1fr] sm:items-start">
+            <span className="pt-3 text-[11px] font-black uppercase tracking-[0.12em] text-gray-400">
+              {languageLabels[locale]}
+            </span>
+            {multiline ? (
+              <textarea
+                value={value[locale]}
+                onChange={(event) => updateLocale(locale, event.target.value)}
+                required
+                minLength={minLength}
+                maxLength={maxLength}
+                rows={rows}
+                className="admin-input resize-y"
+                placeholder={locale === 'ru' ? placeholder : `${placeholder || label} (${languageLabels[locale]})`}
+              />
+            ) : (
+              <input
+                value={value[locale]}
+                onChange={(event) => updateLocale(locale, event.target.value)}
+                required
+                minLength={minLength}
+                maxLength={maxLength}
+                className="admin-input"
+                placeholder={locale === 'ru' ? placeholder : `${placeholder || label} (${languageLabels[locale]})`}
+              />
+            )}
+          </label>
+        ))}
+      </div>
+      {maxLength && (
+        <span className="block text-right text-[10px] text-gray-400">
+          RU: {value.ru.length}/{maxLength}
+        </span>
+      )}
+    </fieldset>
+  );
+}
+
+function localizedSearchValues(value: string | Partial<LocalizedText>) {
+  return typeof value === 'string' ? [value] : localeCodes.map((locale) => value[locale] || '');
+}
+
+function isLocalizedComplete(value: Partial<LocalizedText>) {
+  return localeCodes.every((locale) => Boolean(value[locale]?.trim()));
+}
 
 type UploadFieldProps = {
   id: string;
@@ -168,8 +251,8 @@ export default function AdminPage() {
       status === 'all' || (status === 'published' ? item.published : !item.published);
     const matchesQuery =
       !normalizedQuery ||
-      item.title.toLowerCase().includes(normalizedQuery) ||
-      item.excerpt.toLowerCase().includes(normalizedQuery);
+      localizedSearchValues(item.title).some((text) => text.toLowerCase().includes(normalizedQuery)) ||
+      localizedSearchValues(item.excerpt).some((text) => text.toLowerCase().includes(normalizedQuery));
 
     return matchesStatus && matchesQuery;
   });
@@ -203,8 +286,8 @@ export default function AdminPage() {
   const startEditing = (item: NewsItem) => {
     setEditingId(item.id);
     setForm({
-      title: item.title,
-      excerpt: item.excerpt,
+      title: typeof item.title === 'string' ? createLocalizedText(item.title) : item.title,
+      excerpt: typeof item.excerpt === 'string' ? createLocalizedText(item.excerpt) : item.excerpt,
       category: item.category,
       date: item.date,
       image: item.image,
@@ -243,6 +326,23 @@ export default function AdminPage() {
     setError('');
     setNotice('');
 
+    const hasEmptyTranslation =
+      !isLocalizedComplete(siteContent.hero.eyebrow) ||
+      !isLocalizedComplete(siteContent.hero.title) ||
+      !isLocalizedComplete(siteContent.hero.subtitle) ||
+      !isLocalizedComplete(siteContent.hero.primaryCta) ||
+      !isLocalizedComplete(siteContent.hero.secondaryCta) ||
+      !isLocalizedComplete(siteContent.hero.whatsappLabel) ||
+      siteContent.hero.facts.some((fact) => !isLocalizedComplete(fact.label)) ||
+      siteContent.videos.some((video) => !isLocalizedComplete(video.title) || !isLocalizedComplete(video.label)) ||
+      siteContent.gallery.some((image) => !isLocalizedComplete(image.alt));
+
+    if (hasEmptyTranslation) {
+      setIsContentSaving(false);
+      setError('Заполните все текстовые поля на 6 языках перед сохранением сайта.');
+      return;
+    }
+
     try {
       setSiteContent(await siteContentApi.update(token, siteContent));
       setNotice('Контент сайта сохранён');
@@ -253,7 +353,7 @@ export default function AdminPage() {
     }
   };
 
-  const updateHero = (field: keyof SiteContent['hero'], value: string) =>
+  const updateHero = (field: keyof Omit<SiteContent['hero'], 'facts'>, value: LocalizedText) =>
     setSiteContent({ ...siteContent, hero: { ...siteContent.hero, [field]: value } });
 
   const updateFact = (index: number, patch: Partial<SiteContent['hero']['facts'][number]>) => {
@@ -279,7 +379,13 @@ export default function AdminPage() {
       ...siteContent,
       videos: [
         ...siteContent.videos,
-        { title: 'Новое видео', label: 'Unique Asia', image: '/tourism.jpg', videoUrl: '', enabled: true },
+        {
+          title: createLocalizedText('Новое видео'),
+          label: createLocalizedText('Unique Asia'),
+          image: '/tourism.jpg',
+          videoUrl: '',
+          enabled: true,
+        },
       ],
     });
   };
@@ -291,7 +397,7 @@ export default function AdminPage() {
   const addGalleryImage = () => {
     setSiteContent({
       ...siteContent,
-      gallery: [...siteContent.gallery, { src: '/tourism.jpg', alt: 'Фото Unique Asia' }],
+      gallery: [...siteContent.gallery, { src: '/tourism.jpg', alt: createLocalizedText('Фото Unique Asia') }],
     });
   };
 
@@ -322,7 +428,7 @@ export default function AdminPage() {
   };
 
   const handleDelete = async (item: NewsItem) => {
-    if (!window.confirm(`Удалить новость «${item.title}»? Это действие нельзя отменить.`)) return;
+    if (!window.confirm(`Удалить новость «${getLocalizedText(item.title, 'ru')}»? Это действие нельзя отменить.`)) return;
 
     setError('');
     try {
@@ -433,15 +539,24 @@ export default function AdminPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <label className="block">
-              <span className="mb-1.5 block text-xs font-bold text-gray-700">Заголовок</span>
-              <input value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} required minLength={3} maxLength={180} className="admin-input" placeholder="Название новости" />
-            </label>
-            <label className="block">
-              <span className="mb-1.5 block text-xs font-bold text-gray-700">Краткое описание</span>
-              <textarea value={form.excerpt} onChange={(event) => setForm({ ...form, excerpt: event.target.value })} required minLength={10} maxLength={600} rows={4} className="admin-input resize-y" placeholder="Что произошло и почему это важно" />
-              <span className="mt-1 block text-right text-[10px] text-gray-400">{form.excerpt.length}/600</span>
-            </label>
+            <LocalizedField
+              label="Заголовок"
+              value={form.title}
+              onChange={(title) => setForm({ ...form, title })}
+              minLength={3}
+              maxLength={180}
+              placeholder="Название новости"
+            />
+            <LocalizedField
+              label="Краткое описание"
+              value={form.excerpt}
+              onChange={(excerpt) => setForm({ ...form, excerpt })}
+              multiline
+              rows={4}
+              minLength={10}
+              maxLength={600}
+              placeholder="Что произошло и почему это важно"
+            />
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="mb-1.5 block text-xs font-bold text-gray-700">Категория</span>
@@ -526,31 +641,13 @@ export default function AdminPage() {
                   <h3 className="text-sm font-black">Первый экран</h3>
                 </div>
                 <div className="grid gap-4">
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-bold text-gray-700">Надзаголовок</span>
-                    <input value={siteContent.hero.eyebrow} onChange={(event) => updateHero('eyebrow', event.target.value)} className="admin-input" />
-                  </label>
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-bold text-gray-700">Заголовок</span>
-                    <textarea value={siteContent.hero.title} onChange={(event) => updateHero('title', event.target.value)} rows={2} className="admin-input resize-y" />
-                  </label>
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-bold text-gray-700">Короткое описание</span>
-                    <textarea value={siteContent.hero.subtitle} onChange={(event) => updateHero('subtitle', event.target.value)} rows={2} className="admin-input resize-y" />
-                  </label>
+                  <LocalizedField label="Надзаголовок" value={siteContent.hero.eyebrow} onChange={(value) => updateHero('eyebrow', value)} maxLength={120} />
+                  <LocalizedField label="Заголовок" value={siteContent.hero.title} onChange={(value) => updateHero('title', value)} multiline rows={2} maxLength={180} />
+                  <LocalizedField label="Короткое описание" value={siteContent.hero.subtitle} onChange={(value) => updateHero('subtitle', value)} multiline rows={2} maxLength={240} />
                   <div className="grid gap-4 md:grid-cols-3">
-                    <label className="block">
-                      <span className="mb-1.5 block text-xs font-bold text-gray-700">Кнопка 1</span>
-                      <input value={siteContent.hero.primaryCta} onChange={(event) => updateHero('primaryCta', event.target.value)} className="admin-input" />
-                    </label>
-                    <label className="block">
-                      <span className="mb-1.5 block text-xs font-bold text-gray-700">Кнопка 2</span>
-                      <input value={siteContent.hero.secondaryCta} onChange={(event) => updateHero('secondaryCta', event.target.value)} className="admin-input" />
-                    </label>
-                    <label className="block">
-                      <span className="mb-1.5 block text-xs font-bold text-gray-700">WhatsApp</span>
-                      <input value={siteContent.hero.whatsappLabel} onChange={(event) => updateHero('whatsappLabel', event.target.value)} className="admin-input" />
-                    </label>
+                    <LocalizedField label="Кнопка 1" value={siteContent.hero.primaryCta} onChange={(value) => updateHero('primaryCta', value)} maxLength={40} />
+                    <LocalizedField label="Кнопка 2" value={siteContent.hero.secondaryCta} onChange={(value) => updateHero('secondaryCta', value)} maxLength={40} />
+                    <LocalizedField label="WhatsApp" value={siteContent.hero.whatsappLabel} onChange={(value) => updateHero('whatsappLabel', value)} maxLength={40} />
                   </div>
                   <div className="grid gap-4 md:grid-cols-3">
                     {siteContent.hero.facts.map((fact, index) => (
@@ -559,10 +656,7 @@ export default function AdminPage() {
                           <span className="mb-1.5 block text-xs font-bold text-gray-700">Факт {index + 1}</span>
                           <input value={fact.value} onChange={(event) => updateFact(index, { value: event.target.value })} className="admin-input" />
                         </label>
-                        <label className="block">
-                          <span className="mb-1.5 block text-xs font-bold text-gray-700">Подпись</span>
-                          <input value={fact.label} onChange={(event) => updateFact(index, { label: event.target.value })} className="admin-input" />
-                        </label>
+                        <LocalizedField label="Подпись" value={fact.label} onChange={(label) => updateFact(index, { label })} maxLength={80} />
                       </div>
                     ))}
                   </div>
@@ -592,14 +686,12 @@ export default function AdminPage() {
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
-                      <label className="mb-3 block">
-                        <span className="mb-1.5 block text-xs font-bold text-gray-700">Заголовок</span>
-                        <input value={video.title} onChange={(event) => updateVideo(index, { title: event.target.value })} className="admin-input" />
-                      </label>
-                      <label className="mb-3 block">
-                        <span className="mb-1.5 block text-xs font-bold text-gray-700">Метка</span>
-                        <input value={video.label} onChange={(event) => updateVideo(index, { label: event.target.value })} className="admin-input" />
-                      </label>
+                      <div className="mb-3">
+                        <LocalizedField label="Заголовок" value={video.title} onChange={(title) => updateVideo(index, { title })} maxLength={120} />
+                      </div>
+                      <div className="mb-3">
+                        <LocalizedField label="Метка" value={video.label} onChange={(label) => updateVideo(index, { label })} maxLength={80} />
+                      </div>
                       <div className="mb-3">
                         <UploadField
                           id={`video-image-upload-${index}`}
@@ -657,10 +749,7 @@ export default function AdminPage() {
                           onFileSelect={(file) => handleUpload(`gallery-${index}`, file, (url) => updateGalleryImage(index, { src: url }))}
                         />
                       </div>
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-bold text-gray-700">Alt-текст</span>
-                        <input value={image.alt} onChange={(event) => updateGalleryImage(index, { alt: event.target.value })} className="admin-input" />
-                      </label>
+                      <LocalizedField label="Alt-текст" value={image.alt} onChange={(alt) => updateGalleryImage(index, { alt })} maxLength={160} />
                     </div>
                   ))}
                 </div>
@@ -719,7 +808,7 @@ export default function AdminPage() {
               {filteredItems.map((item) => (
                 <article key={item.id} className="overflow-hidden rounded-[1.5rem] border border-black/[0.06] bg-white p-4 shadow-sm sm:p-5">
                   <div className="flex flex-col gap-4 sm:flex-row">
-                    <img src={item.image} alt={item.title} className="h-40 w-full rounded-xl object-cover sm:h-32 sm:w-40" />
+                    <img src={item.image} alt={getLocalizedText(item.title, 'ru')} className="h-40 w-full rounded-xl object-cover sm:h-32 sm:w-40" />
                     <div className="min-w-0 flex-1">
                       <div className="mb-2 flex flex-wrap items-center gap-2">
                         <span className="rounded-full bg-brand-soft px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-brand">{item.category}</span>
@@ -729,8 +818,8 @@ export default function AdminPage() {
                         </span>
                         <span className="text-[10px] font-semibold text-gray-400">Порядок: {item.order}</span>
                       </div>
-                      <h3 className="text-base font-black leading-snug sm:text-lg">{item.title}</h3>
-                      <p className="mt-2 line-clamp-2 text-xs leading-5 text-gray-500">{item.excerpt}</p>
+                      <h3 className="text-base font-black leading-snug sm:text-lg">{getLocalizedText(item.title, 'ru')}</h3>
+                      <p className="mt-2 line-clamp-2 text-xs leading-5 text-gray-500">{getLocalizedText(item.excerpt, 'ru')}</p>
                       <time dateTime={item.date} className="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-gray-400">
                         <CalendarDays className="h-3.5 w-3.5" />
                         {new Intl.DateTimeFormat('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${item.date}T00:00:00`))}

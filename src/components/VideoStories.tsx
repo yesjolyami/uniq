@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { siteContentApi } from '../api/siteContent';
 import { useI18n } from '../i18n/I18nContext';
 import { defaultSiteContent, type SiteContent, type VideoSlot } from '../types/siteContent';
+import { getLocalizedText } from '../types/localized';
 
 function getEmbedUrl(url: string) {
   try {
@@ -35,10 +36,11 @@ function isDirectVideo(url: string) {
 }
 
 export default function VideoStories() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
   const [selectedVideo, setSelectedVideo] = useState<VideoSlot | null>(null);
   const videos = content.videos.filter((video) => video.enabled);
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
 
   useEffect(() => {
     siteContentApi.getPublic().then(setContent).catch(() => undefined);
@@ -66,7 +68,7 @@ export default function VideoStories() {
 
             return (
             <motion.article
-              key={`${video.title}-${index}`}
+              key={`${text(video.title)}-${index}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -76,7 +78,7 @@ export default function VideoStories() {
               <div className="relative aspect-video overflow-hidden">
                 <img
                   src={video.image}
-                  alt={t(video.title)}
+                  alt={text(video.title)}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
@@ -86,15 +88,15 @@ export default function VideoStories() {
                   onClick={() => hasVideo && setSelectedVideo(video)}
                   disabled={!hasVideo}
                   className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-primary shadow-lg transition-colors hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-brand/30 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-white disabled:hover:text-primary"
-                  aria-label={`${t('Открыть видео')}: ${t(video.title)}`}
+                  aria-label={`${t('Открыть видео')}: ${text(video.title)}`}
                 >
                   <Play className="ml-1 h-7 w-7 fill-current" />
                 </button>
               </div>
               <div className="flex items-center justify-between gap-6 p-6">
-                <h3 className="text-xl font-black text-primary">{t(video.title)}</h3>
+                <h3 className="text-xl font-black text-primary">{text(video.title)}</h3>
                 <span className="shrink-0 text-right text-[11px] font-bold uppercase tracking-[0.16em] text-brand">
-                  {t(video.label)}
+                  {text(video.label)}
                 </span>
               </div>
             </motion.article>
@@ -111,7 +113,7 @@ export default function VideoStories() {
             exit={{ opacity: 0 }}
             role="dialog"
             aria-modal="true"
-            aria-label={t(selectedVideo.title)}
+            aria-label={text(selectedVideo.title)}
             className="fixed inset-0 z-[80] flex items-center justify-center bg-primary/80 px-4 py-8 backdrop-blur-sm"
             onClick={() => setSelectedVideo(null)}
           >
@@ -124,8 +126,8 @@ export default function VideoStories() {
             >
               <div className="flex items-center justify-between gap-4 bg-white px-4 py-3 sm:px-5">
                 <div className="min-w-0">
-                  <h3 className="truncate text-sm font-black text-primary sm:text-base">{t(selectedVideo.title)}</h3>
-                  <p className="mt-0.5 truncate text-[11px] font-bold uppercase tracking-[0.16em] text-brand">{t(selectedVideo.label)}</p>
+                  <h3 className="truncate text-sm font-black text-primary sm:text-base">{text(selectedVideo.title)}</h3>
+                  <p className="mt-0.5 truncate text-[11px] font-bold uppercase tracking-[0.16em] text-brand">{text(selectedVideo.label)}</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <a
@@ -162,7 +164,7 @@ export default function VideoStories() {
                 ) : (
                   <iframe
                     src={getEmbedUrl(selectedVideo.videoUrl)}
-                    title={t(selectedVideo.title)}
+                    title={text(selectedVideo.title)}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                     className="h-full w-full border-0"

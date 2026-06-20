@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { extendedTranslations } from './extendedTranslations';
-
-export type Locale = 'ru' | 'ky' | 'en' | 'zh' | 'ja' | 'de';
+import { type Locale } from '../types/localized';
 
 type Language = {
   code: Locale;

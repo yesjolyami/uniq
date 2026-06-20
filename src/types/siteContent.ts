@@ -1,21 +1,23 @@
+import { createLocalizedText, type LocalizedText } from './localized';
+
 export type HeroFact = {
   value: string;
-  label: string;
+  label: LocalizedText;
 };
 
 export type HeroContent = {
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  primaryCta: string;
-  secondaryCta: string;
-  whatsappLabel: string;
+  eyebrow: LocalizedText;
+  title: LocalizedText;
+  subtitle: LocalizedText;
+  primaryCta: LocalizedText;
+  secondaryCta: LocalizedText;
+  whatsappLabel: LocalizedText;
   facts: HeroFact[];
 };
 
 export type VideoSlot = {
-  title: string;
-  label: string;
+  title: LocalizedText;
+  label: LocalizedText;
   image: string;
   videoUrl: string;
   enabled: boolean;
@@ -23,7 +25,7 @@ export type VideoSlot = {
 
 export type GalleryImage = {
   src: string;
-  alt: string;
+  alt: LocalizedText;
 };
 
 export type SiteContent = {
@@ -34,40 +36,40 @@ export type SiteContent = {
 
 export const defaultSiteContent: SiteContent = {
   hero: {
-    eyebrow: 'ОсОО «Юник Азия» / Бишкек',
-    title: 'Поездка, учёба или работа за рубежом — без разрозненных подрядчиков',
-    subtitle: 'Туризм, визы, авиабилеты, обучение и легальное трудоустройство с сопровождением до выезда.',
-    primaryCta: 'Оставить заявку',
-    secondaryCta: 'Выбрать услугу',
-    whatsappLabel: 'WhatsApp',
+    eyebrow: createLocalizedText('ОсОО «Юник Азия» / Бишкек'),
+    title: createLocalizedText('Поездка, учёба или работа за рубежом — без разрозненных подрядчиков'),
+    subtitle: createLocalizedText('Туризм, визы, авиабилеты, обучение и легальное трудоустройство с сопровождением до выезда.'),
+    primaryCta: createLocalizedText('Оставить заявку'),
+    secondaryCta: createLocalizedText('Выбрать услугу'),
+    whatsappLabel: createLocalizedText('WhatsApp'),
     facts: [
-      { value: '2019', label: 'год начала работы' },
-      { value: '6', label: 'стран для трудоустройства' },
-      { value: '3', label: 'основных направления' },
+      { value: '2019', label: createLocalizedText('год начала работы') },
+      { value: '6', label: createLocalizedText('стран для трудоустройства') },
+      { value: '3', label: createLocalizedText('основных направления') },
     ],
   },
   videos: [
     {
-      title: 'О компании за 60 секунд',
-      label: 'Unique Asia',
+      title: createLocalizedText('О компании за 60 секунд'),
+      label: createLocalizedText('Unique Asia'),
       image: '/work.jpg',
       videoUrl: '',
       enabled: true,
     },
     {
-      title: 'Как проходит сопровождение',
-      label: 'Туризм / работа / обучение',
+      title: createLocalizedText('Как проходит сопровождение'),
+      label: createLocalizedText('Туризм / работа / обучение'),
       image: '/tourism.jpg',
       videoUrl: '',
       enabled: true,
     },
   ],
   gallery: [
-    { src: '/tourism.jpg', alt: 'Путешествие по горным маршрутам Кыргызстана' },
-    { src: '/learn.jpg', alt: 'Участники образовательной программы' },
-    { src: '/tourism_germany.jpg', alt: 'Городской тур по Германии' },
-    { src: '/work_germany.jpg', alt: 'Групповая поездка с Unique Asia' },
-    { src: '/learn_germany.jpg', alt: 'Языковая программа за рубежом' },
-    { src: '/work.jpg', alt: 'Сопровождение участников программы' },
+    { src: '/tourism.jpg', alt: createLocalizedText('Путешествие по горным маршрутам Кыргызстана') },
+    { src: '/learn.jpg', alt: createLocalizedText('Участники образовательной программы') },
+    { src: '/tourism_germany.jpg', alt: createLocalizedText('Городской тур по Германии') },
+    { src: '/work_germany.jpg', alt: createLocalizedText('Групповая поездка с Unique Asia') },
+    { src: '/learn_germany.jpg', alt: createLocalizedText('Языковая программа за рубежом') },
+    { src: '/work.jpg', alt: createLocalizedText('Сопровождение участников программы') },
   ],
 };

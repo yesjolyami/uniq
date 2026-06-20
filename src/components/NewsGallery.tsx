@@ -6,6 +6,7 @@ import { siteContentApi } from '../api/siteContent';
 import { useI18n } from '../i18n/I18nContext';
 import type { NewsItem } from '../types/news';
 import { defaultSiteContent, type GalleryImage, type SiteContent } from '../types/siteContent';
+import { getLocalizedText } from '../types/localized';
 
 const categories = ['Все', 'Туризм', 'Обучение', 'Компания'] as const;
 
@@ -18,6 +19,7 @@ export default function NewsGallery() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const { t, locale } = useI18n();
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
 
   useEffect(() => {
     let isMounted = true;
@@ -107,7 +109,7 @@ export default function NewsGallery() {
                     className="group overflow-hidden rounded-[1.5rem] border border-black/[0.06] bg-white"
                   >
                     <div className="h-56 overflow-hidden">
-                      <img src={item.image} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <img src={item.image} alt={text(item.title)} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     </div>
                     <div className="p-6">
                       <div className="mb-4 flex items-center justify-between gap-3">
@@ -117,8 +119,8 @@ export default function NewsGallery() {
                           {new Intl.DateTimeFormat(locale === 'ky' ? 'ky-KG' : locale, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${item.date}T00:00:00`))}
                         </time>
                       </div>
-                      <h3 className="mb-3 text-lg font-black leading-snug text-primary">{t(item.title)}</h3>
-                      <p className="text-sm leading-6 text-gray-500">{t(item.excerpt)}</p>
+                      <h3 className="mb-3 text-lg font-black leading-snug text-primary">{text(item.title)}</h3>
+                      <p className="text-sm leading-6 text-gray-500">{text(item.excerpt)}</p>
                     </div>
                   </motion.article>
                 ))}
@@ -151,10 +153,10 @@ export default function NewsGallery() {
                 key={image.src}
                 type="button"
                 onClick={() => setSelectedImage(image)}
-                aria-label={`${t('Открыть фото')}: ${t(image.alt)}`}
+                aria-label={`${t('Открыть фото')}: ${text(image.alt)}`}
                 className={`group relative overflow-hidden rounded-xl focus:outline-none focus:ring-2 focus:ring-[#f5963b] ${index === 0 || index === 5 ? 'col-span-2' : ''} ${index === 0 ? 'row-span-2' : ''}`}
               >
-                <img src={image.src} alt={t(image.alt)} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={image.src} alt={text(image.alt)} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <span className="absolute inset-0 bg-[#4b3830]/0 transition-colors group-hover:bg-[#4b3830]/20" />
                 <span className="absolute bottom-4 right-4 flex h-9 w-9 translate-y-2 items-center justify-center rounded-full bg-white text-primary opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
                   <ArrowUpRight className="h-4 w-4" />
@@ -173,7 +175,7 @@ export default function NewsGallery() {
             exit={{ opacity: 0 }}
             role="dialog"
             aria-modal="true"
-            aria-label={t(selectedImage.alt)}
+            aria-label={text(selectedImage.alt)}
             onClick={() => setSelectedImage(null)}
             className="fixed inset-0 z-[70] flex cursor-zoom-out items-center justify-center bg-[#4b3830]/90 p-4"
           >
@@ -181,7 +183,7 @@ export default function NewsGallery() {
               initial={{ scale: 0.96 }}
               animate={{ scale: 1 }}
               src={selectedImage.src}
-              alt={t(selectedImage.alt)}
+              alt={text(selectedImage.alt)}
               className="max-h-[88vh] max-w-full rounded-2xl object-contain"
             />
             <button type="button" onClick={() => setSelectedImage(null)} className="absolute right-5 top-5 rounded-full bg-white px-4 py-2 text-sm font-bold text-primary" aria-label={t('Закрыть фотографию')}>{t('Закрыть')}</button>

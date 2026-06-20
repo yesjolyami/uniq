@@ -6,6 +6,7 @@ import {
   type SiteContent,
   type VideoSlot,
 } from '../src/types/siteContent';
+import { normalizeLocalizedText } from '../src/types/localized';
 
 const dataFile = path.resolve(
   process.env.SITE_CONTENT_FILE || path.join(process.cwd(), 'data/site-content.json'),
@@ -48,15 +49,15 @@ function normalizeFact(value: unknown, fallback: HeroFact): HeroFact {
   const fact = value && typeof value === 'object' ? value as Record<string, unknown> : {};
   return {
     value: cleanText(fact.value, fallback.value, 20),
-    label: cleanText(fact.label, fallback.label, 80),
+    label: normalizeLocalizedText(fact.label, fallback.label, 80),
   };
 }
 
 function normalizeVideo(value: unknown, fallback: VideoSlot): VideoSlot {
   const video = value && typeof value === 'object' ? value as Record<string, unknown> : {};
   return {
-    title: cleanText(video.title, fallback.title, 120),
-    label: cleanText(video.label, fallback.label, 80),
+    title: normalizeLocalizedText(video.title, fallback.title, 120),
+    label: normalizeLocalizedText(video.label, fallback.label, 80),
     image: cleanUrl(video.image, fallback.image),
     videoUrl: cleanUrl(video.videoUrl, fallback.videoUrl),
     enabled: video.enabled !== false,
@@ -67,7 +68,7 @@ function normalizeGalleryImage(value: unknown, fallback: GalleryImage): GalleryI
   const image = value && typeof value === 'object' ? value as Record<string, unknown> : {};
   return {
     src: cleanUrl(image.src, fallback.src),
-    alt: cleanText(image.alt, fallback.alt, 160),
+    alt: normalizeLocalizedText(image.alt, fallback.alt, 160),
   };
 }
 
@@ -81,12 +82,12 @@ export function normalizeSiteContent(value: unknown): SiteContent {
 
   return {
     hero: {
-      eyebrow: cleanText(hero.eyebrow, defaultSiteContent.hero.eyebrow, 120),
-      title: cleanText(hero.title, defaultSiteContent.hero.title, 180),
-      subtitle: cleanText(hero.subtitle, defaultSiteContent.hero.subtitle, 240),
-      primaryCta: cleanText(hero.primaryCta, defaultSiteContent.hero.primaryCta, 40),
-      secondaryCta: cleanText(hero.secondaryCta, defaultSiteContent.hero.secondaryCta, 40),
-      whatsappLabel: cleanText(hero.whatsappLabel, defaultSiteContent.hero.whatsappLabel, 40),
+      eyebrow: normalizeLocalizedText(hero.eyebrow, defaultSiteContent.hero.eyebrow, 120),
+      title: normalizeLocalizedText(hero.title, defaultSiteContent.hero.title, 180),
+      subtitle: normalizeLocalizedText(hero.subtitle, defaultSiteContent.hero.subtitle, 240),
+      primaryCta: normalizeLocalizedText(hero.primaryCta, defaultSiteContent.hero.primaryCta, 40),
+      secondaryCta: normalizeLocalizedText(hero.secondaryCta, defaultSiteContent.hero.secondaryCta, 40),
+      whatsappLabel: normalizeLocalizedText(hero.whatsappLabel, defaultSiteContent.hero.whatsappLabel, 40),
       facts: defaultSiteContent.hero.facts.map((fallback, index) => normalizeFact(facts[index], fallback)),
     },
     videos: videos

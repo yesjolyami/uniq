@@ -2,14 +2,15 @@ import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { NewsInput, NewsItem } from '../src/types/news';
+import { createLocalizedText, normalizeLocalizedText } from '../src/types/localized';
 
 const dataFile = path.resolve(process.env.NEWS_DATA_FILE || path.join(process.cwd(), 'data/news.json'));
 const dataDirectory = path.dirname(dataFile);
 
 const seedItems: NewsInput[] = [
   {
-    title: 'Открыта запись на летние туры по Кыргызстану',
-    excerpt: 'Собрали короткие маршруты для семей, компаний и индивидуальных путешественников.',
+    title: createLocalizedText('Открыта запись на летние туры по Кыргызстану'),
+    excerpt: createLocalizedText('Собрали короткие маршруты для семей, компаний и индивидуальных путешественников.'),
     category: 'Туризм',
     date: '2026-06-08',
     image: '/tourism.jpg',
@@ -17,8 +18,8 @@ const seedItems: NewsInput[] = [
     order: 1,
   },
   {
-    title: 'Новый набор на языковые курсы в Германии',
-    excerpt: 'Программы от двух недель до учебного года с подбором школы и визовым сопровождением.',
+    title: createLocalizedText('Новый набор на языковые курсы в Германии'),
+    excerpt: createLocalizedText('Программы от двух недель до учебного года с подбором школы и визовым сопровождением.'),
     category: 'Обучение',
     date: '2026-05-27',
     image: '/learn_germany.jpg',
@@ -26,8 +27,8 @@ const seedItems: NewsInput[] = [
     order: 2,
   },
   {
-    title: 'Групповая поездка в Японию: осенний сезон',
-    excerpt: 'Маршрут Токио — Киото — Осака, небольшая группа и русскоязычный координатор.',
+    title: createLocalizedText('Групповая поездка в Японию: осенний сезон'),
+    excerpt: createLocalizedText('Маршрут Токио — Киото — Осака, небольшая группа и русскоязычный координатор.'),
     category: 'Туризм',
     date: '2026-05-14',
     image: '/tourism_germany.jpg',
@@ -35,8 +36,8 @@ const seedItems: NewsInput[] = [
     order: 3,
   },
   {
-    title: 'Unique Asia расширяет консультационную команду',
-    excerpt: 'Теперь больше встреч доступно в вечернее время и по видеосвязи.',
+    title: createLocalizedText('Unique Asia расширяет консультационную команду'),
+    excerpt: createLocalizedText('Теперь больше встреч доступно в вечернее время и по видеосвязи.'),
     category: 'Компания',
     date: '2026-04-30',
     image: '/work.jpg',
@@ -71,7 +72,7 @@ async function ensureStore() {
 async function readItems() {
   await ensureStore();
   const contents = await readFile(dataFile, 'utf8');
-  return JSON.parse(contents) as NewsItem[];
+  return (JSON.parse(contents) as unknown[]).map(normalizeNewsItem).filter(Boolean) as NewsItem[];
 }
 
 async function writeItems(items: NewsItem[]) {
@@ -95,6 +96,34 @@ function mutateItems<T>(mutator: (items: NewsItem[]) => T | Promise<T>) {
   return operation;
 }
 
+function normalizeNewsInput(input: NewsInput): NewsInput {
+  return {
+    ...input,
+    title: normalizeLocalizedText(input.title, '', 180),
+    excerpt: normalizeLocalizedText(input.excerpt, '', 600),
+  };
+}
+
+function normalizeNewsItem(value: unknown): NewsItem | null {
+  if (!value || typeof value !== 'object') return null;
+
+  const item = value as Record<string, unknown>;
+  if (typeof item.id !== 'string') return null;
+
+  return {
+    id: item.id,
+    title: normalizeLocalizedText(item.title, '', 180),
+    excerpt: normalizeLocalizedText(item.excerpt, '', 600),
+    category: item.category as NewsItem['category'],
+    date: typeof item.date === 'string' ? item.date : new Date().toISOString().slice(0, 10),
+    image: typeof item.image === 'string' ? item.image : '/tourism.jpg',
+    published: item.published === true,
+    order: Number.isInteger(Number(item.order)) ? Number(item.order) : 9999,
+    createdAt: typeof item.createdAt === 'string' ? item.createdAt : new Date().toISOString(),
+    updatedAt: typeof item.updatedAt === 'string' ? item.updatedAt : new Date().toISOString(),
+  };
+}
+
 export async function getPublishedNews() {
   return sortItems((await readItems()).filter((item) => item.published));
 }
@@ -107,7 +136,7 @@ export async function createNews(input: NewsInput) {
   return mutateItems((items) => {
     const now = new Date().toISOString();
     const item: NewsItem = {
-      ...input,
+      ...normalizeNewsInput(input),
       id: randomUUID(),
       createdAt: now,
       updatedAt: now,
@@ -127,7 +156,7 @@ export async function updateNews(id: string, input: NewsInput) {
 
     const updatedItem: NewsItem = {
       ...items[index],
-      ...input,
+      ...normalizeNewsInput(input),
       updatedAt: new Date().toISOString(),
     };
     items[index] = updatedItem;
