@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { newsApi } from '../api/news';
 import { siteContentApi } from '../api/siteContent';
-import { uploadAsset } from '../api/uploads';
+import { maxUploadBytes, maxUploadMegabytes, uploadAsset } from '../api/uploads';
 import { newsCategories, type NewsInput, type NewsItem } from '../types/news';
 import { defaultSiteContent, type SiteContent } from '../types/siteContent';
 
@@ -300,6 +300,12 @@ export default function AdminPage() {
   };
 
   const handleUpload = async (target: string, file: File, onUploaded: (url: string) => void) => {
+    if (file.size > maxUploadBytes) {
+      setError(`Файл слишком большой. Максимальный размер видео: ${maxUploadMegabytes} МБ`);
+      setNotice('');
+      return;
+    }
+
     setUploadingTarget(target);
     setError('');
     setNotice('');

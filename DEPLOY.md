@@ -11,7 +11,7 @@ PORT=3001
 NEWS_DATA_FILE=/var/www/uniq-data/news.json
 SITE_CONTENT_FILE=/var/www/uniq-data/site-content.json
 UPLOADS_DIR=/var/www/uniq-data/uploads
-UPLOAD_LIMIT_MB=1024
+UPLOAD_LIMIT_MB=2048
 ```
 
 `NEWS_DATA_FILE`, `SITE_CONTENT_FILE` и `UPLOADS_DIR` лучше хранить вне папки релиза. Тогда при обновлении проекта новости, тексты, фото и видео из админки не пропадут.
@@ -36,10 +36,13 @@ npm start
 ```nginx
 server {
   server_name your-domain.com;
-  client_max_body_size 1024m;
+  client_max_body_size 2048m;
 
   location / {
     proxy_pass http://127.0.0.1:3001;
+    proxy_request_buffering off;
+    proxy_read_timeout 300s;
+    proxy_send_timeout 300s;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
