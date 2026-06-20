@@ -7,14 +7,14 @@ export default function About() {
   const { t } = useI18n();
 
   return (
-    <section id="о компании" className="scroll-mt-20 bg-sand-light py-28 md:py-36">
+    <section id="о компании" className="scroll-mt-20 bg-sand-light py-20 sm:py-24 md:py-32 lg:py-36">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
-            className="relative min-h-[380px] overflow-hidden rounded-[1.35rem]"
+            className="relative min-h-[320px] overflow-hidden rounded-[1.25rem] sm:min-h-[380px] sm:rounded-[1.35rem]"
           >
             <img src="/work.jpg" alt={t('Участники программы Unique Asia')} className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#65483c]/85 via-[#65483c]/10 to-transparent" />
@@ -36,7 +36,7 @@ export default function About() {
               <Building2 className="h-4 w-4" />
               {t('О компании')}
             </span>
-            <h2 className="mb-5 text-3xl font-black leading-tight text-primary sm:text-4xl">
+            <h2 className="mb-5 text-[clamp(2rem,6vw,2.5rem)] font-black leading-tight text-primary sm:text-4xl">
               {t('Компания из Бишкека, которая ведёт поездки и документы с 2019 года')}
             </h2>
             <div className="space-y-3 text-sm leading-6 text-gray-600">
@@ -76,7 +76,7 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ delay: index * 0.06 }}
-                className="relative p-7 md:border-r md:border-black/[0.06] md:even:border-r-0 lg:even:border-r lg:last:border-r-0"
+                className="relative p-5 sm:p-7 md:border-r md:border-black/[0.06] md:even:border-r-0 lg:even:border-r lg:last:border-r-0"
               >
                 <span className="mb-5 block text-3xl font-black text-brand">{item.year}</span>
                 <h4 className="mb-3 text-lg font-black text-primary">{t(item.title)}</h4>
@@ -107,7 +107,7 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ delay: index * 0.08 }}
-                className="group overflow-hidden rounded-[1.2rem] border border-gray-200 bg-slate-50 p-7 text-primary"
+                className="group overflow-hidden rounded-[1.2rem] border border-gray-200 bg-slate-50 p-5 text-primary sm:p-7"
               >
                 <div className="mb-8 flex items-start justify-between gap-4">
                   <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-black/10 bg-white text-lg font-black text-[#f5963b] shadow-sm transition-colors group-hover:bg-brand group-hover:text-white">
@@ -124,11 +124,11 @@ export default function About() {
         </div>
 
         <div className="mt-24 grid gap-8 lg:grid-cols-2">
-          <div className="rounded-[1.35rem] border border-black/[0.06] bg-white p-8 sm:p-10">
+          <div className="rounded-[1.25rem] border border-black/[0.06] bg-white p-5 sm:p-10">
             <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand-soft text-brand">
               <FileCheck2 className="h-6 w-6" />
             </span>
-            <h3 className="mb-6 min-h-14 text-2xl font-black text-primary">{t('Лицензии и документы')}</h3>
+            <h3 className="mb-6 text-2xl font-black text-primary lg:min-h-14">{t('Лицензии и документы')}</h3>
             <div className="space-y-4">
               {companyDocuments.map((document) => (
                 <article key={document.title} className="border-t border-black/[0.06] pt-5 first:border-0 first:pt-0">
@@ -145,14 +145,14 @@ export default function About() {
             </div>
           </div>
 
-          <div className="rounded-[1.35rem] border border-gray-200 bg-slate-50 p-8 text-primary sm:p-10">
+          <div className="rounded-[1.25rem] border border-gray-200 bg-slate-50 p-5 text-primary sm:p-10">
             <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-black/10 bg-white text-brand shadow-sm">
               <Award className="h-6 w-6" />
             </span>
-            <h3 className="mb-6 min-h-14 text-2xl font-black">{t('Награды и достижения')}</h3>
+            <h3 className="mb-6 text-2xl font-black lg:min-h-14">{t('Награды и достижения')}</h3>
             <div className="space-y-4">
               {companyAwards.map((award) => (
-                <article key={award.title} className="grid grid-cols-[80px_1fr] gap-4 border-b border-primary/10 pb-4 last:border-0 last:pb-0">
+                <article key={award.title} className="grid gap-2 border-b border-primary/10 pb-4 last:border-0 last:pb-0 min-[420px]:grid-cols-[80px_1fr] min-[420px]:gap-4">
                   <strong className="text-xl font-black text-[#f5963b]">{t(award.year)}</strong>
                   <div>
                     <h4 className="mb-1 text-sm font-black">{t(award.title)}</h4>

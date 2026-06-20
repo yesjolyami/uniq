@@ -85,8 +85,8 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
   if (!data) return null;
 
   return (
-    <main className="pt-20">
-      <section className="relative overflow-hidden bg-slate-50 py-24 lg:py-32">
+    <main className="pt-[68px] md:pt-20">
+      <section className="relative overflow-hidden bg-slate-50 py-20 sm:py-24 lg:py-32">
         <div className="absolute inset-0 z-0">
           <img src={data.heroImage} alt={t(data.title)} className="h-full w-full object-cover opacity-25 mix-blend-multiply" />
         </div>
@@ -94,7 +94,7 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl lg:text-7xl font-black mb-6"
+            className="mb-5 text-[clamp(2.5rem,12vw,4.5rem)] font-black leading-none md:mb-6 md:text-5xl lg:text-7xl"
           >
             {t(data.title)}
           </motion.h1>
@@ -102,14 +102,14 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mx-auto max-w-2xl text-lg text-gray-600 md:text-xl"
+            className="mx-auto max-w-2xl text-base leading-7 text-gray-600 md:text-xl"
           >
             {t(data.subtitle)}
           </motion.p>
         </div>
       </section>
 
-      <section className="py-24 bg-slate-50">
+      <section className="bg-slate-50 py-20 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-16 lg:space-y-24">
             {data.opportunities.map((opp, idx) => (
@@ -118,25 +118,25 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                className={`flex flex-col ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center`}
+                className={`flex flex-col ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-7 lg:gap-16`}
               >
                 <div className="w-full lg:w-1/2">
-                  <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative group">
+                  <div className="group relative aspect-[4/3] overflow-hidden rounded-[1.25rem] shadow-xl sm:rounded-3xl sm:shadow-2xl">
                     <img src={opp.image} alt={t(opp.title)} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#4b3830]/55 to-transparent"></div>
-                    <div className="absolute bottom-6 left-6 text-white flex items-center gap-3">
-                      <div className="bg-[#e62020] p-3 rounded-full">
+                    <div className="absolute bottom-4 left-4 flex items-center gap-3 text-white sm:bottom-6 sm:left-6">
+                      <div className="rounded-full bg-[#e62020] p-3">
                         <opp.icon className="w-6 h-6" />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                  <h2 className="text-3xl font-bold text-primary mb-4">{t(opp.title)}</h2>
-                  <p className="text-gray-600 text-lg leading-relaxed mb-8">{t(opp.description)}</p>
+                  <h2 className="mb-4 text-[clamp(1.75rem,6vw,2rem)] font-bold leading-tight text-primary">{t(opp.title)}</h2>
+                  <p className="mb-7 text-base leading-7 text-gray-600 md:text-lg md:leading-relaxed lg:mb-8">{t(opp.description)}</p>
                   <button 
                     onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="inline-flex items-center justify-center w-fit bg-gradient-to-r from-[#f5963b] to-[#e62020] hover:opacity-90 text-white px-8 py-3.5 rounded-full font-semibold transition-all shadow-md"
+                    className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#f5963b] to-[#e62020] px-8 py-3.5 font-semibold text-white shadow-md transition-all hover:opacity-90 sm:w-fit"
                   >
                     {t('Узнать больше')}
                   </button>

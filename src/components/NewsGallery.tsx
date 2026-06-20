@@ -59,12 +59,12 @@ export default function NewsGallery() {
 
   return (
     <>
-      <section id="новости" className="bg-sand-light py-28 md:py-36">
+      <section id="новости" className="bg-sand-light py-20 sm:py-24 md:py-32 lg:py-36">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-14 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Будьте в курсе')}</span>
-              <h2 className="text-3xl font-black text-primary md:text-5xl">{t('Новости и обновления')}</h2>
+              <h2 className="text-[clamp(2rem,7vw,3rem)] font-black text-primary md:text-5xl">{t('Новости и обновления')}</h2>
             </div>
             <div className="flex gap-2 overflow-x-auto pb-1" aria-label={t('Фильтр новостей')}>
               {categories.map((category) => (
@@ -106,13 +106,13 @@ export default function NewsGallery() {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="group overflow-hidden rounded-[1.5rem] border border-black/[0.06] bg-white"
+                    className="group overflow-hidden rounded-[1.25rem] border border-black/[0.06] bg-white sm:rounded-[1.5rem]"
                   >
-                    <div className="h-56 overflow-hidden">
+                    <div className="h-48 overflow-hidden sm:h-56">
                       <img src={item.image} alt={text(item.title)} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     </div>
-                    <div className="p-6">
-                      <div className="mb-4 flex items-center justify-between gap-3">
+                    <div className="p-5 sm:p-6">
+                      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                         <span className="rounded-full bg-brand-soft px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand">{t(item.category)}</span>
                         <time dateTime={item.date} className="flex items-center gap-1.5 text-[11px] text-gray-400">
                           <CalendarDays className="h-3.5 w-3.5" />
@@ -138,16 +138,16 @@ export default function NewsGallery() {
         </div>
       </section>
 
-      <section id="фотогалерея" className="border-y border-gray-100 bg-slate-50 py-28 text-primary md:py-36">
+      <section id="фотогалерея" className="border-y border-gray-100 bg-slate-50 py-20 text-primary sm:py-24 md:py-32 lg:py-36">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-14 flex items-end justify-between gap-8">
+          <div className="mb-10 flex flex-col gap-4 sm:mb-14 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
             <div>
               <span className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#f5963b]"><Images className="h-4 w-4" />{t('Моменты из поездок')}</span>
-              <h2 className="text-3xl font-black md:text-5xl">{t('Фотогалерея')}</h2>
+              <h2 className="text-[clamp(2rem,7vw,3rem)] font-black md:text-5xl">{t('Фотогалерея')}</h2>
             </div>
             <span className="hidden text-sm text-gray-500 sm:block">{t('Нажмите на фото, чтобы увеличить')}</span>
           </div>
-          <div className="grid auto-rows-[180px] grid-cols-2 gap-5 md:auto-rows-[220px] md:grid-cols-4">
+          <div className="grid auto-rows-[132px] grid-cols-2 gap-3 sm:auto-rows-[180px] sm:gap-5 md:auto-rows-[220px] md:grid-cols-4">
             {content.gallery.map((image, index) => (
               <button
                 key={image.src}
@@ -186,7 +186,7 @@ export default function NewsGallery() {
               alt={text(selectedImage.alt)}
               className="max-h-[88vh] max-w-full rounded-2xl object-contain"
             />
-            <button type="button" onClick={() => setSelectedImage(null)} className="absolute right-5 top-5 rounded-full bg-white px-4 py-2 text-sm font-bold text-primary" aria-label={t('Закрыть фотографию')}>{t('Закрыть')}</button>
+            <button type="button" onClick={() => setSelectedImage(null)} className="absolute right-4 top-4 rounded-full bg-white px-4 py-2 text-sm font-bold text-primary sm:right-5 sm:top-5" aria-label={t('Закрыть фотографию')}>{t('Закрыть')}</button>
           </motion.div>
         )}
       </AnimatePresence>

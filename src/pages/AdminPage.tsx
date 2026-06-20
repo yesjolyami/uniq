@@ -154,7 +154,7 @@ function UploadField({
           </button>
         )}
       </div>
-      <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
+      <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
         <input
           value={value}
           onChange={(event) => onUrlChange(event.target.value)}
@@ -163,7 +163,7 @@ function UploadField({
         />
         <label
           htmlFor={id}
-          className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-brand/30 bg-brand-soft px-4 py-3 text-xs font-black text-brand transition hover:border-brand hover:bg-white"
+          className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-brand/30 bg-brand-soft px-4 py-3 text-xs font-black text-brand transition hover:border-brand hover:bg-white sm:min-w-28"
         >
           {isUploading ? <Upload className="h-4 w-4 animate-pulse" /> : <FileUp className="h-4 w-4" />}
           {isUploading ? 'Загрузка...' : 'Файл'}
@@ -462,13 +462,13 @@ export default function AdminPage() {
 
   if (!token) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#f7f5f2] px-4 py-12">
-        <section className="w-full max-w-md rounded-[2rem] border border-black/[0.06] bg-white p-7 shadow-[0_24px_80px_rgba(39,39,42,0.08)] sm:p-10">
+      <main className="flex min-h-screen items-center justify-center bg-[#f7f5f2] px-4 py-10 sm:py-12">
+        <section className="admin-panel w-full max-w-md p-6 shadow-[0_24px_80px_rgba(39,39,42,0.08)] sm:p-10">
           <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-white">
             <Newspaper className="h-6 w-6" />
           </div>
           <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-brand">Unique Asia</p>
-          <h1 className="text-3xl font-black text-primary">Управление новостями</h1>
+          <h1 className="text-2xl font-black leading-tight text-primary sm:text-3xl">Управление новостями</h1>
           <p className="mt-3 text-sm leading-6 text-gray-500">Введите пароль администратора, чтобы продолжить.</p>
 
           <form onSubmit={handleLogin} className="mt-8 space-y-5">
@@ -503,14 +503,14 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-[#f7f5f2] text-primary">
       <header className="border-b border-black/[0.06] bg-white">
-        <div className="mx-auto flex max-w-[1500px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
+        <div className="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex min-w-0 items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
               <Newspaper className="h-5 w-5" />
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand">Unique Asia</p>
-              <h1 className="text-sm font-black sm:text-base">Редактор новостей</h1>
+              <h1 className="text-sm font-black leading-tight sm:text-base">Редактор новостей</h1>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -524,8 +524,8 @@ export default function AdminPage() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[1500px] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(360px,0.78fr)_minmax(0,1.22fr)] lg:px-8 lg:py-8">
-        <section className="h-fit rounded-[1.5rem] border border-black/[0.06] bg-white p-5 shadow-sm sm:p-7 lg:sticky lg:top-6">
+      <div className="mx-auto grid max-w-[1500px] gap-5 px-4 py-5 sm:px-6 lg:px-8 lg:py-8 xl:grid-cols-[minmax(360px,0.72fr)_minmax(0,1.28fr)]">
+        <section className="admin-panel h-fit p-4 sm:p-7 xl:sticky xl:top-6">
           <div className="mb-6 flex items-center justify-between gap-4">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand">{editingId ? 'Редактирование' : 'Новая публикация'}</p>
@@ -573,7 +573,7 @@ export default function AdminPage() {
                 <input type="date" value={form.date} onChange={(event) => setForm({ ...form, date: event.target.value })} required className="admin-input" />
               </label>
             </div>
-            <div className="grid gap-4 sm:grid-cols-[1fr_110px]">
+            <div className="grid min-w-0 gap-4 md:grid-cols-[minmax(0,1fr)_110px] xl:grid-cols-1 2xl:grid-cols-[minmax(0,1fr)_110px]">
               <UploadField
                 id="news-image-upload"
                 label="Изображение"
@@ -610,18 +610,18 @@ export default function AdminPage() {
         </section>
 
         <section>
-          <div className="mb-6 rounded-[1.5rem] border border-black/[0.06] bg-white p-5 shadow-sm sm:p-6">
+          <div className="admin-panel mb-6 p-4 sm:p-6">
             <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand">Главная страница</p>
                 <h2 className="mt-1 text-xl font-black">Контент сайта</h2>
               </div>
-              <div className="flex gap-2">
-                <button type="button" onClick={loadSiteContent} className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-xs font-bold transition hover:border-brand/30 hover:text-brand">
+              <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto">
+                <button type="button" onClick={loadSiteContent} className="flex items-center justify-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-xs font-bold transition hover:border-brand/30 hover:text-brand">
                   <RefreshCw className="h-3.5 w-3.5" />
                   Обновить
                 </button>
-                <button type="button" onClick={saveSiteContent} disabled={isContentSaving} className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-bold text-white transition hover:bg-primary-light disabled:opacity-60">
+                <button type="button" onClick={saveSiteContent} disabled={isContentSaving} className="flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-bold text-white transition hover:bg-primary-light disabled:opacity-60">
                   <Save className="h-3.5 w-3.5" />
                   {isContentSaving ? 'Сохраняем…' : 'Сохранить сайт'}
                 </button>
@@ -635,7 +635,7 @@ export default function AdminPage() {
             )}
 
             <div className="space-y-8">
-              <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+              <div className="admin-soft-panel p-3 sm:p-4">
                 <div className="mb-4 flex items-center gap-2">
                   <Pencil className="h-4 w-4 text-brand" />
                   <h3 className="text-sm font-black">Первый экран</h3>
@@ -644,14 +644,14 @@ export default function AdminPage() {
                   <LocalizedField label="Надзаголовок" value={siteContent.hero.eyebrow} onChange={(value) => updateHero('eyebrow', value)} maxLength={120} />
                   <LocalizedField label="Заголовок" value={siteContent.hero.title} onChange={(value) => updateHero('title', value)} multiline rows={2} maxLength={180} />
                   <LocalizedField label="Короткое описание" value={siteContent.hero.subtitle} onChange={(value) => updateHero('subtitle', value)} multiline rows={2} maxLength={240} />
-                  <div className="grid gap-4 md:grid-cols-3">
+                  <div className="grid gap-4 xl:grid-cols-3">
                     <LocalizedField label="Кнопка 1" value={siteContent.hero.primaryCta} onChange={(value) => updateHero('primaryCta', value)} maxLength={40} />
                     <LocalizedField label="Кнопка 2" value={siteContent.hero.secondaryCta} onChange={(value) => updateHero('secondaryCta', value)} maxLength={40} />
                     <LocalizedField label="WhatsApp" value={siteContent.hero.whatsappLabel} onChange={(value) => updateHero('whatsappLabel', value)} maxLength={40} />
                   </div>
-                  <div className="grid gap-4 md:grid-cols-3">
+                  <div className="grid gap-4 xl:grid-cols-3">
                     {siteContent.hero.facts.map((fact, index) => (
-                      <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
+                      <div key={index} className="min-w-0 rounded-xl border border-gray-200 bg-white p-3">
                         <label className="mb-3 block">
                           <span className="mb-1.5 block text-xs font-bold text-gray-700">Факт {index + 1}</span>
                           <input value={fact.value} onChange={(event) => updateFact(index, { value: event.target.value })} className="admin-input" />
@@ -663,20 +663,20 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+              <div className="admin-soft-panel p-3 sm:p-4">
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <Video className="h-4 w-4 text-brand" />
                     <h3 className="text-sm font-black">Видео-блок</h3>
                   </div>
-                  <button type="button" onClick={addVideo} className="flex items-center gap-1.5 rounded-full bg-white px-3 py-2 text-[11px] font-bold text-brand transition hover:bg-brand-soft">
+                  <button type="button" onClick={addVideo} className="flex shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-2 text-[11px] font-bold text-brand transition hover:bg-brand-soft">
                     <Plus className="h-3.5 w-3.5" />
                     Добавить
                   </button>
                 </div>
                 <div className="grid gap-4 lg:grid-cols-2">
                   {siteContent.videos.map((video, index) => (
-                    <div key={index} className="rounded-xl border border-gray-200 bg-white p-4">
+                    <div key={index} className="min-w-0 rounded-xl border border-gray-200 bg-white p-3 sm:p-4">
                       <div className="mb-3 flex items-center gap-2">
                         <label className="flex flex-1 items-center justify-between gap-4 rounded-xl bg-gray-50 px-3 py-2">
                           <span className="text-xs font-bold text-gray-700">Показывать видео {index + 1}</span>
@@ -718,20 +718,20 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+              <div className="admin-soft-panel p-3 sm:p-4">
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <Image className="h-4 w-4 text-brand" />
                     <h3 className="text-sm font-black">Фотогалерея</h3>
                   </div>
-                  <button type="button" onClick={addGalleryImage} className="flex items-center gap-1.5 rounded-full bg-white px-3 py-2 text-[11px] font-bold text-brand transition hover:bg-brand-soft">
+                  <button type="button" onClick={addGalleryImage} className="flex shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-2 text-[11px] font-bold text-brand transition hover:bg-brand-soft">
                     <Plus className="h-3.5 w-3.5" />
                     Добавить фото
                   </button>
                 </div>
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
                   {siteContent.gallery.map((image, index) => (
-                    <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
+                    <div key={index} className="min-w-0 rounded-xl border border-gray-200 bg-white p-3">
                       <div className="relative mb-3 overflow-hidden rounded-lg bg-gray-100">
                         <img src={image.src} alt="" className="h-28 w-full object-cover" />
                         <button type="button" onClick={() => removeGalleryImage(index)} aria-label={`Удалить фото ${index + 1}`} className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-red-600 shadow-sm transition hover:bg-red-50">
@@ -757,13 +757,13 @@ export default function AdminPage() {
             </div>
           </div>
 
-          <div className="mb-5 flex flex-col gap-4 rounded-[1.5rem] border border-black/[0.06] bg-white p-5 shadow-sm sm:p-6">
+          <div className="admin-panel mb-5 flex flex-col gap-4 p-4 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand">Всего: {items.length}</p>
                 <h2 className="mt-1 text-xl font-black">Все новости</h2>
               </div>
-              <button type="button" onClick={loadItems} disabled={isLoading} className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-xs font-bold transition hover:border-brand/30 hover:text-brand disabled:opacity-50">
+              <button type="button" onClick={loadItems} disabled={isLoading} className="flex items-center justify-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-xs font-bold transition hover:border-brand/30 hover:text-brand disabled:opacity-50">
                 <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />
                 Обновить
               </button>
@@ -773,7 +773,7 @@ export default function AdminPage() {
                 <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                 <input value={query} onChange={(event) => setQuery(event.target.value)} className="admin-input pl-10" placeholder="Поиск по новостям" aria-label="Поиск по новостям" />
               </label>
-              <div className="flex rounded-xl bg-gray-100 p-1">
+              <div className="grid grid-cols-3 rounded-xl bg-gray-100 p-1 sm:flex">
                 {([
                   ['all', 'Все'],
                   ['published', 'На сайте'],
@@ -806,7 +806,7 @@ export default function AdminPage() {
           ) : (
             <div className="space-y-3">
               {filteredItems.map((item) => (
-                <article key={item.id} className="overflow-hidden rounded-[1.5rem] border border-black/[0.06] bg-white p-4 shadow-sm sm:p-5">
+                <article key={item.id} className="admin-panel overflow-hidden p-4 sm:p-5">
                   <div className="flex flex-col gap-4 sm:flex-row">
                     <img src={item.image} alt={getLocalizedText(item.title, 'ru')} className="h-40 w-full rounded-xl object-cover sm:h-32 sm:w-40" />
                     <div className="min-w-0 flex-1">
@@ -826,15 +826,15 @@ export default function AdminPage() {
                       </time>
                     </div>
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-2 border-t border-gray-100 pt-4">
-                    <button type="button" onClick={() => startEditing(item)} className="flex items-center gap-1.5 rounded-full bg-gray-100 px-3.5 py-2 text-[11px] font-bold transition hover:bg-gray-200">
+                  <div className="mt-4 grid grid-cols-2 gap-2 border-t border-gray-100 pt-4 sm:flex sm:flex-wrap">
+                    <button type="button" onClick={() => startEditing(item)} className="flex items-center justify-center gap-1.5 rounded-full bg-gray-100 px-3.5 py-2 text-[11px] font-bold transition hover:bg-gray-200">
                       <Pencil className="h-3.5 w-3.5" /> Изменить
                     </button>
-                    <button type="button" onClick={() => togglePublished(item)} className="flex items-center gap-1.5 rounded-full bg-gray-100 px-3.5 py-2 text-[11px] font-bold transition hover:bg-gray-200">
+                    <button type="button" onClick={() => togglePublished(item)} className="flex items-center justify-center gap-1.5 rounded-full bg-gray-100 px-3.5 py-2 text-[11px] font-bold transition hover:bg-gray-200">
                       {item.published ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                       {item.published ? 'Скрыть' : 'Опубликовать'}
                     </button>
-                    <button type="button" onClick={() => handleDelete(item)} className="ml-auto flex items-center gap-1.5 rounded-full bg-red-50 px-3.5 py-2 text-[11px] font-bold text-red-600 transition hover:bg-red-100">
+                    <button type="button" onClick={() => handleDelete(item)} className="col-span-2 flex items-center justify-center gap-1.5 rounded-full bg-red-50 px-3.5 py-2 text-[11px] font-bold text-red-600 transition hover:bg-red-100 sm:col-span-1 sm:ml-auto">
                       <Trash2 className="h-3.5 w-3.5" /> Удалить
                     </button>
                   </div>

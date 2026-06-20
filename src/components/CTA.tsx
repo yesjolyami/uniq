@@ -51,14 +51,14 @@ export default function CTA() {
   };
 
   return (
-    <section id="cta" className="relative overflow-hidden bg-slate-50 py-28 md:py-36">
+    <section id="cta" className="relative overflow-hidden bg-slate-50 py-20 sm:py-24 md:py-32 lg:py-36">
       <div className="absolute inset-0 z-0">
         <img 
           src="cta.png" 
           alt="Freedom Mountains" 
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#f8fafc_0%,rgba(248,250,252,.94)_48%,rgba(248,250,252,.36)_100%)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#f8fafc_0%,rgba(248,250,252,.96)_72%,rgba(248,250,252,.5)_100%)] md:bg-[linear-gradient(90deg,#f8fafc_0%,rgba(248,250,252,.94)_48%,rgba(248,250,252,.36)_100%)]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -71,7 +71,7 @@ export default function CTA() {
             className="max-w-xl"
           >
             <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Заявка без продажи в лоб')}</span>
-            <h2 className="mb-5 text-3xl font-black leading-tight text-primary md:text-4xl">
+            <h2 className="mb-5 text-[clamp(2rem,6vw,2.5rem)] font-black leading-tight text-primary md:text-4xl">
               {t('Сначала уточняем задачу, потом предлагаем маршрут действий')}
             </h2>
             <p className="max-w-lg text-sm font-medium leading-6 text-gray-600">
@@ -84,12 +84,12 @@ export default function CTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mx-auto w-full max-w-md overflow-hidden rounded-[1.35rem] border border-gray-200 bg-white p-8 shadow-sm lg:ml-auto sm:p-9"
+            className="relative mx-auto w-full max-w-md overflow-hidden rounded-[1.25rem] border border-gray-200 bg-white p-5 shadow-sm sm:p-9 lg:ml-auto"
           >
             {isSubmitted ? (
               <div className="flex flex-col items-center justify-center h-full min-h-[280px] text-center">
                 <CheckCircle2 className="mb-4 h-16 w-16 text-brand" />
-                <h3 className="text-2xl font-bold text-primary mb-2">{t('Заявка отправлена!')}</h3>
+                <h3 className="mb-2 text-2xl font-bold text-primary">{t('Заявка отправлена!')}</h3>
                 <p className="text-gray-600">{t('Мы свяжемся с вами в ближайшее время.')}</p>
               </div>
             ) : (
@@ -138,7 +138,7 @@ export default function CTA() {
                 <div className="pt-2">
                   <button 
                     type="submit" 
-                    className="w-full rounded-xl bg-primary px-8 py-3.5 text-[14px] font-bold text-white shadow-md transition-colors hover:bg-brand"
+                    className="w-full rounded-xl bg-primary px-8 py-3.5 text-[14px] font-bold text-white shadow-md transition-colors hover:bg-brand active:scale-[0.99]"
                   >
                     {t('Отправить')}
                   </button>

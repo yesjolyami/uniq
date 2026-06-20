@@ -49,7 +49,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[82svh] items-end overflow-hidden bg-[#f7f4ef] pb-20 pt-24 md:min-h-[78vh] md:items-center md:pb-24 md:pt-32"
+      className="relative flex min-h-[calc(100svh-68px)] items-end overflow-hidden bg-[#f7f4ef] pb-20 pt-24 md:min-h-[78vh] md:items-center md:pb-24 md:pt-32"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -71,16 +71,16 @@ export default function Hero() {
             className={`absolute inset-0 h-full w-full object-cover ${slides[activeSlide].position}`}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#f7f4ef_0%,rgba(247,244,239,.92)_42%,rgba(247,244,239,.38)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(247,244,239,.72)_0%,#f7f4ef_76%)] md:bg-[linear-gradient(90deg,#f7f4ef_0%,rgba(247,244,239,.92)_42%,rgba(247,244,239,.38)_100%)]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-end gap-8 lg:grid-cols-[0.92fr_0.42fr] lg:items-center">
+        <div className="grid items-end gap-6 md:gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(300px,0.42fr)] lg:items-center">
         <div className="max-w-3xl text-primary">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.16em] text-brand"
+            className="mb-4 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.14em] text-brand sm:mb-5 sm:text-[11px] sm:tracking-[0.16em]"
           >
             <span className="h-px w-8 bg-brand" />
             {text(hero.eyebrow)}
@@ -90,7 +90,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-5 max-w-4xl text-4xl font-black leading-[1.05] sm:text-5xl lg:text-[3.5rem]"
+            className="mb-5 max-w-4xl text-[clamp(2rem,8vw,3.5rem)] font-black leading-[1.06] sm:text-5xl lg:text-[3.5rem]"
           >
             {text(hero.title)}
           </motion.h1>
@@ -99,7 +99,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-7 max-w-2xl text-sm leading-7 text-gray-700 sm:text-base"
+            className="mb-6 max-w-2xl text-sm leading-7 text-gray-700 sm:mb-7 sm:text-base"
           >
             {text(hero.subtitle)}
           </motion.p>
@@ -108,14 +108,14 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.32 }}
-            className="mb-7 flex flex-wrap gap-2"
+            className="mb-6 flex flex-wrap gap-2 sm:mb-7"
           >
             {['Туризм', 'Трудоустройство', 'Обучение'].map((item) => (
               <button
                 key={item}
                 type="button"
                 onClick={() => scrollTo('услуги')}
-                className="rounded-full border border-primary/10 bg-white/35 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-primary transition-colors hover:border-brand hover:text-brand"
+                className="rounded-full border border-primary/10 bg-white/55 px-3.5 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-primary transition-colors hover:border-brand hover:text-brand sm:px-4 sm:text-xs"
               >
                 {t(item)}
               </button>
@@ -158,7 +158,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.28 }}
-          className="max-w-md rounded-[1.5rem] border border-primary/10 bg-white/56 p-5 text-primary shadow-sm backdrop-blur-sm lg:ml-auto"
+          className="max-w-md rounded-[1.25rem] border border-primary/10 bg-white/68 p-4 text-primary shadow-sm backdrop-blur-sm sm:rounded-[1.5rem] sm:p-5 lg:ml-auto"
         >
           <div className="mb-6 flex items-start gap-4">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-brand/30 text-brand">
@@ -169,9 +169,9 @@ export default function Hero() {
               <h2 className="text-lg font-black leading-tight">{t('Документы, маршрут и связь с менеджером в одном процессе')}</h2>
             </div>
           </div>
-          <div className="grid grid-cols-3 overflow-hidden rounded-2xl border border-primary/10">
+          <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-primary/10 min-[420px]:grid-cols-3">
             {hero.facts.map((fact) => (
-              <div key={fact.value} className="border-r border-primary/10 px-3 py-4 last:border-r-0">
+              <div key={fact.value} className="border-b border-primary/10 px-3 py-3 last:border-b-0 min-[420px]:border-b-0 min-[420px]:border-r min-[420px]:py-4 min-[420px]:last:border-r-0">
                 <strong className="block text-xl font-black text-primary">{fact.value}</strong>
                 <span className="mt-2 block text-[11px] font-semibold leading-4 text-gray-600">{text(fact.label)}</span>
               </div>
@@ -183,7 +183,7 @@ export default function Hero() {
         </motion.aside>
         </div>
 
-        <div className="absolute bottom-[-1.25rem] left-4 right-4 flex items-center justify-between sm:left-6 sm:right-6 md:bottom-[-2rem] lg:left-auto lg:right-8 lg:w-auto lg:gap-5">
+        <div className="absolute bottom-[-1rem] left-4 right-4 flex items-center justify-between sm:left-6 sm:right-6 md:bottom-[-2rem] lg:left-auto lg:right-8 lg:w-auto lg:gap-5">
           <div className="flex items-center gap-2" role="tablist" aria-label={t('Выбор слайда')}>
             {slides.map((slide, index) => (
               <button
@@ -205,7 +205,7 @@ export default function Hero() {
               type="button"
               onClick={showPrevious}
               aria-label={t('Предыдущий слайд')}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-[#f4f1eb]/80 text-primary shadow-sm backdrop-blur transition-colors hover:border-brand hover:text-brand"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/20 bg-[#f4f1eb]/80 text-primary shadow-sm backdrop-blur transition-colors hover:border-brand hover:text-brand sm:h-11 sm:w-11"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -213,7 +213,7 @@ export default function Hero() {
               type="button"
               onClick={showNext}
               aria-label={t('Следующий слайд')}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white shadow-md transition-colors hover:bg-brand"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-md transition-colors hover:bg-brand sm:h-11 sm:w-11"
             >
               <ChevronRight className="h-5 w-5" />
             </button>

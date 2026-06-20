@@ -27,11 +27,11 @@ export default function Contacts() {
   const { t } = useI18n();
 
   return (
-    <section id="контакты" className="bg-white py-28 md:py-36">
+    <section id="контакты" className="bg-white py-20 sm:py-24 md:py-32 lg:py-36">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 max-w-2xl">
           <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Контакты')}</span>
-          <h2 className="max-w-4xl text-3xl font-black leading-tight text-primary md:text-4xl">{t('Выберите удобный способ связи')}</h2>
+          <h2 className="max-w-4xl text-[clamp(2rem,6vw,2.5rem)] font-black leading-tight text-primary md:text-4xl">{t('Выберите удобный способ связи')}</h2>
         </div>
 
         <div className="grid gap-5 overflow-visible md:grid-cols-3">
@@ -45,7 +45,7 @@ export default function Contacts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="group flex min-h-44 flex-col justify-between rounded-[1.35rem] border border-gray-200 bg-white p-7 transition-colors hover:bg-slate-50"
+              className="group flex min-h-44 flex-col justify-between rounded-[1.25rem] border border-gray-200 bg-white p-5 transition-colors hover:bg-slate-50 sm:p-7"
             >
               <div className="flex items-start justify-between">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-green-50 text-[#159447]">
@@ -66,9 +66,9 @@ export default function Contacts() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-10 grid overflow-hidden rounded-[1.35rem] border border-gray-200 bg-slate-50 lg:grid-cols-[0.72fr_1.28fr]"
+          className="mt-10 grid overflow-hidden rounded-[1.25rem] border border-gray-200 bg-slate-50 lg:grid-cols-[0.72fr_1.28fr]"
         >
-          <div className="flex flex-col justify-between p-8 sm:p-10">
+          <div className="flex flex-col justify-between p-5 sm:p-10">
             <div>
               <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
                 <MapPin className="h-5 w-5" />
@@ -92,7 +92,7 @@ export default function Contacts() {
             </div>
           </div>
 
-          <div className="min-h-[320px] overflow-hidden bg-gray-200">
+          <div className="min-h-[280px] overflow-hidden bg-gray-200 sm:min-h-[320px]">
             <iframe
               src="https://maps.google.com/maps?q=Moskovskaya%20164,%20Bishkek,%20Kyrgyzstan&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"

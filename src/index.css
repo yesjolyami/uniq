@@ -19,10 +19,12 @@ body {
   color: #1f2937;
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
+  min-width: 320px;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -54,13 +56,33 @@ label {
   overflow-wrap: anywhere;
 }
 
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
 html[lang="de"] {
   hyphens: auto;
+}
+
+@layer base {
+  section {
+    scroll-margin-top: 5.25rem;
+  }
+
+  @media (max-width: 767px) {
+    section {
+      scroll-margin-top: 4.75rem;
+    }
+  }
 }
 
 @layer components {
   .admin-input {
     width: 100%;
+    min-width: 0;
     border-radius: 0.75rem;
     border: 1px solid #e5e7eb;
     background: #f9fafb;
@@ -74,5 +96,25 @@ html[lang="de"] {
     border-color: #e62020;
     background: #ffffff;
     outline: none;
+  }
+
+  .admin-panel {
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  .admin-soft-panel {
+    border-radius: clamp(0.875rem, 1.6vw, 1rem);
+    border: 1px solid #f3f4f6;
+    background: #f9fafb;
+  }
+
+  @media (max-width: 640px) {
+    .admin-input {
+      padding: 0.7rem 0.8rem;
+      font-size: 0.8125rem;
+    }
   }
 }

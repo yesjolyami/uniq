@@ -118,7 +118,7 @@ export default function Services() {
   };
 
   return (
-    <section id="услуги" className="overflow-hidden border-y border-black/[0.04] bg-[#fbfcfd] py-28 md:py-36">
+    <section id="услуги" className="overflow-hidden border-y border-black/[0.04] bg-[#fbfcfd] py-20 sm:py-24 md:py-32 lg:py-36">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
@@ -126,7 +126,7 @@ export default function Services() {
               <FileText className="h-4 w-4" />
               {t('Что реально закрываем')}
             </span>
-            <h2 className="text-3xl font-black leading-tight text-primary sm:text-4xl lg:text-[2.75rem]">
+            <h2 className="text-[clamp(2rem,6vw,2.75rem)] font-black leading-tight text-primary sm:text-4xl lg:text-[2.75rem]">
               {t('Не набор карточек, а практические задачи клиента')}
             </h2>
           </div>
@@ -155,7 +155,7 @@ export default function Services() {
           ))}
         </div>
 
-        <div className="relative min-h-[440px] overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white shadow-sm">
+        <div className="relative overflow-hidden rounded-[1.25rem] border border-gray-200 bg-white shadow-sm sm:rounded-[1.5rem]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeService.id}
@@ -163,13 +163,13 @@ export default function Services() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="grid min-h-[440px] lg:grid-cols-[1.05fr_0.95fr]"
+              className="grid min-h-[440px] lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)]"
             >
-              <div className="flex flex-col justify-center p-6 text-primary sm:p-8 lg:p-10">
+              <div className="flex min-w-0 flex-col justify-center p-5 text-primary sm:p-8 lg:p-10">
                 <span className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#f5963b]">
                   {t(activeService.eyebrow)}
                 </span>
-                <h3 className="mb-4 max-w-xl text-2xl font-black leading-tight sm:text-3xl">
+                <h3 className="mb-4 max-w-xl text-[clamp(1.55rem,5vw,1.875rem)] font-black leading-tight sm:text-3xl">
                   {t(activeService.title)}
                 </h3>
                 <p className="mb-6 max-w-xl text-sm leading-6 text-gray-600">
@@ -188,7 +188,7 @@ export default function Services() {
                 <button
                   type="button"
                   onClick={scrollToForm}
-                  className="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand focus:outline-none focus:ring-2 focus:ring-brand/30"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand focus:outline-none focus:ring-2 focus:ring-brand/30 sm:w-fit"
                 >
                   {t('Оставить заявку')}
                   <ArrowRight className="h-4 w-4" />
@@ -201,7 +201,7 @@ export default function Services() {
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/30 via-transparent to-transparent lg:bg-none" />
-                <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/50 bg-white/92 p-4 shadow-sm sm:left-auto sm:max-w-xs">
+                <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/50 bg-white/92 p-4 shadow-sm sm:bottom-5 sm:left-auto sm:max-w-xs">
                   <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-brand">{t('После консультации')}</p>
                   <p className="text-sm font-bold leading-6 text-primary">{t('Вы получите список шагов, документов и ориентир по срокам')}</p>
                 </div>
@@ -218,7 +218,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ delay: index * 0.04 }}
-              className="group flex min-h-0 flex-col justify-between rounded-[1.2rem] border border-black/[0.05] bg-white p-6 transition-all hover:border-brand/20 hover:shadow-sm"
+              className="group flex min-h-0 flex-col justify-between rounded-[1.2rem] border border-black/[0.05] bg-white p-5 transition-all hover:border-brand/20 hover:shadow-sm sm:p-6"
             >
               <div>
                 <span className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-[#f8fafc] text-brand transition-colors group-hover:border-brand/40">
@@ -240,7 +240,7 @@ export default function Services() {
         </div>
 
         <div id="туризм" className="scroll-mt-24 pt-24">
-          <div className="grid gap-10 rounded-[1.35rem] border border-black/[0.05] bg-white p-8 sm:p-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid gap-8 rounded-[1.25rem] border border-black/[0.05] bg-white p-5 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
             <div>
               <span className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-brand">
                 <MapPin className="h-4 w-4" />
@@ -265,8 +265,8 @@ export default function Services() {
         </div>
 
         <div id="трудоустройство" className="scroll-mt-24 pt-12">
-          <div className="grid gap-0 overflow-hidden rounded-[1.35rem] border border-black/[0.05] bg-white text-primary lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="bg-[#f7f4ef] p-8 sm:p-10">
+          <div className="grid gap-0 overflow-hidden rounded-[1.25rem] border border-black/[0.05] bg-white text-primary lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="bg-[#f7f4ef] p-5 sm:p-8 lg:p-10">
               <span className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand">
                 <BriefcaseBusiness className="h-4 w-4" />
                 {t('Трудоустройство за рубежом')}
@@ -287,7 +287,7 @@ export default function Services() {
             </div>
             <div className="grid gap-0 bg-white text-primary sm:grid-cols-2">
               {employmentSteps.map((step, index) => (
-                <article key={step} className="border-b border-black/[0.05] p-7 sm:border-r sm:even:border-r-0">
+                <article key={step} className="border-b border-black/[0.05] p-5 sm:border-r sm:p-7 sm:even:border-r-0">
                   <BadgeCheck className="mb-5 h-5 w-5 text-brand" />
                   <span className="mb-3 block text-xs font-black text-gray-300">0{index + 1}</span>
                   <p className="text-sm font-bold leading-6">{t(step)}</p>
@@ -300,13 +300,13 @@ export default function Services() {
         <div id="обучение" className="scroll-mt-24 pt-12">
           <div className="grid gap-6 lg:grid-cols-[1fr_1fr_1fr]">
             {educationTracks.map((track) => (
-              <article key={track.title} className="rounded-[1.2rem] border border-black/[0.05] bg-white p-8">
+              <article key={track.title} className="rounded-[1.2rem] border border-black/[0.05] bg-white p-5 sm:p-8">
                 <GraduationCap className="mb-5 h-6 w-6 text-brand" />
                 <h3 className="mb-3 text-xl font-black text-primary">{t(track.title)}</h3>
                 <p className="text-sm leading-6 text-gray-600">{t(track.text)}</p>
               </article>
             ))}
-            <article className="rounded-[1.2rem] border border-brand/15 bg-brand-soft/55 p-8">
+            <article className="rounded-[1.2rem] border border-brand/15 bg-brand-soft/55 p-5 sm:p-8">
               <BookOpenCheck className="mb-5 h-6 w-6 text-brand" />
               <h3 className="mb-3 text-xl font-black text-primary">{t('Темы курсов')}</h3>
               <p className="text-sm leading-6 text-gray-600">
@@ -317,7 +317,7 @@ export default function Services() {
         </div>
 
         <div id="корпоративным клиентам" className="scroll-mt-24 pt-12">
-          <div className="grid gap-10 rounded-[1.35rem] border border-black/[0.05] bg-white p-8 sm:p-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid gap-8 rounded-[1.25rem] border border-black/[0.05] bg-white p-5 sm:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
             <div>
               <span className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-brand">
                 <Handshake className="h-4 w-4" />
@@ -344,29 +344,29 @@ export default function Services() {
         <div id="для иностранцев" className="scroll-mt-24 pt-24">
           <div className="overflow-hidden rounded-[1.35rem] border border-black/[0.05] bg-white">
             <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
-              <div className="relative overflow-hidden border-r border-gray-200 bg-slate-50 p-8 text-primary sm:p-12 lg:p-14">
+              <div className="relative overflow-hidden border-b border-gray-200 bg-slate-50 p-5 text-primary sm:p-10 lg:border-b-0 lg:border-r lg:p-14">
                 <span className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-black/10 bg-white/60 text-brand">
                   <Globe2 className="h-7 w-7" />
                 </span>
                 <span className="mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-[#f5963b]">
                   {t('Сервис в Кыргызстане')}
                 </span>
-                <h3 className="mb-5 min-h-[4.8rem] text-3xl font-black leading-tight sm:text-4xl">{t('Для иностранных граждан')}</h3>
+                <h3 className="mb-5 text-[clamp(2rem,7vw,2.5rem)] font-black leading-tight sm:text-4xl lg:min-h-[4.8rem]">{t('Для иностранных граждан')}</h3>
                 <p className="mb-8 text-sm leading-7 text-gray-600">
                   {t('Помогаем разобраться в документах и банковских процедурах, подготовить заявление и пройти необходимые этапы.')}
                 </p>
                 <button
                   type="button"
                   onClick={scrollToForm}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand focus:outline-none focus:ring-2 focus:ring-brand/30"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand focus:outline-none focus:ring-2 focus:ring-brand/30 sm:w-fit"
                 >
                   {t('Получить консультацию')}
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="p-8 sm:p-10 lg:p-12">
-                <div className="grid gap-6 md:grid-cols-3">
+              <div className="p-5 sm:p-8 lg:p-12">
+                <div className="grid gap-4 md:grid-cols-3 lg:gap-6">
                   {[
                     {
                       icon: FileText,
@@ -387,7 +387,7 @@ export default function Services() {
                       text: 'Консультация по реквизитам и подключению расчётного счёта к доступным сервисам.',
                     },
                   ].map((service) => (
-                    <article key={service.title} className="group rounded-2xl border border-black/[0.06] bg-sand-light p-5 transition-colors hover:border-brand/25">
+                    <article key={service.title} className="group rounded-2xl border border-black/[0.06] bg-sand-light p-4 transition-colors hover:border-brand/25 lg:p-5">
                       <div className="mb-8 flex items-center justify-between">
                         <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-black/10 bg-white text-brand">
                           <service.icon className="h-5 w-5" />
@@ -414,7 +414,7 @@ export default function Services() {
         <div className="mb-12 mt-28 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Ближайшие поездки')}</span>
-            <h3 className="text-3xl font-black text-primary md:text-4xl">{t('Готовые турпакеты')}</h3>
+            <h3 className="text-[clamp(2rem,6vw,2.5rem)] font-black text-primary md:text-4xl">{t('Готовые турпакеты')}</h3>
           </div>
           <p className="max-w-md text-sm leading-6 text-gray-600">{t('Стоимость указана за одного человека. Программу любого тура можно адаптировать под вашу группу.')}</p>
         </div>
@@ -445,7 +445,7 @@ export default function Services() {
                   {t(tour.location)}
                 </div>
                 <h4 className="mb-5 text-xl font-black text-primary">{t(tour.title)}</h4>
-                <div className="mb-5 grid grid-cols-2 gap-3 border-y border-gray-100 py-4 text-xs text-gray-600">
+                <div className="mb-5 grid gap-3 border-y border-gray-100 py-4 text-xs text-gray-600 min-[420px]:grid-cols-2">
                   <span className="flex items-center gap-2"><Clock3 className="h-4 w-4" />{t(tour.duration)}</span>
                   <span className="flex items-center gap-2"><CalendarDays className="h-4 w-4" />{t(tour.dates)}</span>
                 </div>
