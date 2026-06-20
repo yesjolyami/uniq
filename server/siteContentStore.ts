@@ -89,8 +89,14 @@ export function normalizeSiteContent(value: unknown): SiteContent {
       whatsappLabel: cleanText(hero.whatsappLabel, defaultSiteContent.hero.whatsappLabel, 40),
       facts: defaultSiteContent.hero.facts.map((fallback, index) => normalizeFact(facts[index], fallback)),
     },
-    videos: defaultSiteContent.videos.map((fallback, index) => normalizeVideo(videos[index], fallback)),
-    gallery: defaultSiteContent.gallery.map((fallback, index) => normalizeGalleryImage(gallery[index], fallback)),
+    videos: videos
+      .map((video, index) => normalizeVideo(video, defaultSiteContent.videos[index] || defaultSiteContent.videos[0]))
+      .filter((video) => video.title || video.image || video.videoUrl)
+      .slice(0, 8),
+    gallery: gallery
+      .map((image, index) => normalizeGalleryImage(image, defaultSiteContent.gallery[index] || defaultSiteContent.gallery[0]))
+      .filter((image) => image.src)
+      .slice(0, 24),
   };
 }
 

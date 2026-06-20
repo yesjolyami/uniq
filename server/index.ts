@@ -1,4 +1,5 @@
-import { randomBytes, timingSafeEqual } from 'node:crypto';
+import { randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
+import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import express, { type NextFunction, type Request, type Response } from 'express';
@@ -14,6 +15,18 @@ const isProduction = process.env.NODE_ENV === 'production';
 const adminPassword = process.env.ADMIN_PASSWORD || (isProduction ? '' : 'change-me');
 const sessions = new Map<string, number>();
 const sessionLifetime = 1000 * 60 * 60 * 12;
+const uploadsDirectory = path.resolve(process.env.UPLOADS_DIR || path.join(process.cwd(), 'public/uploads'));
+const uploadLimitBytes = 50 * 1024 * 1024;
+const allowedUploadTypes = new Map([
+  ['image/jpeg', 'jpg'],
+  ['image/png', 'png'],
+  ['image/webp', 'webp'],
+  ['image/gif', 'gif'],
+  ['video/mp4', 'mp4'],
+  ['video/webm', 'webm'],
+  ['video/quicktime', 'mov'],
+  ['application/pdf', 'pdf'],
+]);
 
 if (!adminPassword) {
   throw new Error('ADMIN_PASSWORD is required in production');
@@ -24,6 +37,10 @@ if (!process.env.ADMIN_PASSWORD) {
 }
 
 app.use(express.json({ limit: '1mb' }));
+app.use('/uploads', express.static(uploadsDirectory, {
+  immutable: true,
+  maxAge: '30d',
+}));
 
 function passwordsMatch(received: string, expected: string) {
   const receivedBuffer = Buffer.from(received);
@@ -43,6 +60,79 @@ function requireAdmin(request: Request, response: Response, next: NextFunction) 
 
   sessions.set(token, Date.now() + sessionLifetime);
   next();
+}
+
+function parseContentDisposition(value = '') {
+  return Object.fromEntries(
+    value
+      .split(';')
+      .map((part) => part.trim())
+      .map((part) => {
+        const [key, ...rest] = part.split('=');
+        return [key, rest.join('=').replace(/^"|"$/g, '')];
+      }),
+  );
+}
+
+async function readMultipartFile(request: Request) {
+  const contentType = request.headers['content-type'] || '';
+  const boundaryMatch = /boundary=(?:"([^"]+)"|([^;]+))/i.exec(contentType);
+  const boundary = boundaryMatch?.[1] || boundaryMatch?.[2];
+
+  if (!boundary) {
+    throw new Error('Файл не найден в запросе');
+  }
+
+  const chunks: Buffer[] = [];
+  let totalSize = 0;
+
+  for await (const chunk of request) {
+    const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+    totalSize += buffer.length;
+
+    if (totalSize > uploadLimitBytes + 1024 * 1024) {
+      throw new Error('Файл слишком большой. Максимум 50 МБ');
+    }
+
+    chunks.push(buffer);
+  }
+
+  const body = Buffer.concat(chunks);
+  const separator = Buffer.from(`--${boundary}`);
+  let offset = body.indexOf(separator);
+
+  while (offset !== -1) {
+    const headerStart = offset + separator.length + 2;
+    const headerEnd = body.indexOf(Buffer.from('\r\n\r\n'), headerStart);
+
+    if (headerEnd === -1) break;
+
+    const headers = body.subarray(headerStart, headerEnd).toString('utf8');
+    const disposition = parseContentDisposition(/content-disposition:\s*([^\r\n]+)/i.exec(headers)?.[1]);
+    const filename = disposition.filename;
+
+    if (disposition.name === 'file' && filename) {
+      const mimeType = /content-type:\s*([^\r\n]+)/i.exec(headers)?.[1]?.trim().toLowerCase() || 'application/octet-stream';
+      const nextSeparator = body.indexOf(separator, headerEnd + 4);
+      const contentEnd = nextSeparator === -1 ? body.length : nextSeparator - 2;
+      const content = body.subarray(headerEnd + 4, contentEnd);
+
+      return { filename, mimeType, content };
+    }
+
+    offset = body.indexOf(separator, headerEnd + 4);
+  }
+
+  throw new Error('Файл не найден в запросе');
+}
+
+function sanitizeBaseName(filename: string) {
+  const parsed = path.parse(filename);
+  return parsed.name
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё_-]+/gi, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48) || 'file';
 }
 
 function validateNewsInput(value: unknown): { data?: NewsInput; message?: string } {
@@ -132,6 +222,42 @@ app.get('/api/admin/site-content', requireAdmin, async (_request, response, next
     response.json(await getSiteContent());
   } catch (error) {
     next(error);
+  }
+});
+
+app.post('/api/admin/uploads', requireAdmin, async (request, response) => {
+  try {
+    const file = await readMultipartFile(request);
+    const extension = allowedUploadTypes.get(file.mimeType);
+
+    if (!extension) {
+      response.status(400).json({ message: 'Поддерживаются JPG, PNG, WebP, GIF, MP4, WebM, MOV и PDF' });
+      return;
+    }
+
+    if (file.content.length === 0) {
+      response.status(400).json({ message: 'Файл пустой' });
+      return;
+    }
+
+    if (file.content.length > uploadLimitBytes) {
+      response.status(400).json({ message: 'Файл слишком большой. Максимум 50 МБ' });
+      return;
+    }
+
+    await mkdir(uploadsDirectory, { recursive: true });
+
+    const safeName = `${Date.now()}-${sanitizeBaseName(file.filename)}-${randomUUID().slice(0, 8)}.${extension}`;
+    await writeFile(path.join(uploadsDirectory, safeName), file.content);
+
+    response.status(201).json({
+      url: `/uploads/${safeName}`,
+      filename: safeName,
+      size: file.content.length,
+      mimeType: file.mimeType,
+    });
+  } catch (error) {
+    response.status(400).json({ message: (error as Error).message || 'Не удалось загрузить файл' });
   }
 });
 

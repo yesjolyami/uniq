@@ -9,3 +9,4 @@ coverage/
 !.env.example
 data/news.json
 data/news.json.tmp
+public/uploads/

@@ -10,9 +10,10 @@ ADMIN_PASSWORD=your-strong-admin-password
 PORT=3001
 NEWS_DATA_FILE=/var/www/uniq-data/news.json
 SITE_CONTENT_FILE=/var/www/uniq-data/site-content.json
+UPLOADS_DIR=/var/www/uniq-data/uploads
 ```
 
-`NEWS_DATA_FILE` и `SITE_CONTENT_FILE` лучше хранить вне папки релиза. Тогда при обновлении проекта новости, тексты, фото и видео из админки не пропадут.
+`NEWS_DATA_FILE`, `SITE_CONTENT_FILE` и `UPLOADS_DIR` лучше хранить вне папки релиза. Тогда при обновлении проекта новости, тексты, фото и видео из админки не пропадут.
 
 ## Сборка и запуск
 

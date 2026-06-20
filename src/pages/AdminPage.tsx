@@ -2,8 +2,10 @@ import { type FormEvent, useCallback, useEffect, useState } from 'react';
 import {
   CalendarDays,
   Check,
+  Copy,
   Eye,
   EyeOff,
+  FileUp,
   Image,
   LogOut,
   Newspaper,
@@ -13,11 +15,13 @@ import {
   Save,
   Search,
   Trash2,
+  Upload,
   Video,
   X,
 } from 'lucide-react';
 import { newsApi } from '../api/news';
 import { siteContentApi } from '../api/siteContent';
+import { uploadAsset } from '../api/uploads';
 import { newsCategories, type NewsInput, type NewsItem } from '../types/news';
 import { defaultSiteContent, type SiteContent } from '../types/siteContent';
 
@@ -33,6 +37,71 @@ const emptyForm = (): NewsInput => ({
   order: 1,
 });
 
+type UploadFieldProps = {
+  id: string;
+  label: string;
+  value: string;
+  accept?: string;
+  isUploading: boolean;
+  onUrlChange: (value: string) => void;
+  onFileSelect: (file: File) => void;
+};
+
+function UploadField({
+  id,
+  label,
+  value,
+  accept = 'image/*,video/mp4,video/webm,video/quicktime,application/pdf',
+  isUploading,
+  onUrlChange,
+  onFileSelect,
+}: UploadFieldProps) {
+  return (
+    <div>
+      <div className="mb-1.5 flex items-center justify-between gap-3">
+        <span className="block text-xs font-bold text-gray-700">{label}</span>
+        {value && (
+          <button
+            type="button"
+            onClick={() => navigator.clipboard?.writeText(value)}
+            className="flex items-center gap-1 rounded-full px-2 py-1 text-[10px] font-bold text-gray-400 transition hover:bg-gray-100 hover:text-brand"
+          >
+            <Copy className="h-3 w-3" />
+            Путь
+          </button>
+        )}
+      </div>
+      <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
+        <input
+          value={value}
+          onChange={(event) => onUrlChange(event.target.value)}
+          className="admin-input"
+          placeholder="/uploads/file.jpg или https://..."
+        />
+        <label
+          htmlFor={id}
+          className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-brand/30 bg-brand-soft px-4 py-3 text-xs font-black text-brand transition hover:border-brand hover:bg-white"
+        >
+          {isUploading ? <Upload className="h-4 w-4 animate-pulse" /> : <FileUp className="h-4 w-4" />}
+          {isUploading ? 'Загрузка...' : 'Файл'}
+        </label>
+        <input
+          id={id}
+          type="file"
+          accept={accept}
+          disabled={isUploading}
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            event.target.value = '';
+            if (file) onFileSelect(file);
+          }}
+          className="sr-only"
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function AdminPage() {
   const [token, setToken] = useState(() => sessionStorage.getItem(tokenKey) || '');
   const [password, setPassword] = useState('');
@@ -45,6 +114,7 @@ export default function AdminPage() {
   const [isLoading, setIsLoading] = useState(Boolean(token));
   const [isSaving, setIsSaving] = useState(false);
   const [isContentSaving, setIsContentSaving] = useState(false);
+  const [uploadingTarget, setUploadingTarget] = useState('');
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
 
@@ -199,9 +269,50 @@ export default function AdminPage() {
   };
 
   const updateGalleryImage = (index: number, patch: Partial<SiteContent['gallery'][number]>) => {
-     const gallery = [...siteContent.gallery];
-     gallery[index] = { ...gallery[index], ...patch };
-     setSiteContent({ ...siteContent, gallery });
+    const gallery = [...siteContent.gallery];
+    gallery[index] = { ...gallery[index], ...patch };
+    setSiteContent({ ...siteContent, gallery });
+  };
+
+  const addVideo = () => {
+    setSiteContent({
+      ...siteContent,
+      videos: [
+        ...siteContent.videos,
+        { title: 'Новое видео', label: 'Unique Asia', image: '/tourism.jpg', videoUrl: '', enabled: true },
+      ],
+    });
+  };
+
+  const removeVideo = (index: number) => {
+    setSiteContent({ ...siteContent, videos: siteContent.videos.filter((_, itemIndex) => itemIndex !== index) });
+  };
+
+  const addGalleryImage = () => {
+    setSiteContent({
+      ...siteContent,
+      gallery: [...siteContent.gallery, { src: '/tourism.jpg', alt: 'Фото Unique Asia' }],
+    });
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setSiteContent({ ...siteContent, gallery: siteContent.gallery.filter((_, itemIndex) => itemIndex !== index) });
+  };
+
+  const handleUpload = async (target: string, file: File, onUploaded: (url: string) => void) => {
+    setUploadingTarget(target);
+    setError('');
+    setNotice('');
+
+    try {
+      const result = await uploadAsset(token, file);
+      onUploaded(result.url);
+      setNotice(`Файл загружен: ${result.url}`);
+    } catch (requestError) {
+      setError((requestError as Error).message);
+    } finally {
+      setUploadingTarget('');
+    }
   };
 
   const handleDelete = async (item: NewsItem) => {
@@ -342,10 +453,15 @@ export default function AdminPage() {
               </label>
             </div>
             <div className="grid gap-4 sm:grid-cols-[1fr_110px]">
-              <label className="block">
-                <span className="mb-1.5 block text-xs font-bold text-gray-700">Изображение</span>
-                <input value={form.image} onChange={(event) => setForm({ ...form, image: event.target.value })} required className="admin-input" placeholder="/image.jpg или https://…" />
-              </label>
+              <UploadField
+                id="news-image-upload"
+                label="Изображение"
+                value={form.image}
+                accept="image/*"
+                isUploading={uploadingTarget === 'news-image'}
+                onUrlChange={(value) => setForm({ ...form, image: value })}
+                onFileSelect={(file) => handleUpload('news-image', file, (url) => setForm((current) => ({ ...current, image: url })))}
+              />
               <label className="block">
                 <span className="mb-1.5 block text-xs font-bold text-gray-700">Порядок</span>
                 <input type="number" min={0} max={9999} value={form.order} onChange={(event) => setForm({ ...form, order: Number(event.target.value) })} required className="admin-input" />
@@ -442,17 +558,28 @@ export default function AdminPage() {
               </div>
 
               <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                <div className="mb-4 flex items-center gap-2">
-                  <Video className="h-4 w-4 text-brand" />
-                  <h3 className="text-sm font-black">Видео-блок</h3>
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <Video className="h-4 w-4 text-brand" />
+                    <h3 className="text-sm font-black">Видео-блок</h3>
+                  </div>
+                  <button type="button" onClick={addVideo} className="flex items-center gap-1.5 rounded-full bg-white px-3 py-2 text-[11px] font-bold text-brand transition hover:bg-brand-soft">
+                    <Plus className="h-3.5 w-3.5" />
+                    Добавить
+                  </button>
                 </div>
                 <div className="grid gap-4 lg:grid-cols-2">
                   {siteContent.videos.map((video, index) => (
                     <div key={index} className="rounded-xl border border-gray-200 bg-white p-4">
-                      <label className="mb-3 flex items-center justify-between gap-4 rounded-xl bg-gray-50 px-3 py-2">
-                        <span className="text-xs font-bold text-gray-700">Показывать видео {index + 1}</span>
-                        <input type="checkbox" checked={video.enabled} onChange={(event) => updateVideo(index, { enabled: event.target.checked })} className="h-5 w-5 accent-[#e62020]" />
-                      </label>
+                      <div className="mb-3 flex items-center gap-2">
+                        <label className="flex flex-1 items-center justify-between gap-4 rounded-xl bg-gray-50 px-3 py-2">
+                          <span className="text-xs font-bold text-gray-700">Показывать видео {index + 1}</span>
+                          <input type="checkbox" checked={video.enabled} onChange={(event) => updateVideo(index, { enabled: event.target.checked })} className="h-5 w-5 accent-[#e62020]" />
+                        </label>
+                        <button type="button" onClick={() => removeVideo(index)} aria-label={`Удалить видео ${index + 1}`} className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600 transition hover:bg-red-100">
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
                       <label className="mb-3 block">
                         <span className="mb-1.5 block text-xs font-bold text-gray-700">Заголовок</span>
                         <input value={video.title} onChange={(event) => updateVideo(index, { title: event.target.value })} className="admin-input" />
@@ -461,19 +588,26 @@ export default function AdminPage() {
                         <span className="mb-1.5 block text-xs font-bold text-gray-700">Метка</span>
                         <input value={video.label} onChange={(event) => updateVideo(index, { label: event.target.value })} className="admin-input" />
                       </label>
-                      <label className="mb-3 block">
-                        <span className="mb-1.5 block text-xs font-bold text-gray-700">Фото-превью</span>
-                        <input value={video.image} onChange={(event) => updateVideo(index, { image: event.target.value })} className="admin-input" />
-                      </label>
-                      <label className="mb-0 block">
-                        <span className="mb-1.5 block text-xs font-bold text-gray-700">Ссылка на видео</span>
-                        <input
-                          value={video.videoUrl}
-                           onChange={(event) => updateVideo(index, { videoUrl: event.target.value })}
-                          className="admin-input"
-                          placeholder="/video.mp4 или https://…"
+                      <div className="mb-3">
+                        <UploadField
+                          id={`video-image-upload-${index}`}
+                          label="Фото-превью"
+                          value={video.image}
+                          accept="image/*"
+                          isUploading={uploadingTarget === `video-image-${index}`}
+                          onUrlChange={(value) => updateVideo(index, { image: value })}
+                          onFileSelect={(file) => handleUpload(`video-image-${index}`, file, (url) => updateVideo(index, { image: url }))}
                         />
-                      </label>
+                      </div>
+                      <UploadField
+                        id={`video-file-upload-${index}`}
+                        label="Ссылка на видео"
+                        value={video.videoUrl}
+                        accept="video/mp4,video/webm,video/quicktime"
+                        isUploading={uploadingTarget === `video-file-${index}`}
+                        onUrlChange={(value) => updateVideo(index, { videoUrl: value })}
+                        onFileSelect={(file) => handleUpload(`video-file-${index}`, file, (url) => updateVideo(index, { videoUrl: url }))}
+                      />
                       {video.image && <img src={video.image} alt="" className="mt-4 h-32 w-full rounded-xl object-cover" />}
                     </div>
                   ))}
@@ -481,18 +615,36 @@ export default function AdminPage() {
               </div>
 
               <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                <div className="mb-4 flex items-center gap-2">
-                  <Image className="h-4 w-4 text-brand" />
-                  <h3 className="text-sm font-black">Фотогалерея</h3>
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <Image className="h-4 w-4 text-brand" />
+                    <h3 className="text-sm font-black">Фотогалерея</h3>
+                  </div>
+                  <button type="button" onClick={addGalleryImage} className="flex items-center gap-1.5 rounded-full bg-white px-3 py-2 text-[11px] font-bold text-brand transition hover:bg-brand-soft">
+                    <Plus className="h-3.5 w-3.5" />
+                    Добавить фото
+                  </button>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                   {siteContent.gallery.map((image, index) => (
                     <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
-                      <img src={image.src} alt="" className="mb-3 h-28 w-full rounded-lg object-cover" />
-                      <label className="mb-3 block">
-                        <span className="mb-1.5 block text-xs font-bold text-gray-700">Фото {index + 1}</span>
-                        <input value={image.src} onChange={(event) => updateGalleryImage(index, { src: event.target.value })} className="admin-input" placeholder="/photo.jpg или https://…" />
-                      </label>
+                      <div className="relative mb-3 overflow-hidden rounded-lg bg-gray-100">
+                        <img src={image.src} alt="" className="h-28 w-full object-cover" />
+                        <button type="button" onClick={() => removeGalleryImage(index)} aria-label={`Удалить фото ${index + 1}`} className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-red-600 shadow-sm transition hover:bg-red-50">
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                      <div className="mb-3">
+                        <UploadField
+                          id={`gallery-upload-${index}`}
+                          label={`Фото ${index + 1}`}
+                          value={image.src}
+                          accept="image/*"
+                          isUploading={uploadingTarget === `gallery-${index}`}
+                          onUrlChange={(value) => updateGalleryImage(index, { src: value })}
+                          onFileSelect={(file) => handleUpload(`gallery-${index}`, file, (url) => updateGalleryImage(index, { src: url }))}
+                        />
+                      </div>
                       <label className="block">
                         <span className="mb-1.5 block text-xs font-bold text-gray-700">Alt-текст</span>
                         <input value={image.alt} onChange={(event) => updateGalleryImage(index, { alt: event.target.value })} className="admin-input" />
