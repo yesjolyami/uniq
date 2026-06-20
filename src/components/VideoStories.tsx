@@ -31,7 +31,7 @@ function getEmbedUrl(url: string) {
 }
 
 function isDirectVideo(url: string) {
-  return /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
+  return /\.(mp4|m4v|webm|mov|avi|mpeg|mpg|ogv)(\?.*)?$/i.test(url);
 }
 
 export default function VideoStories() {

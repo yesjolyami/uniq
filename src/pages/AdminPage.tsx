@@ -51,7 +51,7 @@ function UploadField({
   id,
   label,
   value,
-  accept = 'image/*,video/mp4,video/webm,video/quicktime,application/pdf',
+  accept = 'image/*,video/*,application/pdf',
   isUploading,
   onUrlChange,
   onFileSelect,
@@ -507,6 +507,12 @@ export default function AdminPage() {
               </div>
             </div>
 
+            {(error || notice) && (
+              <div className={`mb-5 rounded-xl px-4 py-3 text-xs font-bold ${error ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'}`} role={error ? 'alert' : 'status'}>
+                {error || notice}
+              </div>
+            )}
+
             <div className="space-y-8">
               <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
                 <div className="mb-4 flex items-center gap-2">
@@ -603,7 +609,7 @@ export default function AdminPage() {
                         id={`video-file-upload-${index}`}
                         label="Ссылка на видео"
                         value={video.videoUrl}
-                        accept="video/mp4,video/webm,video/quicktime"
+                        accept="video/*"
                         isUploading={uploadingTarget === `video-file-${index}`}
                         onUrlChange={(value) => updateVideo(index, { videoUrl: value })}
                         onFileSelect={(file) => handleUpload(`video-file-${index}`, file, (url) => updateVideo(index, { videoUrl: url }))}

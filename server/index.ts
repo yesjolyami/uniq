@@ -16,15 +16,20 @@ const adminPassword = process.env.ADMIN_PASSWORD || (isProduction ? '' : 'change
 const sessions = new Map<string, number>();
 const sessionLifetime = 1000 * 60 * 60 * 12;
 const uploadsDirectory = path.resolve(process.env.UPLOADS_DIR || path.join(process.cwd(), 'public/uploads'));
-const uploadLimitBytes = 50 * 1024 * 1024;
+const uploadLimitMegabytes = 500;
+const uploadLimitBytes = uploadLimitMegabytes * 1024 * 1024;
 const allowedUploadTypes = new Map([
   ['image/jpeg', 'jpg'],
   ['image/png', 'png'],
   ['image/webp', 'webp'],
   ['image/gif', 'gif'],
   ['video/mp4', 'mp4'],
+  ['video/x-m4v', 'm4v'],
   ['video/webm', 'webm'],
   ['video/quicktime', 'mov'],
+  ['video/x-msvideo', 'avi'],
+  ['video/mpeg', 'mpeg'],
+  ['video/ogg', 'ogv'],
   ['application/pdf', 'pdf'],
 ]);
 
@@ -91,7 +96,7 @@ async function readMultipartFile(request: Request) {
     totalSize += buffer.length;
 
     if (totalSize > uploadLimitBytes + 1024 * 1024) {
-      throw new Error('Файл слишком большой. Максимум 50 МБ');
+      throw new Error(`Файл слишком большой. Максимум ${uploadLimitMegabytes} МБ`);
     }
 
     chunks.push(buffer);
@@ -231,7 +236,7 @@ app.post('/api/admin/uploads', requireAdmin, async (request, response) => {
     const extension = allowedUploadTypes.get(file.mimeType);
 
     if (!extension) {
-      response.status(400).json({ message: 'Поддерживаются JPG, PNG, WebP, GIF, MP4, WebM, MOV и PDF' });
+      response.status(400).json({ message: 'Поддерживаются JPG, PNG, WebP, GIF, MP4, M4V, WebM, MOV, AVI, MPEG, OGV и PDF' });
       return;
     }
 
@@ -241,7 +246,7 @@ app.post('/api/admin/uploads', requireAdmin, async (request, response) => {
     }
 
     if (file.content.length > uploadLimitBytes) {
-      response.status(400).json({ message: 'Файл слишком большой. Максимум 50 МБ' });
+      response.status(400).json({ message: `Файл слишком большой. Максимум ${uploadLimitMegabytes} МБ` });
       return;
     }
 
