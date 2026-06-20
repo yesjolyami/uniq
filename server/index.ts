@@ -16,7 +16,7 @@ const adminPassword = process.env.ADMIN_PASSWORD || (isProduction ? '' : 'change
 const sessions = new Map<string, number>();
 const sessionLifetime = 1000 * 60 * 60 * 12;
 const uploadsDirectory = path.resolve(process.env.UPLOADS_DIR || path.join(process.cwd(), 'public/uploads'));
-const uploadLimitMegabytes = 500;
+const uploadLimitMegabytes = Math.max(1, Number(process.env.UPLOAD_LIMIT_MB) || 1024);
 const uploadLimitBytes = uploadLimitMegabytes * 1024 * 1024;
 const allowedUploadTypes = new Map([
   ['image/jpeg', 'jpg'],
