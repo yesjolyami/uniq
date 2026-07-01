@@ -31,13 +31,13 @@ export default function Footer() {
           <div>
             <h4 className="mb-6 text-[11px] font-bold uppercase tracking-[0.18em] text-brand">{t('Компания')}</h4>
             <ul className="space-y-4">
-                <li><a href="/#о%20компании" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('О компании')}</a></li>
-                <li><a href="/#о%20компании" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Наша команда')}</a></li>
-                <li><a href="/#о%20компании" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('История компании')}</a></li>
-                <li><a href="/#о%20компании" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Лицензии и документы')}</a></li>
-                <li><a href="/#трудоустройство" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Трудоустройство')}</a></li>
-                <li><a href="/#обучение" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Обучение')}</a></li>
-                <li><a href="/#корпоративным%20клиентам" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Корпоративным клиентам')}</a></li>
+                <li><a href="/company" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('О компании')}</a></li>
+                <li><a href="/company#team" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Наша команда')}</a></li>
+                <li><a href="/company#history" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('История компании')}</a></li>
+                <li><a href="/company#docs" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Лицензии и документы')}</a></li>
+                <li><a href="/employment" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Трудоустройство')}</a></li>
+                <li><a href="/education" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Обучение')}</a></li>
+                <li><a href="/#контакты" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Корпоративным клиентам')}</a></li>
                 <li><a href="/#новости" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Новости')}</a></li>
             </ul>
           </div>

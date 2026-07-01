@@ -1,5 +1,6 @@
 import { Building2, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { companyAwards } from '../data/aboutContent';
 import { useI18n } from '../i18n/I18nContext';
 
@@ -43,19 +44,7 @@ export default function About() {
                 {t('Unique Asia с 2019 года организует поездки, образовательные и международные программы, объединяя консультацию, документы и сопровождение в одном процессе.')}
               </p>
             </div>
-            <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {[
-                'Ответственный менеджер',
-                'Фиксированные этапы работы',
-                'Проверенные партнёры',
-                'Конфиденциальность данных',
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-2.5 text-sm font-bold text-primary">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-brand" />
-                  {t(item)}
-                </div>
-              ))}
-            </div>
+      
             <div className="mt-4 grid gap-2.5 sm:grid-cols-3">
               {companyAwards.map((award) => (
                 <article key={award.title} className="rounded-2xl bg-sand p-3.5 text-primary">
@@ -65,6 +54,9 @@ export default function About() {
                 </article>
               ))}
             </div>
+            <Link to="/company" className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/15 px-4 py-2 text-sm font-bold text-primary transition-colors hover:border-brand hover:text-brand">
+              {t('Подробнее')}
+            </Link>
           </motion.div>
         </div>
       </div>

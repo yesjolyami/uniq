@@ -1,21 +1,25 @@
 import { BriefcaseBusiness, ChevronRight, GraduationCap, Handshake } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useI18n } from '../i18n/I18nContext';
 
 const items = [
   {
     id: 'трудоустройство',
+    href: '/employment',
     icon: BriefcaseBusiness,
     title: 'Трудоустройство',
     text: 'Контракт, документы, страховка и подготовка к выезду.',
   },
   {
     id: 'обучение',
+    href: '/education',
     icon: GraduationCap,
     title: 'Обучение',
     text: 'Языковые программы и курсы для туризма и международных поездок.',
   },
   {
     id: 'корпоративные поездки',
+    href: '/#контакты',
     icon: Handshake,
     title: 'Корпоративные поездки',
     text: 'Командировки, группы, мероприятия и единый координатор.',
@@ -24,10 +28,6 @@ const items = [
 
 export default function SecondaryDirections() {
   const { t } = useI18n();
-
-  const scrollToContacts = () => {
-    document.getElementById('контакты')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section className="border-b border-black/[0.04] bg-[#fffaf5] py-8 sm:py-10 md:py-12">
@@ -46,11 +46,10 @@ export default function SecondaryDirections() {
 
         <div className="grid gap-3 md:grid-cols-3">
           {items.map((item) => (
-            <button
+            <Link
               key={item.id}
               id={item.id}
-              type="button"
-              onClick={scrollToContacts}
+              to={item.href}
               className="group scroll-mt-24 flex items-start justify-between gap-3 rounded-[1.1rem] border border-black/[0.05] bg-white px-4 py-3 text-left transition-colors hover:border-brand/25"
             >
               <div className="flex items-start gap-3">
@@ -63,7 +62,7 @@ export default function SecondaryDirections() {
                 </div>
               </div>
               <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-primary/35 transition-colors group-hover:text-brand" />
-            </button>
+            </Link>
           ))}
         </div>
       </div>
