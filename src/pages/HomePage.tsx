@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Hero from '../components/Hero';
-import Features from '../components/Features';
-import Services from '../components/Services';
-import Testimonials from '../components/Testimonials';
-import CTA from '../components/CTA';
-import Contacts from '../components/Contacts';
-import NewsGallery from '../components/NewsGallery';
 import About from '../components/About';
-import VideoStories from '../components/VideoStories';
+import Contacts from '../components/Contacts';
+import GallerySection from '../components/GallerySection';
+import Hero from '../components/Hero';
+import NewsGallery from '../components/NewsGallery';
+import SecondaryDirections from '../components/SecondaryDirections';
+import Services from '../components/Services';
 
 export default function HomePage() {
   const { hash } = useLocation();
@@ -30,13 +28,11 @@ export default function HomePage() {
   return (
     <main>
       <Hero />
-      <Features />
-      <About />
-      <VideoStories />
-      <Services />
       <NewsGallery />
-      <Testimonials />
-      <CTA />
+      <Services />
+      <About />
+      <SecondaryDirections />
+      <GallerySection />
       <Contacts />
     </main>
   );

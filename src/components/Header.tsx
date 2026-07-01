@@ -15,10 +15,12 @@ export default function Header() {
 
   const navLinks = [
     { label: 'О компании', target: 'о компании' },
-    { label: 'Услуги', target: 'услуги' },
+    { label: 'Новости', target: 'новости' },
+    { label: 'Туризм', target: 'туризм' },
     { label: 'Трудоустройство', target: 'трудоустройство' },
     { label: 'Обучение', target: 'обучение' },
-    { label: 'Новости', target: 'новости' },
+    { label: 'Фотогалерея', target: 'фотогалерея' },
+    { label: 'Отзывы', target: 'отзывы' },
     { label: 'Контакты', target: 'контакты' },
   ];
 
@@ -34,7 +36,7 @@ export default function Header() {
   return (
     <>
       <header className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/90 backdrop-blur-xl">
-        <div className="relative z-50 mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 md:h-[76px] lg:px-8">
+        <div className="relative z-50 flex h-[68px] w-full items-center justify-between gap-3 px-4 sm:px-6 md:h-[76px] lg:px-8">
           <Link to="/" className="group flex min-w-0 cursor-pointer items-center gap-3" onClick={() => window.scrollTo(0, 0)}>
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white text-sm font-black tracking-tighter shadow-sm">
               <span className="text-[#f5963b]">U</span>
@@ -70,7 +72,7 @@ export default function Header() {
               WhatsApp
             </a>
             <button 
-              onClick={() => scrollToSection('cta')}
+              onClick={() => scrollToSection('контакты')}
               className="rounded-full bg-primary px-4 py-3 text-[12px] font-bold text-white shadow-md transition-colors hover:bg-brand xl:px-5"
             >
               {t('Оставить заявку')}
@@ -119,7 +121,7 @@ export default function Header() {
                   </button>
                 ))}
                 <button 
-                  onClick={() => scrollToSection('cta')}
+                  onClick={() => scrollToSection('контакты')}
                   className="mt-4 rounded-full bg-primary px-6 py-4 text-center font-bold text-white transition-colors hover:bg-brand"
                 >
                   {t('Оставить заявку')}

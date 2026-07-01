@@ -27,14 +27,14 @@ export default function Contacts() {
   const { t } = useI18n();
 
   return (
-    <section id="контакты" className="bg-white py-20 sm:py-24 md:py-32 lg:py-36">
+    <section id="контакты" className="bg-white py-10 sm:py-12 md:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 max-w-2xl">
+        <div className="mb-5 max-w-2xl">
           <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Контакты')}</span>
-          <h2 className="max-w-4xl text-[clamp(2rem,6vw,2.5rem)] font-black leading-tight text-primary md:text-4xl">{t('Выберите удобный способ связи')}</h2>
+          <h2 className="max-w-4xl text-[clamp(1.7rem,5vw,2.2rem)] font-black leading-tight text-primary">{t('Выберите удобный способ связи')}</h2>
         </div>
 
-        <div className="grid gap-5 overflow-visible md:grid-cols-3">
+        <div className="grid gap-4 overflow-visible md:grid-cols-3">
           {contactMethods.map((method, index) => (
             <motion.a
               key={method.phone}
@@ -45,7 +45,7 @@ export default function Contacts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="group flex min-h-44 flex-col justify-between rounded-[1.25rem] border border-gray-200 bg-white p-5 transition-colors hover:bg-slate-50 sm:p-7"
+              className="group flex min-h-32 flex-col justify-between rounded-[1.15rem] border border-gray-200 bg-white p-4 transition-colors hover:bg-slate-50 sm:p-5"
             >
               <div className="flex items-start justify-between">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-green-50 text-[#159447]">
@@ -54,9 +54,9 @@ export default function Contacts() {
                 <span className="text-[10px] font-black tracking-[0.16em] text-gray-300">0{index + 1}</span>
               </div>
               <div>
-                <h3 className="mb-2 text-lg font-black text-primary">{t(method.title)}</h3>
-                <p className="mb-3 text-xs leading-5 text-gray-500">{t(method.detail)}</p>
-                <span className="text-base font-black text-[#159447] transition-colors group-hover:text-brand">{method.phone}</span>
+                <h3 className="mb-1.5 text-base font-black text-primary">{t(method.title)}</h3>
+                <p className="mb-2 text-xs leading-4 text-gray-500">{t(method.detail)}</p>
+                <span className="text-sm font-black text-[#159447] transition-colors group-hover:text-brand">{method.phone}</span>
               </div>
             </motion.a>
           ))}
@@ -66,17 +66,17 @@ export default function Contacts() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-10 grid overflow-hidden rounded-[1.25rem] border border-gray-200 bg-slate-50 lg:grid-cols-[0.72fr_1.28fr]"
+          className="mt-5 grid overflow-hidden rounded-[1.15rem] border border-gray-200 bg-slate-50 lg:grid-cols-[0.76fr_1.24fr]"
         >
-          <div className="flex flex-col justify-between p-5 sm:p-10">
+          <div className="flex flex-col justify-between p-4 sm:p-5">
             <div>
               <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
                 <MapPin className="h-5 w-5" />
               </span>
-              <h3 className="mb-3 min-h-8 text-2xl font-black text-primary">{t('Офис в Бишкеке')}</h3>
-              <p className="max-w-sm text-sm leading-6 text-gray-600">{t('Приходите на личную консультацию. Перед визитом рекомендуем согласовать время.')}</p>
+              <h3 className="mb-2 text-xl font-black text-primary">{t('Офис в Бишкеке')}</h3>
+              <p className="max-w-sm text-sm leading-5 text-gray-600">{t('Личную консультацию лучше согласовать заранее.')}</p>
             </div>
-            <div className="mt-10 space-y-4">
+            <div className="mt-5 space-y-3">
               <div className="flex items-start gap-3 text-sm font-bold text-primary">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                 {t('г. Бишкек, ул. Московская 164, 720017')}
@@ -92,7 +92,7 @@ export default function Contacts() {
             </div>
           </div>
 
-          <div className="min-h-[280px] overflow-hidden bg-gray-200 sm:min-h-[320px]">
+          <div className="min-h-[200px] overflow-hidden bg-gray-200 sm:min-h-[220px]">
             <iframe
               src="https://maps.google.com/maps?q=Moskovskaya%20164,%20Bishkek,%20Kyrgyzstan&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"
