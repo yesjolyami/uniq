@@ -335,7 +335,33 @@ export default function AdminPage() {
       !isLocalizedComplete(siteContent.hero.whatsappLabel) ||
       siteContent.hero.facts.some((fact) => !isLocalizedComplete(fact.label)) ||
       siteContent.videos.some((video) => !isLocalizedComplete(video.title) || !isLocalizedComplete(video.label)) ||
-      siteContent.gallery.some((image) => !isLocalizedComplete(image.alt));
+      siteContent.gallery.some((image) => !isLocalizedComplete(image.alt)) ||
+      !isLocalizedComplete(siteContent.tourism.intro.eyebrow) ||
+      !isLocalizedComplete(siteContent.tourism.intro.title) ||
+      !isLocalizedComplete(siteContent.tourism.intro.description) ||
+      siteContent.tourism.highlights.some((item) => !isLocalizedComplete(item)) ||
+      siteContent.tourism.benefits.some((item) => !isLocalizedComplete(item.title) || !isLocalizedComplete(item.text)) ||
+      !isLocalizedComplete(siteContent.tourism.formatsTitle) ||
+      !isLocalizedComplete(siteContent.tourism.formatsLead) ||
+      siteContent.tourism.formats.some((item) => !isLocalizedComplete(item)) ||
+      !isLocalizedComplete(siteContent.employment.intro.eyebrow) ||
+      !isLocalizedComplete(siteContent.employment.intro.title) ||
+      !isLocalizedComplete(siteContent.employment.intro.description) ||
+      siteContent.employment.countries.some((item) => !isLocalizedComplete(item)) ||
+      siteContent.employment.advantages.some((item) => !isLocalizedComplete(item.title) || !isLocalizedComplete(item.text)) ||
+      !isLocalizedComplete(siteContent.employment.processTitle) ||
+      siteContent.employment.steps.some((item) => !isLocalizedComplete(item)) ||
+      !isLocalizedComplete(siteContent.employment.supportTitle) ||
+      siteContent.employment.supportItems.some((item) => !isLocalizedComplete(item)) ||
+      !isLocalizedComplete(siteContent.education.intro.eyebrow) ||
+      !isLocalizedComplete(siteContent.education.intro.title) ||
+      !isLocalizedComplete(siteContent.education.intro.description) ||
+      siteContent.education.benefits.some((item) => !isLocalizedComplete(item.title) || !isLocalizedComplete(item.text)) ||
+      siteContent.education.tracks.some((item) => !isLocalizedComplete(item.title) || !isLocalizedComplete(item.text)) ||
+      !isLocalizedComplete(siteContent.education.formatsTitle) ||
+      !isLocalizedComplete(siteContent.education.formatsLead) ||
+      siteContent.education.formats.some((item) => !isLocalizedComplete(item)) ||
+      !isLocalizedComplete(siteContent.education.note);
 
     if (hasEmptyTranslation) {
       setIsContentSaving(false);
@@ -372,6 +398,84 @@ export default function AdminPage() {
     const gallery = [...siteContent.gallery];
     gallery[index] = { ...gallery[index], ...patch };
     setSiteContent({ ...siteContent, gallery });
+  };
+
+  const updatePageIntro = (
+    page: 'tourism' | 'employment' | 'education',
+    field: 'eyebrow' | 'title' | 'description' | 'image',
+    value: string | LocalizedText,
+  ) => {
+    const pageContent = siteContent[page] as SiteContent['tourism'] | SiteContent['employment'] | SiteContent['education'];
+    setSiteContent({
+      ...siteContent,
+      [page]: {
+        ...pageContent,
+        intro: {
+          ...pageContent.intro,
+          [field]: value,
+        },
+      },
+    });
+  };
+
+  const updatePageText = (
+    page: 'tourism' | 'education',
+    field: 'formatsTitle' | 'formatsLead' | 'note',
+    value: LocalizedText,
+  ) => {
+    setSiteContent({
+      ...siteContent,
+      [page]: {
+        ...siteContent[page],
+        [field]: value,
+      },
+    });
+  };
+
+  const updateEmploymentText = (field: 'processTitle' | 'supportTitle', value: LocalizedText) => {
+    setSiteContent({
+      ...siteContent,
+      employment: {
+        ...siteContent.employment,
+        [field]: value,
+      },
+    });
+  };
+
+  const updatePageListItem = (
+    page: 'tourism' | 'employment' | 'education',
+    field: 'highlights' | 'formats' | 'countries' | 'steps' | 'supportItems',
+    index: number,
+    value: LocalizedText,
+  ) => {
+    const pageContent = siteContent[page] as Record<string, unknown>;
+    const items = [...(pageContent[field] as LocalizedText[])];
+    items[index] = value;
+    setSiteContent({
+      ...siteContent,
+      [page]: {
+        ...siteContent[page],
+        [field]: items,
+      },
+    });
+  };
+
+  const updatePageCard = (
+    page: 'tourism' | 'employment' | 'education',
+    field: 'benefits' | 'advantages' | 'tracks',
+    index: number,
+    patch: { title?: LocalizedText; text?: LocalizedText },
+  ) => {
+    const pageContent = siteContent[page] as Record<string, unknown>;
+    const items = [...(pageContent[field] as Array<{ title: LocalizedText; text: LocalizedText }>)];
+    items[index] = { ...items[index], ...patch };
+    setSiteContent({
+      ...siteContent,
+      [page]: {
+        ...siteContent[page],
+        [field]: items,
+      },
+    });
   };
 
   const addVideo = () => {
@@ -752,6 +856,162 @@ export default function AdminPage() {
                       <LocalizedField label="Alt-текст" value={image.alt} onChange={(alt) => updateGalleryImage(index, { alt })} maxLength={160} />
                     </div>
                   ))}
+                </div>
+              </div>
+
+              <div className="admin-soft-panel p-3 sm:p-4">
+                <div className="mb-4 flex items-center gap-2">
+                  <Image className="h-4 w-4 text-brand" />
+                  <h3 className="text-sm font-black">Лендинг: Туризм</h3>
+                </div>
+                <div className="grid gap-4">
+                  <LocalizedField label="Надзаголовок" value={siteContent.tourism.intro.eyebrow} onChange={(value) => updatePageIntro('tourism', 'eyebrow', value)} maxLength={80} />
+                  <LocalizedField label="Заголовок" value={siteContent.tourism.intro.title} onChange={(value) => updatePageIntro('tourism', 'title', value)} multiline rows={2} maxLength={180} />
+                  <LocalizedField label="Описание" value={siteContent.tourism.intro.description} onChange={(value) => updatePageIntro('tourism', 'description', value)} multiline rows={3} maxLength={320} />
+                  <UploadField
+                    id="tourism-intro-image"
+                    label="Главное изображение"
+                    value={siteContent.tourism.intro.image}
+                    accept="image/*"
+                    isUploading={uploadingTarget === 'tourism-intro-image'}
+                    onUrlChange={(value) => updatePageIntro('tourism', 'image', value)}
+                    onFileSelect={(file) => handleUpload('tourism-intro-image', file, (url) => updatePageIntro('tourism', 'image', url))}
+                  />
+                  <div className="grid gap-4 lg:grid-cols-3">
+                    {siteContent.tourism.highlights.map((item, index) => (
+                      <div key={index}>
+                        <LocalizedField label={`Плашка ${index + 1}`} value={item} onChange={(value) => updatePageListItem('tourism', 'highlights', index, value)} maxLength={120} />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-3">
+                    {siteContent.tourism.benefits.map((item, index) => (
+                      <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
+                        <LocalizedField label={`Преимущество ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('tourism', 'benefits', index, { title: value })} maxLength={120} />
+                        <div className="mt-3">
+                          <LocalizedField label="Описание" value={item.text} onChange={(value) => updatePageCard('tourism', 'benefits', index, { text: value })} multiline rows={3} maxLength={280} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+                    <LocalizedField label="Заголовок форматов" value={siteContent.tourism.formatsTitle} onChange={(value) => updatePageText('tourism', 'formatsTitle', value)} maxLength={80} />
+                    <LocalizedField label="Подзаголовок форматов" value={siteContent.tourism.formatsLead} onChange={(value) => updatePageText('tourism', 'formatsLead', value)} maxLength={120} />
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    {siteContent.tourism.formats.map((item, index) => (
+                      <div key={index}>
+                        <LocalizedField label={`Формат ${index + 1}`} value={item} onChange={(value) => updatePageListItem('tourism', 'formats', index, value)} maxLength={140} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="admin-soft-panel p-3 sm:p-4">
+                <div className="mb-4 flex items-center gap-2">
+                  <Image className="h-4 w-4 text-brand" />
+                  <h3 className="text-sm font-black">Лендинг: Трудоустройство</h3>
+                </div>
+                <div className="grid gap-4">
+                  <LocalizedField label="Надзаголовок" value={siteContent.employment.intro.eyebrow} onChange={(value) => updatePageIntro('employment', 'eyebrow', value)} maxLength={80} />
+                  <LocalizedField label="Заголовок" value={siteContent.employment.intro.title} onChange={(value) => updatePageIntro('employment', 'title', value)} multiline rows={2} maxLength={180} />
+                  <LocalizedField label="Описание" value={siteContent.employment.intro.description} onChange={(value) => updatePageIntro('employment', 'description', value)} multiline rows={3} maxLength={320} />
+                  <UploadField
+                    id="employment-intro-image"
+                    label="Главное изображение"
+                    value={siteContent.employment.intro.image}
+                    accept="image/*"
+                    isUploading={uploadingTarget === 'employment-intro-image'}
+                    onUrlChange={(value) => updatePageIntro('employment', 'image', value)}
+                    onFileSelect={(file) => handleUpload('employment-intro-image', file, (url) => updatePageIntro('employment', 'image', url))}
+                  />
+                  <div className="grid gap-4 lg:grid-cols-3">
+                    {siteContent.employment.advantages.map((item, index) => (
+                      <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
+                        <LocalizedField label={`Преимущество ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('employment', 'advantages', index, { title: value })} maxLength={120} />
+                        <div className="mt-3">
+                          <LocalizedField label="Описание" value={item.text} onChange={(value) => updatePageCard('employment', 'advantages', index, { text: value })} multiline rows={3} maxLength={280} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-3">
+                    {siteContent.employment.countries.map((item, index) => (
+                      <div key={index}>
+                        <LocalizedField label={`Страна ${index + 1}`} value={item} onChange={(value) => updatePageListItem('employment', 'countries', index, value)} maxLength={40} />
+                      </div>
+                    ))}
+                  </div>
+                  <LocalizedField label="Заголовок процесса" value={siteContent.employment.processTitle} onChange={updateEmploymentText.bind(null, 'processTitle')} maxLength={80} />
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    {siteContent.employment.steps.map((item, index) => (
+                      <div key={index}>
+                        <LocalizedField label={`Этап ${index + 1}`} value={item} onChange={(value) => updatePageListItem('employment', 'steps', index, value)} multiline rows={2} maxLength={160} />
+                      </div>
+                    ))}
+                  </div>
+                  <LocalizedField label="Заголовок сопровождения" value={siteContent.employment.supportTitle} onChange={updateEmploymentText.bind(null, 'supportTitle')} maxLength={80} />
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    {siteContent.employment.supportItems.map((item, index) => (
+                      <div key={index}>
+                        <LocalizedField label={`Пункт ${index + 1}`} value={item} onChange={(value) => updatePageListItem('employment', 'supportItems', index, value)} multiline rows={2} maxLength={160} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="admin-soft-panel p-3 sm:p-4">
+                <div className="mb-4 flex items-center gap-2">
+                  <Image className="h-4 w-4 text-brand" />
+                  <h3 className="text-sm font-black">Лендинг: Обучение и языки</h3>
+                </div>
+                <div className="grid gap-4">
+                  <LocalizedField label="Надзаголовок" value={siteContent.education.intro.eyebrow} onChange={(value) => updatePageIntro('education', 'eyebrow', value)} maxLength={80} />
+                  <LocalizedField label="Заголовок" value={siteContent.education.intro.title} onChange={(value) => updatePageIntro('education', 'title', value)} multiline rows={2} maxLength={180} />
+                  <LocalizedField label="Описание" value={siteContent.education.intro.description} onChange={(value) => updatePageIntro('education', 'description', value)} multiline rows={3} maxLength={320} />
+                  <UploadField
+                    id="education-intro-image"
+                    label="Главное изображение"
+                    value={siteContent.education.intro.image}
+                    accept="image/*"
+                    isUploading={uploadingTarget === 'education-intro-image'}
+                    onUrlChange={(value) => updatePageIntro('education', 'image', value)}
+                    onFileSelect={(file) => handleUpload('education-intro-image', file, (url) => updatePageIntro('education', 'image', url))}
+                  />
+                  <div className="grid gap-4 lg:grid-cols-3">
+                    {siteContent.education.benefits.map((item, index) => (
+                      <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
+                        <LocalizedField label={`Преимущество ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('education', 'benefits', index, { title: value })} maxLength={120} />
+                        <div className="mt-3">
+                          <LocalizedField label="Описание" value={item.text} onChange={(value) => updatePageCard('education', 'benefits', index, { text: value })} multiline rows={3} maxLength={280} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-3">
+                    {siteContent.education.tracks.map((item, index) => (
+                      <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
+                        <LocalizedField label={`Блок языков/курсов ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('education', 'tracks', index, { title: value })} maxLength={120} />
+                        <div className="mt-3">
+                          <LocalizedField label="Описание" value={item.text} onChange={(value) => updatePageCard('education', 'tracks', index, { text: value })} multiline rows={4} maxLength={320} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+                    <LocalizedField label="Заголовок форматов" value={siteContent.education.formatsTitle} onChange={(value) => updatePageText('education', 'formatsTitle', value)} maxLength={80} />
+                    <LocalizedField label="Подзаголовок форматов" value={siteContent.education.formatsLead} onChange={(value) => updatePageText('education', 'formatsLead', value)} maxLength={120} />
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-2">
+                    {siteContent.education.formats.map((item, index) => (
+                      <div key={index}>
+                        <LocalizedField label={`Формат ${index + 1}`} value={item} onChange={(value) => updatePageListItem('education', 'formats', index, value)} maxLength={140} />
+                      </div>
+                    ))}
+                  </div>
+                  <LocalizedField label="Нижний текст про языки и адаптацию" value={siteContent.education.note} onChange={(value) => updatePageText('education', 'note', value)} multiline rows={3} maxLength={280} />
                 </div>
               </div>
             </div>

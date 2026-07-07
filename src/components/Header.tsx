@@ -14,14 +14,13 @@ export default function Header() {
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   const navLinks = [
-    { label: 'О компании', target: 'о компании' },
-    { label: 'Новости', target: 'новости' },
-    { label: 'Туризм', target: 'туризм' },
-    { label: 'Трудоустройство', target: 'трудоустройство' },
-    { label: 'Обучение', target: 'обучение' },
-    { label: 'Фотогалерея', target: 'фотогалерея' },
-    { label: 'Отзывы', target: 'отзывы' },
-    { label: 'Контакты', target: 'контакты' },
+    { label: 'Туризм', kind: 'route', value: '/tourism' },
+    { label: 'Трудоустройство', kind: 'route', value: '/employment' },
+    { label: 'Обучение', kind: 'route', value: '/education' },
+    { label: 'О компании', kind: 'section', value: 'о компании' },
+    { label: 'Новости', kind: 'section', value: 'новости' },
+    { label: 'Отзывы', kind: 'section', value: 'отзывы' },
+    { label: 'Контакты', kind: 'section', value: 'контакты' },
   ];
 
   const scrollToSection = (id: string) => {
@@ -31,6 +30,17 @@ export default function Header() {
     } else {
       document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleNavClick = (item: typeof navLinks[number]) => {
+    setIsMobileMenuOpen(false);
+    if (item.kind === 'route') {
+      navigate(item.value);
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    scrollToSection(item.value);
   };
 
   return (
@@ -49,8 +59,8 @@ export default function Header() {
           <nav className="hidden items-center gap-4 xl:gap-6 lg:flex">
             {navLinks.map((item) => (
               <button 
-                key={item.target}
-                onClick={() => scrollToSection(item.target)}
+                key={item.value}
+                onClick={() => handleNavClick(item)}
                 className="max-w-[124px] whitespace-nowrap text-[11px] font-bold text-gray-700 transition-colors hover:text-brand xl:max-w-[140px] xl:text-[12px]"
               >
                 {t(item.label)}
@@ -113,8 +123,8 @@ export default function Header() {
               <nav className="flex flex-col px-4 py-6 gap-2">
                 {navLinks.map((item) => (
                   <button 
-                    key={item.target}
-                    onClick={() => scrollToSection(item.target)}
+                    key={item.value}
+                    onClick={() => handleNavClick(item)}
                   className="border-b border-black/[0.05] p-3 text-left text-lg font-bold text-gray-800 transition-colors hover:text-brand"
                   >
                     {t(item.label)}

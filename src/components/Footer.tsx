@@ -24,7 +24,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-gray-500">
-              {t('Организуем поездки, обучение и легальное трудоустройство за рубежом с сопровождением на каждом этапе.')}
+              {t('Организуем поездки и обучение за рубежом с сопровождением на каждом этапе.')}
             </p>
           </div>
 
@@ -32,9 +32,9 @@ export default function Footer() {
             <h4 className="mb-6 text-[11px] font-bold uppercase tracking-[0.18em] text-brand">{t('Компания')}</h4>
             <ul className="space-y-4">
                 <li><a href="/company" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('О компании')}</a></li>
-                <li><a href="/company#team" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Наша команда')}</a></li>
                 <li><a href="/company#history" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('История компании')}</a></li>
                 <li><a href="/company#docs" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Лицензии и документы')}</a></li>
+                <li><a href="/tourism" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Туризм')}</a></li>
                 <li><a href="/employment" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Трудоустройство')}</a></li>
                 <li><a href="/education" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Обучение')}</a></li>
                 <li><a href="/#контакты" className="text-sm text-gray-500 transition-colors hover:text-brand">{t('Корпоративным клиентам')}</a></li>

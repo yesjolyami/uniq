@@ -1,7 +1,7 @@
-import { Award, Building2, CheckCircle2, FileCheck2, Quote, ShieldCheck, Users } from 'lucide-react';
+import { Award, Building2, CheckCircle2, FileCheck2, Quote, ShieldCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { companyAwards, companyDocuments, companyHistory, teamMembers } from '../data/aboutContent';
+import { companyAwards, companyDocuments, companyHistory } from '../data/aboutContent';
 import { useI18n } from '../i18n/I18nContext';
 
 export default function CompanyPage() {
@@ -72,43 +72,6 @@ export default function CompanyPage() {
                 <span className="mb-4 block text-3xl font-black text-brand">{item.year}</span>
                 <h3 className="mb-2 text-lg font-black text-primary">{t(item.title)}</h3>
                 <p className="text-sm leading-6 text-gray-600">{t(item.description)}</p>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="team" className="pb-8 sm:pb-10 md:pb-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <span className="mb-3 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-brand">
-                <Users className="h-4 w-4" />
-                {t('Люди, которые рядом')}
-              </span>
-              <h2 className="text-2xl font-black text-primary md:text-3xl">{t('Наша команда')}</h2>
-            </div>
-            <p className="max-w-md text-sm leading-6 text-gray-600">{t('Специалисты по туризму, образованию и сопровождению работают как единая команда.')}</p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {teamMembers.map((member, index) => (
-              <motion.article
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ delay: index * 0.04 }}
-                className="rounded-[1.2rem] border border-gray-200 bg-white p-5"
-              >
-                <div className="mb-5 flex items-start justify-between gap-4">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-black/10 bg-sand text-sm font-black text-[#f5963b]">
-                    {member.shortLabel}
-                  </span>
-                  <Users className="h-5 w-5 text-primary/20" />
-                </div>
-                <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[#f5963b]">{t(member.role)}</p>
-                <h3 className="mb-2 text-lg font-black text-primary">{t(member.name)}</h3>
-                <p className="text-sm leading-6 text-gray-600">{t(member.description)}</p>
               </motion.article>
             ))}
           </div>

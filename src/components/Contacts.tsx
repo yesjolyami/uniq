@@ -5,7 +5,7 @@ import { useI18n } from '../i18n/I18nContext';
 const contactMethods = [
   {
     title: 'Заявки и консультации',
-    detail: 'Туризм, обучение, трудоустройство',
+    detail: 'Туризм, обучение, консультации',
     phone: '+996 508 97-97-47',
     link: 'https://wa.me/996508979747',
   },

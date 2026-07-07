@@ -2,8 +2,14 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   defaultSiteContent,
-  type GalleryImage, type HeroFact,
+  type ContentCard,
+  type EducationPageContent,
+  type EmploymentPageContent,
+  type GalleryImage,
+  type HeroFact,
+  type PageIntroContent,
   type SiteContent,
+  type TourismPageContent,
   type VideoSlot,
 } from '../src/types/siteContent';
 import { normalizeLocalizedText } from '../src/types/localized';
@@ -72,6 +78,67 @@ function normalizeGalleryImage(value: unknown, fallback: GalleryImage): GalleryI
   };
 }
 
+function normalizePageIntro(value: unknown, fallback: PageIntroContent): PageIntroContent {
+  const input = value && typeof value === 'object' ? value as Record<string, unknown> : {};
+  return {
+    eyebrow: normalizeLocalizedText(input.eyebrow, fallback.eyebrow, 80),
+    title: normalizeLocalizedText(input.title, fallback.title, 180),
+    description: normalizeLocalizedText(input.description, fallback.description, 320),
+    image: cleanUrl(input.image, fallback.image),
+  };
+}
+
+function normalizeCard(value: unknown, fallback: ContentCard): ContentCard {
+  const input = value && typeof value === 'object' ? value as Record<string, unknown> : {};
+  return {
+    title: normalizeLocalizedText(input.title, fallback.title, 120),
+    text: normalizeLocalizedText(input.text, fallback.text, 280),
+  };
+}
+
+function normalizeLocalizedList(values: unknown, fallbacks: string[] | ReturnType<typeof normalizeLocalizedText>[]) {
+  const list = Array.isArray(values) ? values : [];
+  return fallbacks.map((fallback, index) => normalizeLocalizedText(list[index], fallback, 220));
+}
+
+function normalizeTourismContent(value: unknown, fallback: TourismPageContent): TourismPageContent {
+  const input = value && typeof value === 'object' ? value as Record<string, unknown> : {};
+  return {
+    intro: normalizePageIntro(input.intro, fallback.intro),
+    highlights: normalizeLocalizedList(input.highlights, fallback.highlights),
+    benefits: fallback.benefits.map((item, index) => normalizeCard(Array.isArray(input.benefits) ? input.benefits[index] : undefined, item)),
+    formatsTitle: normalizeLocalizedText(input.formatsTitle, fallback.formatsTitle, 80),
+    formatsLead: normalizeLocalizedText(input.formatsLead, fallback.formatsLead, 120),
+    formats: normalizeLocalizedList(input.formats, fallback.formats),
+  };
+}
+
+function normalizeEmploymentContent(value: unknown, fallback: EmploymentPageContent): EmploymentPageContent {
+  const input = value && typeof value === 'object' ? value as Record<string, unknown> : {};
+  return {
+    intro: normalizePageIntro(input.intro, fallback.intro),
+    countries: normalizeLocalizedList(input.countries, fallback.countries),
+    advantages: fallback.advantages.map((item, index) => normalizeCard(Array.isArray(input.advantages) ? input.advantages[index] : undefined, item)),
+    processTitle: normalizeLocalizedText(input.processTitle, fallback.processTitle, 80),
+    steps: normalizeLocalizedList(input.steps, fallback.steps),
+    supportTitle: normalizeLocalizedText(input.supportTitle, fallback.supportTitle, 80),
+    supportItems: normalizeLocalizedList(input.supportItems, fallback.supportItems),
+  };
+}
+
+function normalizeEducationContent(value: unknown, fallback: EducationPageContent): EducationPageContent {
+  const input = value && typeof value === 'object' ? value as Record<string, unknown> : {};
+  return {
+    intro: normalizePageIntro(input.intro, fallback.intro),
+    benefits: fallback.benefits.map((item, index) => normalizeCard(Array.isArray(input.benefits) ? input.benefits[index] : undefined, item)),
+    tracks: fallback.tracks.map((item, index) => normalizeCard(Array.isArray(input.tracks) ? input.tracks[index] : undefined, item)),
+    formatsTitle: normalizeLocalizedText(input.formatsTitle, fallback.formatsTitle, 80),
+    formatsLead: normalizeLocalizedText(input.formatsLead, fallback.formatsLead, 120),
+    formats: normalizeLocalizedList(input.formats, fallback.formats),
+    note: normalizeLocalizedText(input.note, fallback.note, 280),
+  };
+}
+
 export function normalizeSiteContent(value: unknown): SiteContent {
   const input = value && typeof value === 'object' ? value as Record<string, unknown> : {};
   const hero = input.hero && typeof input.hero === 'object' ? input.hero as Record<string, unknown> : {};
@@ -98,6 +165,9 @@ export function normalizeSiteContent(value: unknown): SiteContent {
       .map((image, index) => normalizeGalleryImage(image, defaultSiteContent.gallery[index] || defaultSiteContent.gallery[0]))
       .filter((image) => image.src)
       .slice(0, 24),
+    tourism: normalizeTourismContent(input.tourism, defaultSiteContent.tourism),
+    employment: normalizeEmploymentContent(input.employment, defaultSiteContent.employment),
+    education: normalizeEducationContent(input.education, defaultSiteContent.education),
   };
 }
 

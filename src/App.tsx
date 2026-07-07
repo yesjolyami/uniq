@@ -9,6 +9,7 @@ import AdminPage from './pages/AdminPage';
 import CompanyPage from './pages/CompanyPage';
 import EmploymentPage from './pages/EmploymentPage';
 import EducationPage from './pages/EducationPage';
+import TourismPage from './pages/TourismPage';
 
 function HashScrollHandler() {
   const { hash } = useLocation();
@@ -46,6 +47,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/company" element={<CompanyPage />} />
+                <Route path="/tourism" element={<TourismPage />} />
                 <Route path="/employment" element={<EmploymentPage />} />
                 <Route path="/education" element={<EducationPage />} />
                 <Route path="/japan" element={<DirectionPage countryId="japan" />} />

@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import About from '../components/About';
 import Contacts from '../components/Contacts';
-import GallerySection from '../components/GallerySection';
-import Hero from '../components/Hero';
+import Hero, { HeroDirectionButtons } from '../components/Hero';
 import NewsGallery from '../components/NewsGallery';
-import SecondaryDirections from '../components/SecondaryDirections';
-import Services from '../components/Services';
+import Testimonials from '../components/Testimonials';
 
 export default function HomePage() {
   const { hash } = useLocation();
@@ -28,11 +25,9 @@ export default function HomePage() {
   return (
     <main>
       <Hero />
+      <HeroDirectionButtons />
       <NewsGallery />
-      <Services />
-      <About />
-      <SecondaryDirections />
-      <GallerySection />
+      <Testimonials />
       <Contacts />
     </main>
   );
