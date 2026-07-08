@@ -14,12 +14,10 @@ export default function Header() {
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   const navLinks = [
+    { label: 'О компании', kind: 'route', value: '/company' },
     { label: 'Туризм', kind: 'route', value: '/tourism' },
     { label: 'Трудоустройство', kind: 'route', value: '/employment' },
     { label: 'Обучение', kind: 'route', value: '/education' },
-    { label: 'О компании', kind: 'section', value: 'о компании' },
-    { label: 'Новости', kind: 'section', value: 'новости' },
-    { label: 'Отзывы', kind: 'section', value: 'отзывы' },
     { label: 'Контакты', kind: 'section', value: 'контакты' },
   ];
 
@@ -74,7 +72,7 @@ export default function Header() {
               href="https://wa.me/996508979747"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3.5 py-2.5 text-[12px] font-bold text-primary transition-colors hover:border-[#25D366]/50 hover:text-[#159447] xl:px-4"
+              className="flex items-center gap-2 rounded-full border border-[#25D366] bg-[#25D366] px-3.5 py-2.5 text-[12px] font-bold text-white shadow-sm shadow-[#25D366]/20 transition-colors hover:border-[#1fb857] hover:bg-[#1fb857] xl:px-4"
             >
               <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
@@ -83,7 +81,7 @@ export default function Header() {
             </a>
             <button 
               onClick={() => scrollToSection('контакты')}
-              className="rounded-full bg-primary px-4 py-3 text-[12px] font-bold text-white shadow-md transition-colors hover:bg-brand xl:px-5"
+              className="rounded-full bg-[#0ea5e9] px-4 py-3 text-[12px] font-bold text-white shadow-md shadow-sky-500/20 transition-colors hover:bg-[#0284c7] xl:px-5"
             >
               {t('Оставить заявку')}
             </button>
@@ -132,7 +130,7 @@ export default function Header() {
                 ))}
                 <button 
                   onClick={() => scrollToSection('контакты')}
-                  className="mt-4 rounded-full bg-primary px-6 py-4 text-center font-bold text-white transition-colors hover:bg-brand"
+                  className="mt-4 rounded-full bg-[#0ea5e9] px-6 py-4 text-center font-bold text-white transition-colors hover:bg-[#0284c7]"
                 >
                   {t('Оставить заявку')}
                 </button>

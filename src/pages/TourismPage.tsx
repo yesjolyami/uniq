@@ -99,11 +99,11 @@ export default function TourismPage() {
 
       <section className="pb-6 sm:pb-8 md:pb-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="rounded-[1.15rem] border border-black/[0.05] bg-[#fff9f4] p-4 sm:p-5">
-              <div className="mb-4 flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-brand" />
-                <h2 className="text-base font-black text-primary">{t('Как собираем поездку')}</h2>
+              <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="rounded-[1.15rem] border border-black/[0.05] bg-[#fff9f4] p-4 sm:p-5">
+                  <div className="mb-4 flex items-center gap-2">
+                    <Sparkles className="h-4 w-4 text-brand" />
+                    <h2 className="text-base font-black text-primary">{t('Как собираем поездку')}</h2>
               </div>
               <div className="grid gap-3">
                 {routeSteps.map((item, index) => (
@@ -121,23 +121,14 @@ export default function TourismPage() {
                 <div className="relative min-h-[220px] overflow-hidden rounded-[1.15rem]">
                   <img src="/tourism_germany.jpg" alt={t('Городское направление')} className="absolute inset-0 h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/55 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-white/70">{t('Городской сценарий')}</p>
-                    <p className="mt-1 text-base font-black text-white">{t('Перелёт, проживание, ритм дня и логистика без перегруза')}</p>
-                  </div>
                 </div>
                 <div className="relative min-h-[220px] overflow-hidden rounded-[1.15rem]">
                   <img src="/hero.png" alt={t('Природное направление')} className="absolute inset-0 h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/55 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-white/70">{t('Природный сценарий')}</p>
-                    <p className="mt-1 text-base font-black text-white">{t('Маршруты по регионам, сезонность и активный формат отдыха')}</p>
-                  </div>
                 </div>
               </div>
               <div className="rounded-[1.15rem] border border-black/[0.05] bg-white p-5">
                 <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.18em] text-brand">{text(tourism.formatsTitle)}</span>
-                <h2 className="mb-4 text-xl font-black text-primary">{text(tourism.formatsLead)}</h2>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {tourism.formats.map((item, index) => (
                     <div key={`${item.ru}-${index}`} className="rounded-2xl bg-sand px-4 py-3 text-sm font-semibold leading-5 text-primary">
