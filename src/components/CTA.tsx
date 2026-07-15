@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import React, { useState } from 'react';
-import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2, MessageCircle } from 'lucide-react';
 import { useI18n } from '../i18n/I18nContext';
 
 export default function CTA() {
@@ -95,8 +95,15 @@ export default function CTA() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="mb-5">
-                  <span className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-brand">{t('Бесплатная консультация')}</span>
-                  <h3 className="min-h-8 text-xl font-black text-primary">{t('Оставить заявку')}</h3>
+                  <div className="mb-2 flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand">
+                      <MessageCircle className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-brand">{t('Бесплатная консультация')}</span>
+                      <h3 className="min-h-8 text-xl font-black text-primary">{t('Оставить заявку')}</h3>
+                    </div>
+                  </div>
                 </div>
                 
                 <div>

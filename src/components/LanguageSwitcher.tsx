@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Check, ChevronDown } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { languages, useI18n } from '../i18n/I18nContext';
+import LanguageFlag from './LanguageFlag';
 
 export default function LanguageSwitcher({ mobile = false }: { mobile?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ export default function LanguageSwitcher({ mobile = false }: { mobile?: boolean 
           mobile ? 'w-full px-4' : 'w-[100px] px-3'
         }`}
       >
-        <span className="text-base leading-none" aria-hidden="true">{language.flag}</span>
+        <LanguageFlag locale={language.code} />
         <span className="w-7 text-center">{language.short}</span>
         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
@@ -60,7 +61,7 @@ export default function LanguageSwitcher({ mobile = false }: { mobile?: boolean 
                   item.code === language.code ? 'bg-brand-soft font-bold text-primary' : 'text-gray-600 hover:bg-slate-50'
                 }`}
               >
-                <span className="w-6 text-center text-lg" aria-hidden="true">{item.flag}</span>
+                <LanguageFlag locale={item.code} className="shrink-0" />
                 <span className="min-w-0 flex-1 truncate">{item.name}</span>
                 {item.code === language.code && <Check className="h-4 w-4 shrink-0 text-brand" />}
               </button>

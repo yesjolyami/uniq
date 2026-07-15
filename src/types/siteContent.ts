@@ -56,7 +56,9 @@ export type EmploymentPageContent = {
   processTitle: LocalizedText;
   steps: LocalizedText[];
   supportTitle: LocalizedText;
+  supportIntro: LocalizedText[];
   supportItems: LocalizedText[];
+  supportOutro: LocalizedText[];
 };
 
 export type EducationPageContent = {
@@ -80,9 +82,9 @@ export type SiteContent = {
 
 export const defaultSiteContent: SiteContent = {
   hero: {
-    eyebrow: createLocalizedText('ОсОО «Юник Азия» / Бишкек'),
+    eyebrow: createLocalizedText('Путешествие начинается с «Unique Asia»'),
     title: createLocalizedText('Поездка, учёба или работа за рубежом — без разрозненных подрядчиков'),
-    subtitle: createLocalizedText('Туризм, визы, авиабилеты, обучение и легальное трудоустройство с сопровождением до выезда.'),
+    subtitle: createLocalizedText('Организуем поездки, трудоустройство и обучение за рубежом с сопровождением на каждом этапе.'),
     primaryCta: createLocalizedText('Оставить заявку'),
     secondaryCta: createLocalizedText('Выбрать услугу'),
     whatsappLabel: createLocalizedText('WhatsApp'),
@@ -119,27 +121,27 @@ export const defaultSiteContent: SiteContent = {
   tourism: {
     intro: {
       eyebrow: createLocalizedText('Туризм'),
-      title: createLocalizedText('Туризм как отдельный маршрут с понятной программой поездки'),
-      description: createLocalizedText('Собираем поездку под задачу клиента: маршрут, билеты, проживание, документы и понятный бюджет без лишней перегрузки.'),
+      title: createLocalizedText('Туризм как вдохновение и искусство планирования'),
+      description: createLocalizedText('Каждая поездка — это новая история, новый ракурс и новый взгляд на себя. Мы подбираем маршруты, которые заставляют сердце биться чаще и дарят воспоминания на всю жизнь. Мы превращаем хаос маршрутов, виз и билетов в изящную симфонию. Каждая деталь продумана, каждый этап находится под контролем. Вам остаётся только наслаждаться путешествием.'),
       image: '/tourism.jpg',
     },
     highlights: [
       createLocalizedText('Маршрут, авиабилеты, отели и визы'),
       createLocalizedText('Поездки по Кыргызстану и за рубеж'),
-      createLocalizedText('Гиды, активный отдых и гастрономия'),
+      createLocalizedText('Профессиональные гиды, переводчики и сопровождающие'),
     ],
     benefits: [
       {
-        title: createLocalizedText('Индивидуальный маршрут'),
-        text: createLocalizedText('Подбираем направление, темп поездки и сценарий отдыха под состав группы и бюджет.'),
+        title: createLocalizedText('Туры по всему миру'),
+        text: createLocalizedText('Туры по всему миру — от идеи до собранного чемодана. Вы называете страну, а мы формируем полный пакет путешествия: перелёт, проживание, трансферы, страховку и экскурсии.'),
       },
       {
-        title: createLocalizedText('Понятная организация'),
-        text: createLocalizedText('Заранее фиксируем проживание, трансферы, документы и ключевые точки маршрута.'),
+        title: createLocalizedText('Туры по Кыргызстану'),
+        text: createLocalizedText('Мы предлагаем уникальные туры по нетронутой природе, горным озёрам и местам, связанным с кочевой культурой Кыргызстана. Наши гиды становятся проводниками в мир настоящих легенд, национальных традиций и кыргызского гостеприимства.'),
       },
       {
-        title: createLocalizedText('Форматы для групп'),
-        text: createLocalizedText('Собираем семейные, корпоративные и авторские поездки с единым координатором.'),
+        title: createLocalizedText('Фокус'),
+        text: createLocalizedText('Не шаблонный тур, а поездка под конкретный сценарий: учитываем цель поездки, ритм отдыха, состав группы, бюджет и те впечатления, которые человек действительно хочет получить.'),
       },
     ],
     formatsTitle: createLocalizedText('Форматы поездок'),
@@ -154,8 +156,8 @@ export const defaultSiteContent: SiteContent = {
   employment: {
     intro: {
       eyebrow: createLocalizedText('Трудоустройство за рубежом'),
-      title: createLocalizedText('Легальная работа с понятными этапами до выезда'),
-      description: createLocalizedText('Работаем с проверенными работодателями, помогаем оформить документы и держим связь с клиентом на каждом важном этапе.'),
+      title: createLocalizedText('Легальная работа или обучение за рубежом с понятными этапами до выезда'),
+      description: createLocalizedText('Трудоустройство под ключ. Оставьте нам бюрократию — займитесь мечтой.'),
       image: '/work_germany.jpg',
     },
     countries: [
@@ -187,57 +189,69 @@ export const defaultSiteContent: SiteContent = {
       createLocalizedText('Подача документов, визовая поддержка и страховка'),
       createLocalizedText('Медосмотр, предмиграционная подготовка, логистика и авиабилеты'),
     ],
-    supportTitle: createLocalizedText('Что сопровождаем отдельно'),
+    supportTitle: createLocalizedText('В пакет входит'),
+    supportIntro: [
+      createLocalizedText('Трудоустройство под ключ.'),
+      createLocalizedText('Оставьте нам бюрократию — займитесь мечтой.'),
+    ],
     supportItems: [
-      createLocalizedText('Проверка работодателя и условий контракта'),
-      createLocalizedText('Сопровождение по визе и медицинским требованиям'),
-      createLocalizedText('Подготовка к собеседованию и выезду'),
-      createLocalizedText('Связь с менеджером до отъезда и после прибытия'),
+      createLocalizedText('Поиск подходящей вакансии и организация собеседования'),
+      createLocalizedText('Визовая поддержка: заполнение анкет, подготовка документов и сопровождение при обращении в посольство'),
+      createLocalizedText('Перевод дипломов и паспортов с нотариальным заверением'),
+      createLocalizedText('Языковые курсы перед выездом'),
+      createLocalizedText('Организация медицинского осмотра'),
+      createLocalizedText('Оформление медицинской страховки'),
+      createLocalizedText('Подбор и приобретение авиабилетов с выгодными стыковками и бонусами'),
+      createLocalizedText('Предвыездная миграционная подготовка: законы, обычаи и особенности быта в стране назначения'),
+    ],
+    supportOutro: [
+      createLocalizedText('Всё это — в одной компании. Никакой беготни по городу.'),
+      createLocalizedText('Просто скажите нам «да», и мы запустим процесс.'),
     ],
   },
   education: {
     intro: {
       eyebrow: createLocalizedText('Обучение'),
-      title: createLocalizedText('Языки и туристические профессии с понятной программой занятий'),
-      description: createLocalizedText('Организуем языковые курсы и обучение для гидов, менеджеров по туризму, бронированию и продаже авиабилетов.'),
+      title: createLocalizedText('Обучение языкам и туристическим профессиям с понятной программой занятий и получением сертификата.'),
+      description: createLocalizedText('Наши курсы — это не просто уроки. Организуем языковые курсы и обучение для гидов, менеджеров по туризму, бронированию и продаже авиабилетов по эффективным программам.'),
       image: '/learn_germany.jpg',
     },
     benefits: [
       {
-        title: createLocalizedText('Языковая база'),
-        text: createLocalizedText('Подбираем уровень и программу занятий под задачу: учёба, работа, поездка или смена профессии.'),
+        title: createLocalizedText('Языковые курсы'),
+        text: createLocalizedText('Изучение иностранных языков даёт колоссальные преимущества: это образование, международный опыт, свобода общения и новые карьерные перспективы.'),
       },
       {
-        title: createLocalizedText('Практическая программа'),
-        text: createLocalizedText('Фокусируемся на реальных сценариях: коммуникация, документы, сервис, ориентирование и адаптация.'),
+        title: createLocalizedText('Изучение языков и развитие мышления'),
+        text: createLocalizedText('Кроме того, изучение языков является отличным тренажёром для мозга. Знание иностранных языков меняет не только мировоззрение человека, но и помогает развивать память, внимание и мышление.'),
       },
       {
-        title: createLocalizedText('Поддержка по траектории'),
-        text: createLocalizedText('Помогаем выбрать формат обучения, нагрузку и последовательность модулей без перегруза.'),
+        title: createLocalizedText('Особенность обучения в компании «Юник Азия»'),
+        text: createLocalizedText('Главная особенность обучения в компании «Юник Азия» заключается в том, что языковые курсы комбинируются с другими направлениями деятельности компании.'),
       },
     ],
     tracks: [
       {
-        title: createLocalizedText('Языковые курсы'),
-        text: createLocalizedText('Английский, японский, немецкий и кыргызский язык для учёбы, работы и адаптации.'),
-      },
-      {
         title: createLocalizedText('Курсы в сфере туризма'),
-        text: createLocalizedText('Подготовка гидов, менеджеров по туризму, бронированию и продаже авиабилетов.'),
+        text: createLocalizedText('Это направление является уникальным проектом компании, поскольку ранее аналогичного комплексного подхода к обучению специалистов туристической сферы в Кыргызстане не было.'),
       },
       {
-        title: createLocalizedText('Темы курсов'),
-        text: createLocalizedText('Стандарты туризма, экскурсионная деятельность, этика, культура Кыргызстана, география, гастрономия, безопасность и первая медицинская помощь.'),
+        title: createLocalizedText('Почему это важно'),
+        text: createLocalizedText('Кыргызстан ежегодно привлекает тысячи иностранных туристов. Международные издания и туристические платформы регулярно включают страну в подборки рекомендуемых направлений для путешествий. Развитие туристической отрасли создаёт спрос на квалифицированных специалистов, которые знают иностранные языки, понимают особенности работы с туристами и умеют профессионально организовывать поездки.'),
+      },
+      {
+        title: createLocalizedText('Направления подготовки'),
+        text: createLocalizedText('Компания «Юник Азия» предлагает обучение по трём основным направлениям: • Подготовка менеджеров по туризму • Подготовка гидов • Подготовка менеджеров по бронированию и продаже авиабилетов'),
       },
     ],
-    formatsTitle: createLocalizedText('Форматы обучения'),
-    formatsLead: createLocalizedText('Собираем программу под темп и цель'),
+    formatsTitle: createLocalizedText('Какие языки мы преподаём'),
+    formatsLead: createLocalizedText('Вы можете изучать язык для конкретной цели — туристической поездки, учёбы, работы, адаптации или трудоустройства за границей.'),
     formats: [
-      createLocalizedText('Индивидуальные и мини-группы'),
-      createLocalizedText('Краткосрочные интенсивы'),
-      createLocalizedText('Подготовка к поездке и адаптации'),
-      createLocalizedText('Программы для туризма и сервиса'),
+      createLocalizedText('Английский язык'),
+      createLocalizedText('Японский язык'),
+      createLocalizedText('Немецкий язык'),
+      createLocalizedText('Кыргызский язык'),
     ],
-    note: createLocalizedText('Подключаем обучение к реальным задачам: поступление, работа с туристами, сервис, сопровождение поездок и уверенная адаптация.'),
+    note: createLocalizedText('Подготовка гидов, менеджеров по туризму, а также специалистов по бронированию и продаже авиабилетов.'),
   },
 };

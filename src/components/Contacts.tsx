@@ -16,7 +16,7 @@ const contactMethods = [
     link: 'https://wa.me/996701979747',
   },
   {
-    title: 'Курсы и документы',
+    title: 'Трудоустройство, курсы и документы',
     detail: 'Языки, подготовка, сопровождение',
     phone: '+996 508 970 047',
     link: 'https://wa.me/996508970047',
@@ -30,7 +30,12 @@ export default function Contacts() {
     <section id="контакты" className="bg-white py-10 sm:py-12 md:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-5 max-w-2xl">
-          <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Контакты')}</span>
+          <div className="mb-3 flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand">
+              <MessageCircle className="h-5 w-5" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Контакты')}</span>
+          </div>
           <h2 className="max-w-4xl text-[clamp(1.7rem,5vw,2.2rem)] font-black leading-tight text-primary">{t('Выберите удобный способ связи')}</h2>
         </div>
 
@@ -47,14 +52,16 @@ export default function Contacts() {
               transition={{ delay: index * 0.08 }}
               className="group flex min-h-32 flex-col justify-between rounded-[1.15rem] border border-gray-200 bg-white p-4 transition-colors hover:bg-slate-50 sm:p-5"
             >
-              <div className="flex items-start justify-between">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-green-50 text-[#159447]">
-                  <MessageCircle className="h-5 w-5" />
-                </span>
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-green-50 text-[#159447]">
+                    <MessageCircle className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-base font-black leading-tight text-primary">{t(method.title)}</h3>
+                </div>
                 <span className="text-[10px] font-black tracking-[0.16em] text-gray-300">0{index + 1}</span>
               </div>
               <div>
-                <h3 className="mb-1.5 text-base font-black text-primary">{t(method.title)}</h3>
                 <p className="mb-2 text-xs leading-4 text-gray-500">{t(method.detail)}</p>
                 <span className="text-sm font-black text-[#159447] transition-colors group-hover:text-brand">{method.phone}</span>
               </div>
@@ -70,10 +77,12 @@ export default function Contacts() {
         >
           <div className="flex flex-col justify-between p-4 sm:p-5">
             <div>
-              <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
-                <MapPin className="h-5 w-5" />
-              </span>
-              <h3 className="mb-2 text-xl font-black text-primary">{t('Офис в Бишкеке')}</h3>
+              <div className="mb-3 flex items-center gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
+                  <MapPin className="h-5 w-5" />
+                </span>
+                <h3 className="text-xl font-black text-primary">{t('Офис в Бишкеке')}</h3>
+              </div>
               <p className="max-w-sm text-sm leading-5 text-gray-600">{t('Личную консультацию лучше согласовать заранее.')}</p>
             </div>
             <div className="mt-5 space-y-3">

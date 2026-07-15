@@ -6,8 +6,7 @@ import { useI18n } from '../i18n/I18nContext';
 const tourismHighlights = [
   'Маршрут, авиабилеты, отели и визы',
   'Поездки по Кыргызстану и за рубеж',
-  'Гиды, активный отдых и гастрономия',
-];
+  'Профессиональные гиды, переводчики и сопровождающий персонал',
 
 export default function Services() {
   const { t } = useI18n();
@@ -70,10 +69,6 @@ export default function Services() {
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/35 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 rounded-2xl border border-white/50 bg-white/92 p-3.5 shadow-sm sm:max-w-xs">
-                  <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-brand">{t('После консультации')}</p>
-                  <p className="text-sm font-bold leading-5 text-primary">{t('Вы получите маршрут, бюджет и список документов')}</p>
-                </div>
               </div>
             </div>
           </div>

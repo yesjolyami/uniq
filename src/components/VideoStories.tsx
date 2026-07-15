@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ExternalLink, Play, X } from 'lucide-react';
+import { ExternalLink, Play, Video, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { siteContentApi } from '../api/siteContent';
 import { useI18n } from '../i18n/I18nContext';
@@ -54,9 +54,12 @@ export default function VideoStories() {
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 flex min-w-0 flex-col gap-5 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">
-              {t('Видео')}
-            </span>
+            <div className="mb-3 flex items-center gap-3">
+              <Video className="h-5 w-5 shrink-0 text-brand" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">
+                {t('Видео')}
+              </span>
+            </div>
 
             <h2 className="max-w-3xl text-2xl font-black leading-tight text-primary [overflow-wrap:anywhere] sm:text-3xl md:text-4xl">
               {t('Места для коротких роликов')}

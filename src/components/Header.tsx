@@ -43,10 +43,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/90 backdrop-blur-xl">
+      <header className="fixed top-0 z-50 w-full border-b border-[#efe6dc] bg-[rgba(255,253,249,0.84)] backdrop-blur-xl">
         <div className="relative z-50 flex h-[68px] w-full items-center justify-between gap-3 px-4 sm:px-6 md:h-[76px] lg:px-8">
           <Link to="/" className="group flex min-w-0 cursor-pointer items-center gap-3" onClick={() => window.scrollTo(0, 0)}>
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white text-sm font-black tracking-tighter shadow-sm">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[#ebdfd2] bg-white text-sm font-black tracking-tighter shadow-sm shadow-[#725447]/10">
               <span className="text-[#f5963b]">U</span>
               <span className="text-brand">K</span>
               <span className="text-brand">G</span>
@@ -59,7 +59,7 @@ export default function Header() {
               <button 
                 key={item.value}
                 onClick={() => handleNavClick(item)}
-                className="max-w-[124px] whitespace-nowrap text-[11px] font-bold text-gray-700 transition-colors hover:text-brand xl:max-w-[140px] xl:text-[12px]"
+                className="max-w-[124px] whitespace-nowrap text-[11px] font-bold text-primary/72 transition-colors hover:text-brand xl:max-w-[140px] xl:text-[12px]"
               >
                 {t(item.label)}
               </button>
@@ -81,7 +81,7 @@ export default function Header() {
             </a>
             <button 
               onClick={() => scrollToSection('контакты')}
-              className="rounded-full bg-[#0ea5e9] px-4 py-3 text-[12px] font-bold text-white shadow-md shadow-sky-500/20 transition-colors hover:bg-[#0284c7] xl:px-5"
+              className="rounded-full bg-primary px-4 py-3 text-[12px] font-bold text-white shadow-md shadow-[#27272a]/15 transition-colors hover:bg-brand xl:px-5"
             >
               {t('Оставить заявку')}
             </button>
@@ -101,7 +101,7 @@ export default function Header() {
               </svg>
             </a>
             <button 
-              className="flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors hover:bg-gray-100"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors hover:bg-[#f4eee7]"
               onClick={toggleMenu}
               aria-label={t('Открыть или закрыть меню')}
             >
@@ -116,7 +116,7 @@ export default function Header() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute left-0 top-[68px] z-40 max-h-[calc(100svh-68px)] w-full overflow-y-auto border-b border-gray-100 bg-white shadow-xl md:top-[76px] md:max-h-[calc(100svh-76px)] lg:hidden"
+              className="absolute left-0 top-[68px] z-40 max-h-[calc(100svh-68px)] w-full overflow-y-auto border-b border-[#efe6dc] bg-[rgba(255,253,249,0.98)] shadow-xl md:top-[76px] md:max-h-[calc(100svh-76px)] lg:hidden"
             >
               <nav className="flex flex-col px-4 py-6 gap-2">
                 {navLinks.map((item) => (
@@ -130,7 +130,7 @@ export default function Header() {
                 ))}
                 <button 
                   onClick={() => scrollToSection('контакты')}
-                  className="mt-4 rounded-full bg-[#0ea5e9] px-6 py-4 text-center font-bold text-white transition-colors hover:bg-[#0284c7]"
+                  className="mt-4 rounded-full bg-primary px-6 py-4 text-center font-bold text-white transition-colors hover:bg-brand"
                 >
                   {t('Оставить заявку')}
                 </button>

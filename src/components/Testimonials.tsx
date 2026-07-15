@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, Quote, Star } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MessageSquare, Quote, Star } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useI18n } from '../i18n/I18nContext';
 
@@ -71,7 +71,10 @@ export default function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Истории клиентов')}</span>
+            <div className="mb-3 flex items-center gap-3">
+              <MessageSquare className="h-5 w-5 shrink-0 text-brand" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Истории клиентов')}</span>
+            </div>
             <h2 className="text-3xl font-black leading-tight text-primary md:text-5xl">
               {t('Опыт людей говорит')} <span className="text-brand">{t('лучше рекламы')}</span>
             </h2>

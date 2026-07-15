@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Contacts from '../components/Contacts';
 import Hero, { HeroDirectionButtons } from '../components/Hero';
+import HomeOverview from '../components/HomeOverview';
 import NewsGallery from '../components/NewsGallery';
 import Testimonials from '../components/Testimonials';
 
@@ -26,6 +27,7 @@ export default function HomePage() {
     <main>
       <Hero />
       <HeroDirectionButtons />
+      <HomeOverview />
       <NewsGallery />
       <Testimonials />
       <Contacts />

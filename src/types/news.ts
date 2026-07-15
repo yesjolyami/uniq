@@ -1,6 +1,6 @@
 import { createLocalizedText, type LocalizedText } from './localized';
 
-export const newsCategories = ['Туризм', 'Обучение', 'Компания'] as const;
+export const newsCategories = ['Туризм', 'Обучение', 'Трудоустройство', 'Компания'] as const;
 
 export type NewsCategory = (typeof newsCategories)[number];
 

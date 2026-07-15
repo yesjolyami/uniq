@@ -17,7 +17,7 @@ export default function EducationPage() {
   }, []);
 
   const education = content.education;
-  const languageBadges = ['English', 'Deutsch', 'Japanese', t('Кыргызский')];
+  const languageBadges = [t('Английский'), t('Немецкий'), t('Японский'), t('Кыргызский')];
 
   return (
     <main className="bg-sand-light pt-24 sm:pt-28">
@@ -48,10 +48,7 @@ export default function EducationPage() {
               <div className="relative min-h-[260px] lg:min-h-[420px]">
                 <img src={education.intro.image} alt={text(education.intro.eyebrow)} className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/28 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 rounded-[1.15rem] border border-white/40 bg-white/92 p-4 shadow-sm sm:max-w-sm">
-                  <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-brand">{t('Формат')}</p>
-                  <p className="text-sm font-bold leading-5 text-primary">{t('Языки, туристические профессии и подготовка под конкретную цель')}</p>
-                </div>
+
               </div>
             </div>
           </div>
@@ -70,10 +67,12 @@ export default function EducationPage() {
                 transition={{ delay: index * 0.05 }}
                 className="rounded-[1.2rem] border border-black/[0.05] bg-white p-5"
               >
-                {index === 0 && <Languages className="mb-4 h-5 w-5 text-brand" />}
-                {index === 1 && <NotebookTabs className="mb-4 h-5 w-5 text-brand" />}
-                {index === 2 && <UserRoundCheck className="mb-4 h-5 w-5 text-brand" />}
-                <h2 className="mb-2 text-lg font-black text-primary">{text(item.title)}</h2>
+                <div className="mb-3 flex items-center gap-3">
+                  {index === 0 && <Languages className="h-5 w-5 shrink-0 text-brand" />}
+                  {index === 1 && <NotebookTabs className="h-5 w-5 shrink-0 text-brand" />}
+                  {index === 2 && <UserRoundCheck className="h-5 w-5 shrink-0 text-brand" />}
+                  <h2 className="text-lg font-black text-primary">{text(item.title)}</h2>
+                </div>
                 <p className="text-sm leading-6 text-gray-600">{text(item.text)}</p>
               </motion.article>
             ))}
@@ -85,24 +84,7 @@ export default function EducationPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
             <div className="grid gap-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="relative min-h-[200px] overflow-hidden rounded-[1.2rem] border border-black/[0.05]">
-                  <img src="/learn.jpg" alt={t('Учебный процесс')} className="absolute inset-0 h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-white/65">{t('Занятия')}</p>
-                    <p className="mt-1 text-base font-black text-white">{t('Групповой и индивидуальный формат без перегруженной программы')}</p>
-                  </div>
-                </div>
-                <div className="relative min-h-[200px] overflow-hidden rounded-[1.2rem] border border-black/[0.05]">
-                  <img src="/learn_germany.jpg" alt={t('Языковая практика')} className="absolute inset-0 h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-white/65">{t('Практика')}</p>
-                    <p className="mt-1 text-base font-black text-white">{t('Язык, адаптация и прикладные темы под работу и поездки')}</p>
-                  </div>
-                </div>
-              </div>
+
               <div className="rounded-[1.2rem] border border-black/[0.05] bg-white p-5">
                 <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.18em] text-brand">{text(education.formatsTitle)}</span>
                 <h2 className="mb-4 text-xl font-black text-primary">{text(education.formatsLead)}</h2>
@@ -114,12 +96,14 @@ export default function EducationPage() {
                   ))}
                 </div>
                 <div className="mt-5 rounded-2xl border border-black/[0.05] bg-slate-50 p-4">
-                  <span className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
-                    <Globe2 className="h-5 w-5" />
-                  </span>
-                  <p className="text-sm leading-6 text-gray-600">
-                    {text(education.note)}
-                  </p>
+                  <div className="flex items-start gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
+                      <Globe2 className="h-5 w-5" />
+                    </span>
+                    <p className="text-sm leading-6 text-gray-600">
+                      {text(education.note)}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -127,8 +111,10 @@ export default function EducationPage() {
             <div className="grid gap-4 lg:grid-cols-1">
               {education.tracks.map((track, index) => (
                 <article key={`${track.title.ru}-${index}`} className={`rounded-[1.2rem] border p-5 ${index === 1 ? 'border-brand/15 bg-brand-soft/55' : index === 2 ? 'border-black/[0.08] bg-[#27272a] text-white' : 'border-black/[0.05] bg-white'}`}>
-                  <BookOpenCheck className="mb-4 h-5 w-5 text-brand" />
-                  <h2 className={`mb-2 text-lg font-black ${index === 2 ? 'text-white' : 'text-primary'}`}>{text(track.title)}</h2>
+                  <div className="mb-3 flex items-center gap-3">
+                    <BookOpenCheck className="h-5 w-5 shrink-0 text-brand" />
+                    <h2 className={`text-lg font-black ${index === 2 ? 'text-white' : 'text-primary'}`}>{text(track.title)}</h2>
+                  </div>
                   <p className={`text-sm leading-6 ${index === 2 ? 'text-white/72' : 'text-gray-600'}`}>{text(track.text)}</p>
                 </article>
               ))}
@@ -139,7 +125,7 @@ export default function EducationPage() {
 
       <section className="pb-10 sm:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand">
+          <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-[#0ea5e9] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0284c7]">
             {t('Получить консультацию')}
           </Link>
         </div>

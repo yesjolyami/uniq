@@ -5,26 +5,56 @@ export type TeamMember = {
   shortLabel: string;
 };
 
+export type CompanyAboutCard = {
+  eyebrow: string;
+  title: string;
+  description: string;
+};
+
+export type CompanyDocument = {
+  title: string;
+  description: string;
+  note: string;
+  fileUrl: string;
+  fileName: string;
+};
+
+export type CompanyGalleryCategory = {
+  id: string;
+  label: string;
+  description: string;
+};
+
+export type CompanyGalleryImage = {
+  src: string;
+  alt: string;
+  title: string;
+  description: string;
+  categoryId: string;
+  featured?: boolean;
+  orientation?: 'landscape' | 'portrait';
+};
+
 export const companyHistory = [
   {
     year: '2019',
     title: 'Начало работы',
-    description: 'Unique Asia начала помогать клиентам с обучением, поездками и международными программами.',
+    description: 'Unique Asia начала деятельность как туристическое агентство. Компания помогала клиентам с организацией поездок, подбором туров, оформлением виз и приобретением авиабилетов.',
   },
   {
     year: '2021',
     title: 'Расширение направлений',
-    description: 'В портфеле появились новые образовательные и туристические программы в Азии и Европе.',
+    description: 'В портфеле появились новые образовательные курсы и программы по трудоустройству в Японии и странах Европы.',
   },
   {
     year: '2023',
-    title: 'Собственная команда сопровождения',
-    description: 'Усилили поддержку клиентов до, во время и после поездки.',
+    title: 'Эксклюзивные поездки',
+    description: 'Запустили эксклюзивные авторские туры в Японию и Корею.',
   },
   {
     year: '2026',
     title: 'Новый этап',
-    description: 'Развиваем внутренний туризм, групповые поездки и языковые программы для разных возрастов.',
+    description: 'Развиваем внутренний туризм и социальные проекты, направленные на поддержку молодёжи.',
   },
 ];
 
@@ -73,33 +103,136 @@ export const teamMembers: TeamMember[] = [
   },
 ];
 
-export const companyDocuments = [
+export const companyDocuments: CompanyDocument[] = [
   {
     title: 'Регистрационные документы',
     description: 'Официальные реквизиты компании и подтверждение государственной регистрации.',
-    note: 'Копии предоставляются по запросу',
+    note: 'PDF-макет для скачивания',
+    fileUrl: '/mock-documents/registration-documents.pdf',
+    fileName: 'unique-asia-registration-documents.pdf',
   },
   {
     title: 'Лицензии и разрешения',
-    description: 'Документы по направлениям деятельности публикуются после проверки актуальных реквизитов.',
-    note: 'Раздел готов для загрузки PDF',
+    description: 'Мок-лицензии по основным направлениям деятельности компании для демонстрации раздела.',
+    note: 'PDF-макет для скачивания',
+    fileUrl: '/mock-documents/licenses-and-permits.pdf',
+    fileName: 'unique-asia-licenses-and-permits.pdf',
+  },
+  {
+    title: 'Награды и признания',
+    description: 'Демонстрационный пакет сертификатов и благодарственных писем в формате мок-документа.',
+    note: 'PDF-макет для скачивания',
+    fileUrl: '/mock-documents/awards-and-recognition.pdf',
+    fileName: 'unique-asia-awards-and-recognition.pdf',
   },
 ];
 
-export const companyAwards = [
+export const companyAboutCards: CompanyAboutCard[] = [
   {
-    year: '5+ лет',
-    title: 'Практического опыта',
-    description: 'Системная работа с международными и локальными программами с 2019 года.',
+    eyebrow: 'Кто мы',
+    title: 'Локальная команда с международным фокусом',
+    description: 'Unique Asia из Бишкека объединяет туризм, обучение и трудоустройство за рубежом в одном понятном сервисе.',
   },
   {
-    year: '1000+',
-    title: 'Обращений клиентов',
-    description: 'Консультации по туризму, образованию и поездкам за рубеж.',
+    eyebrow: 'Как работаем',
+    title: 'Собираем маршрут клиента под ключ',
+    description: 'Подбираем программу, проверяем документы, объясняем этапы и сопровождаем до поездки, учёбы или выезда на работу.',
   },
   {
-    year: '24/7',
-    title: 'Поддержка в поездке',
-    description: 'Координатор остаётся на связи в важных ситуациях.',
+    eyebrow: 'Что важно',
+    title: 'Делаем сложные процессы спокойнее',
+    description: 'Для клиента это означает меньше неопределённости, прозрачные сроки и один ответственный контакт на всём пути.',
+  },
+];
+
+export const companyGalleryCategories: CompanyGalleryCategory[] = [
+  {
+    id: 'all',
+    label: 'Все фото',
+    description: 'Общий обзор направлений, с которыми работает компания.',
+  },
+  {
+    id: 'travel',
+    label: 'Поездки',
+    description: 'Туры, сопровождение групп и впечатления клиентов в маршрутах.',
+  },
+  {
+    id: 'education',
+    label: 'Обучение',
+    description: 'Языковые и международные программы, подготовка и адаптация.',
+  },
+  {
+    id: 'team',
+    label: 'Команда',
+    description: 'Люди и атмосфера, на которых держится сервис Unique Asia.',
+  },
+];
+
+export const companyGalleryImages: CompanyGalleryImage[] = [
+  {
+    src: '/work.jpg',
+    alt: 'Команда Unique Asia на встрече с клиентами',
+    title: 'Работа с клиентами',
+    description: 'Показываем процесс сопровождения: консультация, документы и личный контакт.',
+    categoryId: 'team',
+    featured: true,
+    orientation: 'portrait',
+  },
+  {
+    src: '/tourism.jpg',
+    alt: 'Туристическая группа в поездке',
+    title: 'Групповые маршруты',
+    description: 'Организуем поездки с продуманной логистикой и единым координатором.',
+    categoryId: 'travel',
+    orientation: 'portrait',
+  },
+  {
+    src: '/learn.jpg',
+    alt: 'Участники образовательной программы',
+    title: 'Подготовка к обучению',
+    description: 'Помогаем собрать понятный путь к языковым и академическим программам.',
+    categoryId: 'education',
+    orientation: 'portrait',
+  },
+  {
+    src: '/work_germany.jpg',
+    alt: 'Кандидаты на международную программу трудоустройства',
+    title: 'Международные программы',
+    description: 'Сопровождаем клиентов на этапах подготовки к выезду и работе за рубежом.',
+    categoryId: 'team',
+    orientation: 'landscape',
+  },
+  {
+    src: '/tourism_germany.jpg',
+    alt: 'Авторский тур с насыщенной программой',
+    title: 'Авторские путешествия',
+    description: 'Собираем поездки так, чтобы маршрут выглядел цельно и без лишней суеты.',
+    categoryId: 'travel',
+    featured: true,
+    orientation: 'portrait',
+  },
+  {
+    src: '/learn_germany.jpg',
+    alt: 'Изучение иностранного языка перед поездкой',
+    title: 'Языковая адаптация',
+    description: 'Подбираем формат обучения под цели клиента и сроки программы.',
+    categoryId: 'education',
+    orientation: 'portrait',
+  },
+  {
+    src: '/hero.png',
+    alt: 'Визуальный образ международных возможностей Unique Asia',
+    title: 'Масштаб направлений',
+    description: 'Работаем на стыке туризма, обучения и международных поездок.',
+    categoryId: 'travel',
+    orientation: 'landscape',
+  },
+  {
+    src: '/cta.png',
+    alt: 'Сопровождение и консультация клиентов Unique Asia',
+    title: 'Сервис с сопровождением',
+    description: 'Остаемся на связи до старта программы, в процессе и после возвращения.',
+    categoryId: 'team',
+    orientation: 'landscape',
   },
 ];

@@ -6,7 +6,7 @@ import { useI18n } from '../i18n/I18nContext';
 import { getLocalizedText } from '../types/localized';
 import type { NewsItem } from '../types/news';
 
-const categories = ['Все', 'Туризм', 'Обучение', 'Компания'] as const;
+const categories = ['Все', 'Туризм', 'Обучение', 'Трудоустройство', 'Компания'] as const;
 
 
 export default function NewsGallery() {
