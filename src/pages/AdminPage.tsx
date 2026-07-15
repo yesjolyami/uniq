@@ -344,6 +344,13 @@ export default function AdminPage() {
       !isLocalizedComplete(siteContent.tourism.formatsTitle) ||
       !isLocalizedComplete(siteContent.tourism.formatsLead) ||
       siteContent.tourism.formats.some((item) => !isLocalizedComplete(item)) ||
+      !isLocalizedComplete(siteContent.tourism.routeTitle) ||
+      siteContent.tourism.routeSteps.some((item) => !isLocalizedComplete(item.title) || !isLocalizedComplete(item.text)) ||
+      !isLocalizedComplete(siteContent.tourism.packageTitle) ||
+      !isLocalizedComplete(siteContent.tourism.packageLead) ||
+      siteContent.tourism.packageItems.some((item) => !isLocalizedComplete(item.title) || !isLocalizedComplete(item.text)) ||
+      !isLocalizedComplete(siteContent.tourism.packageNoteTitle) ||
+      !isLocalizedComplete(siteContent.tourism.packageNoteText) ||
       !isLocalizedComplete(siteContent.employment.intro.eyebrow) ||
       !isLocalizedComplete(siteContent.employment.intro.title) ||
       !isLocalizedComplete(siteContent.employment.intro.description) ||
@@ -352,7 +359,9 @@ export default function AdminPage() {
       !isLocalizedComplete(siteContent.employment.processTitle) ||
       siteContent.employment.steps.some((item) => !isLocalizedComplete(item)) ||
       !isLocalizedComplete(siteContent.employment.supportTitle) ||
+      siteContent.employment.supportIntro.some((item) => !isLocalizedComplete(item)) ||
       siteContent.employment.supportItems.some((item) => !isLocalizedComplete(item)) ||
+      siteContent.employment.supportOutro.some((item) => !isLocalizedComplete(item)) ||
       !isLocalizedComplete(siteContent.education.intro.eyebrow) ||
       !isLocalizedComplete(siteContent.education.intro.title) ||
       !isLocalizedComplete(siteContent.education.intro.description) ||
@@ -420,7 +429,7 @@ export default function AdminPage() {
 
   const updatePageText = (
     page: 'tourism' | 'education',
-    field: 'formatsTitle' | 'formatsLead' | 'note',
+    field: 'formatsTitle' | 'formatsLead' | 'note' | 'routeTitle' | 'packageTitle' | 'packageLead' | 'packageNoteTitle' | 'packageNoteText',
     value: LocalizedText,
   ) => {
     setSiteContent({
@@ -444,7 +453,7 @@ export default function AdminPage() {
 
   const updatePageListItem = (
     page: 'tourism' | 'employment' | 'education',
-    field: 'highlights' | 'formats' | 'countries' | 'steps' | 'supportItems',
+    field: 'highlights' | 'formats' | 'countries' | 'steps' | 'supportIntro' | 'supportItems' | 'supportOutro',
     index: number,
     value: LocalizedText,
   ) => {
@@ -462,7 +471,7 @@ export default function AdminPage() {
 
   const updatePageCard = (
     page: 'tourism' | 'employment' | 'education',
-    field: 'benefits' | 'advantages' | 'tracks',
+    field: 'benefits' | 'advantages' | 'tracks' | 'routeSteps' | 'packageItems',
     index: number,
     patch: { title?: LocalizedText; text?: LocalizedText },
   ) => {
@@ -905,6 +914,60 @@ export default function AdminPage() {
                       </div>
                     ))}
                   </div>
+                  <div className="rounded-xl border border-gray-200 bg-white p-3">
+                    <LocalizedField label="Заголовок блока маршрута" value={siteContent.tourism.routeTitle} onChange={(value) => updatePageText('tourism', 'routeTitle', value)} maxLength={80} />
+                    <div className="mt-4 grid gap-4 lg:grid-cols-3">
+                      {siteContent.tourism.routeSteps.map((item, index) => (
+                        <div key={index} className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+                          <LocalizedField label={`Шаг ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('tourism', 'routeSteps', index, { title: value })} maxLength={80} />
+                          <div className="mt-3">
+                            <LocalizedField label="Описание шага" value={item.text} onChange={(value) => updatePageCard('tourism', 'routeSteps', index, { text: value })} multiline rows={3} maxLength={220} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="grid gap-3 lg:grid-cols-2">
+                    <UploadField
+                      id="tourism-city-image"
+                      label="Фото городского направления"
+                      value={siteContent.tourism.cityImage}
+                      accept="image/*"
+                      isUploading={uploadingTarget === 'tourism-city-image'}
+                      onUrlChange={(value) => setSiteContent({ ...siteContent, tourism: { ...siteContent.tourism, cityImage: value } })}
+                      onFileSelect={(file) => handleUpload('tourism-city-image', file, (url) => setSiteContent((current) => ({ ...current, tourism: { ...current.tourism, cityImage: url } })))}
+                    />
+                    <UploadField
+                      id="tourism-nature-image"
+                      label="Фото природного направления"
+                      value={siteContent.tourism.natureImage}
+                      accept="image/*"
+                      isUploading={uploadingTarget === 'tourism-nature-image'}
+                      onUrlChange={(value) => setSiteContent({ ...siteContent, tourism: { ...siteContent.tourism, natureImage: value } })}
+                      onFileSelect={(file) => handleUpload('tourism-nature-image', file, (url) => setSiteContent((current) => ({ ...current, tourism: { ...current.tourism, natureImage: url } })))}
+                    />
+                  </div>
+                  <div className="rounded-xl border border-brand/10 bg-brand-soft/30 p-3">
+                    <p className="mb-3 text-xs font-black uppercase tracking-[0.12em] text-brand">Блок «В пакет входит»</p>
+                    <div className="grid gap-4">
+                      <LocalizedField label="Заголовок" value={siteContent.tourism.packageTitle} onChange={(value) => updatePageText('tourism', 'packageTitle', value)} multiline rows={2} maxLength={220} />
+                      <LocalizedField label="Описание" value={siteContent.tourism.packageLead} onChange={(value) => updatePageText('tourism', 'packageLead', value)} multiline rows={3} maxLength={320} />
+                      <div className="grid gap-4 lg:grid-cols-2">
+                        {siteContent.tourism.packageItems.map((item, index) => (
+                          <div key={index} className="rounded-xl border border-gray-200 bg-white p-3">
+                            <LocalizedField label={`Пункт ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('tourism', 'packageItems', index, { title: value })} maxLength={120} />
+                            <div className="mt-3">
+                              <LocalizedField label="Описание" value={item.text} onChange={(value) => updatePageCard('tourism', 'packageItems', index, { text: value })} multiline rows={3} maxLength={280} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="grid gap-4 lg:grid-cols-2">
+                        <LocalizedField label="Заголовок заметки" value={siteContent.tourism.packageNoteTitle} onChange={(value) => updatePageText('tourism', 'packageNoteTitle', value)} maxLength={80} />
+                        <LocalizedField label="Текст заметки" value={siteContent.tourism.packageNoteText} onChange={(value) => updatePageText('tourism', 'packageNoteText', value)} multiline rows={2} maxLength={220} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -952,6 +1015,22 @@ export default function AdminPage() {
                     ))}
                   </div>
                   <LocalizedField label="Заголовок сопровождения" value={siteContent.employment.supportTitle} onChange={updateEmploymentText.bind(null, 'supportTitle')} maxLength={80} />
+                  <div className="rounded-xl border border-brand/10 bg-brand-soft/30 p-3">
+                    <p className="mb-3 text-xs font-black uppercase tracking-[0.12em] text-brand">Тексты блока «В пакет входит»</p>
+                    <div className="grid gap-4">
+                      {siteContent.employment.supportIntro.map((item, index) => (
+                        <LocalizedField
+                          key={index}
+                          label={`Вводный текст ${index + 1}`}
+                          value={item}
+                          onChange={(value) => updatePageListItem('employment', 'supportIntro', index, value)}
+                          multiline
+                          rows={2}
+                          maxLength={220}
+                        />
+                      ))}
+                    </div>
+                  </div>
                   <div className="grid gap-4 lg:grid-cols-2">
                     {siteContent.employment.supportItems.map((item, index) => (
                       <div key={index}>
@@ -959,6 +1038,31 @@ export default function AdminPage() {
                       </div>
                     ))}
                   </div>
+                  <div className="rounded-xl border border-gray-200 bg-white p-3">
+                    <p className="mb-3 text-xs font-black uppercase tracking-[0.12em] text-gray-500">Финальные тексты секции</p>
+                    <div className="grid gap-4">
+                      {siteContent.employment.supportOutro.map((item, index) => (
+                        <LocalizedField
+                          key={index}
+                          label={`Финальный текст ${index + 1}`}
+                          value={item}
+                          onChange={(value) => updatePageListItem('employment', 'supportOutro', index, value)}
+                          multiline
+                          rows={2}
+                          maxLength={220}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <UploadField
+                    id="employment-support-image"
+                    label="Изображение блока подготовки к выезду"
+                    value={siteContent.employment.supportImage}
+                    accept="image/*"
+                    isUploading={uploadingTarget === 'employment-support-image'}
+                    onUrlChange={(value) => setSiteContent({ ...siteContent, employment: { ...siteContent.employment, supportImage: value } })}
+                    onFileSelect={(file) => handleUpload('employment-support-image', file, (url) => setSiteContent((current) => ({ ...current, employment: { ...current.employment, supportImage: url } })))}
+                  />
                 </div>
               </div>
 

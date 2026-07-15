@@ -17,32 +17,12 @@ export default function TourismPage() {
   }, []);
 
   const tourism = content.tourism;
-  const routeSteps = [
-    { title: t('Бриф'), text: t('Формируем задачу поездки, состав группы и ожидания по темпу.') },
-    { title: t('Подбор'), text: t('Собираем маршрут, билеты, проживание и точки программы.') },
-    { title: t('Подтверждение'), text: t('Фиксируем бюджет, документы, логистику и контакт на сопровождение.') },
-  ];
+  const routeSteps = tourism.routeSteps;
   const packageItems = [
-    {
-      icon: Plane,
-      title: t('Перелёт и логистика'),
-      text: t('Подбираем авиабилеты, стыковки, трансферы и темп маршрута без лишних пересадок и случайных решений.'),
-    },
-    {
-      icon: Hotel,
-      title: t('Проживание и комфорт'),
-      text: t('Собираем размещение под сценарий поездки: городской ритм, семейный отдых, природа или групповая программа.'),
-    },
-    {
-      icon: Compass,
-      title: t('Маршрут и впечатления'),
-      text: t('Формируем программу с экскурсиями, природными точками, локальными локациями и временем на отдых.'),
-    },
-    {
-      icon: Users,
-      title: t('Сопровождение группы'),
-      text: t('Подключаем координатора, гидов, переводчиков и организацию групповых выездов, если это нужно формату поездки.'),
-    },
+    { ...tourism.packageItems[0], icon: Plane },
+    { ...tourism.packageItems[1], icon: Hotel },
+    { ...tourism.packageItems[2], icon: Compass },
+    { ...tourism.packageItems[3], icon: Users },
   ];
 
   return (
@@ -118,14 +98,14 @@ export default function TourismPage() {
                 <div className="rounded-[1.15rem] border border-black/[0.05] bg-[#fff9f4] p-4 sm:p-5">
                   <div className="mb-4 flex items-center gap-2">
                     <Sparkles className="h-4 w-4 text-brand" />
-                    <h2 className="text-base font-black text-primary">{t('Как собираем поездку')}</h2>
+                    <h2 className="text-base font-black text-primary">{text(tourism.routeTitle)}</h2>
               </div>
               <div className="grid gap-3">
                 {routeSteps.map((item, index) => (
-                  <div key={item.title} className="rounded-2xl border border-black/[0.05] bg-white p-4">
+                  <div key={`${item.title.ru}-${index}`} className="rounded-2xl border border-black/[0.05] bg-white p-4">
                     <span className="mb-2 block text-[11px] font-black uppercase tracking-[0.14em] text-brand">0{index + 1}</span>
-                    <h3 className="mb-1 text-sm font-black text-primary">{item.title}</h3>
-                    <p className="text-sm leading-6 text-gray-600">{item.text}</p>
+                    <h3 className="mb-1 text-sm font-black text-primary">{text(item.title)}</h3>
+                    <p className="text-sm leading-6 text-gray-600">{text(item.text)}</p>
                   </div>
                 ))}
               </div>
@@ -134,11 +114,11 @@ export default function TourismPage() {
             <div className="grid gap-4">
               <div className="grid gap-4 sm:grid-cols-[1.15fr_0.85fr]">
                 <div className="relative min-h-[220px] overflow-hidden rounded-[1.15rem]">
-                  <img src="/tourism_germany.jpg" alt={t('Городское направление')} className="absolute inset-0 h-full w-full object-cover" />
+                  <img src={tourism.cityImage} alt={t('Городское направление')} className="absolute inset-0 h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/55 via-transparent to-transparent" />
                 </div>
                 <div className="relative min-h-[220px] overflow-hidden rounded-[1.15rem]">
-                  <img src="/hero.png" alt={t('Природное направление')} className="absolute inset-0 h-full w-full object-cover" />
+                  <img src={tourism.natureImage} alt={t('Природное направление')} className="absolute inset-0 h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/55 via-transparent to-transparent" />
                 </div>
               </div>
@@ -152,9 +132,9 @@ export default function TourismPage() {
                   ))}
                 </div>
                 <div className="mt-4 rounded-2xl border border-black/[0.05] bg-[#fff9f4] p-4">
-                  <h3 className="mb-1 text-sm font-black text-primary">{t('Организация под ключ')}</h3>
+                  <h3 className="mb-1 text-sm font-black text-primary">{text(tourism.packageNoteTitle)}</h3>
                   <p className="text-sm leading-6 text-gray-600">
-                    {t('Все этапы и расходы прозрачны. Организация поездки выполняется под ключ.')}
+                    {text(tourism.packageNoteText)}
                   </p>
                 </div>
               </div>
@@ -176,10 +156,10 @@ export default function TourismPage() {
                     {t('В пакет входит')}
                   </span>
                   <h2 className="max-w-xl text-[1.9rem] font-black leading-[1.04] text-primary sm:text-[2.25rem]">
-                    {t('Поездка собирается как цельный маршрут, а не набор случайных бронирований')}
+                    {text(tourism.packageTitle)}
                   </h2>
                   <p className="mt-4 max-w-xl text-sm leading-6 text-gray-600 sm:text-[15px]">
-                    {t('Мы соединяем логистику, проживание, впечатления и сопровождение в одну внятную программу, которая выглядит аккуратно и ощущается спокойно ещё до выезда.')}
+                    {text(tourism.packageLead)}
                   </p>
 
                   <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -197,16 +177,16 @@ export default function TourismPage() {
 
               <div className="border-t border-black/[0.05] bg-white/70 p-5 sm:p-6 lg:border-l lg:border-t-0 lg:p-8">
                 <div className="grid gap-3 sm:grid-cols-2">
-                  {packageItems.map((item) => (
+                  {packageItems.map((item, index) => (
                     <article
-                      key={item.title}
+                      key={`${item.title.ru}-${index}`}
                       className="group rounded-[1.3rem] border border-black/[0.05] bg-[#fcfaf7] p-4 transition-transform duration-200 hover:-translate-y-0.5"
                     >
                       <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand shadow-sm">
                         <item.icon className="h-5 w-5" aria-hidden="true" />
                       </div>
-                      <h3 className="text-sm font-black text-primary">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-gray-600">{item.text}</p>
+                      <h3 className="text-sm font-black text-primary">{text(item.title)}</h3>
+                      <p className="mt-2 text-sm leading-6 text-gray-600">{text(item.text)}</p>
                     </article>
                   ))}
                 </div>

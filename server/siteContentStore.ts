@@ -110,6 +110,15 @@ function normalizeTourismContent(value: unknown, fallback: TourismPageContent): 
     formatsTitle: normalizeLocalizedText(input.formatsTitle, fallback.formatsTitle, 80),
     formatsLead: normalizeLocalizedText(input.formatsLead, fallback.formatsLead, 120),
     formats: normalizeLocalizedList(input.formats, fallback.formats),
+    routeTitle: normalizeLocalizedText(input.routeTitle, fallback.routeTitle, 80),
+    routeSteps: fallback.routeSteps.map((item, index) => normalizeCard(Array.isArray(input.routeSteps) ? input.routeSteps[index] : undefined, item)),
+    cityImage: cleanUrl(input.cityImage, fallback.cityImage),
+    natureImage: cleanUrl(input.natureImage, fallback.natureImage),
+    packageTitle: normalizeLocalizedText(input.packageTitle, fallback.packageTitle, 220),
+    packageLead: normalizeLocalizedText(input.packageLead, fallback.packageLead, 320),
+    packageItems: fallback.packageItems.map((item, index) => normalizeCard(Array.isArray(input.packageItems) ? input.packageItems[index] : undefined, item)),
+    packageNoteTitle: normalizeLocalizedText(input.packageNoteTitle, fallback.packageNoteTitle, 80),
+    packageNoteText: normalizeLocalizedText(input.packageNoteText, fallback.packageNoteText, 220),
   };
 }
 
@@ -122,7 +131,10 @@ function normalizeEmploymentContent(value: unknown, fallback: EmploymentPageCont
     processTitle: normalizeLocalizedText(input.processTitle, fallback.processTitle, 80),
     steps: normalizeLocalizedList(input.steps, fallback.steps),
     supportTitle: normalizeLocalizedText(input.supportTitle, fallback.supportTitle, 80),
+    supportIntro: normalizeLocalizedList(input.supportIntro, fallback.supportIntro),
     supportItems: normalizeLocalizedList(input.supportItems, fallback.supportItems),
+    supportOutro: normalizeLocalizedList(input.supportOutro, fallback.supportOutro),
+    supportImage: cleanUrl(input.supportImage, fallback.supportImage),
   };
 }
 

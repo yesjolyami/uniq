@@ -304,7 +304,7 @@ export default function EmploymentPage() {
               </div>
 
               <div className="relative min-h-[240px] overflow-hidden rounded-[1.35rem] border border-black/[0.06]">
-                <img src="/work.jpg" alt={t('Подготовка к выезду')} className="absolute inset-0 h-full w-full object-cover" />
+                <img src={employment.supportImage} alt={t('Подготовка к выезду')} className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.08)_0%,rgba(17,24,39,0.22)_35%,rgba(17,24,39,0.78)_100%)]" />
                 <div className="absolute bottom-4 left-4 right-4 rounded-[1.2rem] border border-white/15 bg-black/25 p-4 text-white backdrop-blur-md">
                   <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-white/60">{t('Подготовка к выезду')}</p>

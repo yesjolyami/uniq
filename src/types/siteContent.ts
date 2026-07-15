@@ -47,6 +47,15 @@ export type TourismPageContent = {
   formatsTitle: LocalizedText;
   formatsLead: LocalizedText;
   formats: LocalizedText[];
+  routeTitle: LocalizedText;
+  routeSteps: ContentCard[];
+  cityImage: string;
+  natureImage: string;
+  packageTitle: LocalizedText;
+  packageLead: LocalizedText;
+  packageItems: ContentCard[];
+  packageNoteTitle: LocalizedText;
+  packageNoteText: LocalizedText;
 };
 
 export type EmploymentPageContent = {
@@ -59,6 +68,7 @@ export type EmploymentPageContent = {
   supportIntro: LocalizedText[];
   supportItems: LocalizedText[];
   supportOutro: LocalizedText[];
+  supportImage: string;
 };
 
 export type EducationPageContent = {
@@ -152,6 +162,24 @@ export const defaultSiteContent: SiteContent = {
       createLocalizedText('Комбинированные туры с городами и природой'),
       createLocalizedText('Короткие weekend-программы и сезонные сборы'),
     ],
+    routeTitle: createLocalizedText('Как собираем поездку'),
+    routeSteps: [
+      { title: createLocalizedText('Бриф'), text: createLocalizedText('Формируем задачу поездки, состав группы и ожидания по темпу.') },
+      { title: createLocalizedText('Подбор'), text: createLocalizedText('Собираем маршрут, билеты, проживание и точки программы.') },
+      { title: createLocalizedText('Подтверждение'), text: createLocalizedText('Фиксируем бюджет, документы, логистику и контакт на сопровождение.') },
+    ],
+    cityImage: '/tourism_germany.jpg',
+    natureImage: '/hero.png',
+    packageTitle: createLocalizedText('Поездка собирается как цельный маршрут, а не набор случайных бронирований'),
+    packageLead: createLocalizedText('Мы соединяем логистику, проживание, впечатления и сопровождение в одну внятную программу, которая выглядит аккуратно и ощущается спокойно ещё до выезда.'),
+    packageItems: [
+      { title: createLocalizedText('Перелёт и логистика'), text: createLocalizedText('Подбираем авиабилеты, стыковки, трансферы и темп маршрута без лишних пересадок и случайных решений.') },
+      { title: createLocalizedText('Проживание и комфорт'), text: createLocalizedText('Собираем размещение под сценарий поездки: городской ритм, семейный отдых, природа или групповая программа.') },
+      { title: createLocalizedText('Маршрут и впечатления'), text: createLocalizedText('Формируем программу с экскурсиями, природными точками, локальными локациями и временем на отдых.') },
+      { title: createLocalizedText('Сопровождение группы'), text: createLocalizedText('Подключаем координатора, гидов, переводчиков и организацию групповых выездов, если это нужно формату поездки.') },
+    ],
+    packageNoteTitle: createLocalizedText('Организация под ключ'),
+    packageNoteText: createLocalizedText('Все этапы и расходы прозрачны. Организация поездки выполняется под ключ.'),
   },
   employment: {
     intro: {
@@ -208,6 +236,7 @@ export const defaultSiteContent: SiteContent = {
       createLocalizedText('Всё это — в одной компании. Никакой беготни по городу.'),
       createLocalizedText('Просто скажите нам «да», и мы запустим процесс.'),
     ],
+    supportImage: '/work.jpg',
   },
   education: {
     intro: {
