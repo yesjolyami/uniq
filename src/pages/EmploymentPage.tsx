@@ -78,7 +78,7 @@ export default function EmploymentPage() {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     to="/#контакты"
-                    className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand"
+                    className="inline-flex items-center gap-2 rounded-full bg-cta px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover"
                   >
                     {t('Получить консультацию')}
                   </Link>
@@ -332,7 +332,7 @@ export default function EmploymentPage() {
                 </h2>
               </div>
               <div className="flex shrink-0 flex-wrap gap-3">
-                <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand">
+                <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-cta px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
                   {t('Получить консультацию')}
                 </Link>
                 <Link to="/company" className="inline-flex items-center gap-2 rounded-full border border-primary/10 bg-white px-5 py-3 text-sm font-bold text-primary transition-colors hover:border-brand hover:text-brand">

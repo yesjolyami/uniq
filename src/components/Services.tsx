@@ -7,6 +7,7 @@ const tourismHighlights = [
   'Маршрут, авиабилеты, отели и визы',
   'Поездки по Кыргызстану и за рубеж',
   'Профессиональные гиды, переводчики и сопровождающий персонал',
+];
 
 export default function Services() {
   const { t } = useI18n();
@@ -56,7 +57,7 @@ export default function Services() {
                 <button
                   type="button"
                   onClick={scrollToContacts}
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-brand focus:outline-none focus:ring-2 focus:ring-brand/30 sm:w-fit"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-cta px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-cta-hover focus:outline-none focus:ring-2 focus:ring-cta/30 sm:w-fit"
                 >
                   {t('Оставить заявку')}
                   <ArrowRight className="h-4 w-4" />

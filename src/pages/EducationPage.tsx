@@ -125,7 +125,7 @@ export default function EducationPage() {
 
       <section className="pb-10 sm:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-[#0ea5e9] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0284c7]">
+          <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-cta px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
             {t('Получить консультацию')}
           </Link>
         </div>

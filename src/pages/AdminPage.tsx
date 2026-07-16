@@ -915,13 +915,13 @@ export default function AdminPage() {
                     ))}
                   </div>
                   <div className="rounded-xl border border-gray-200 bg-white p-3">
-                    <LocalizedField label="Заголовок блока маршрута" value={siteContent.tourism.routeTitle} onChange={(value) => updatePageText('tourism', 'routeTitle', value)} maxLength={80} />
+                    <LocalizedField label="Заголовок блока направлений" value={siteContent.tourism.routeTitle} onChange={(value) => updatePageText('tourism', 'routeTitle', value)} maxLength={80} />
                     <div className="mt-4 grid gap-4 lg:grid-cols-3">
                       {siteContent.tourism.routeSteps.map((item, index) => (
                         <div key={index} className="rounded-xl border border-gray-200 bg-gray-50 p-3">
-                          <LocalizedField label={`Шаг ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('tourism', 'routeSteps', index, { title: value })} maxLength={80} />
+                          <LocalizedField label={`Направление ${index + 1}`} value={item.title} onChange={(value) => updatePageCard('tourism', 'routeSteps', index, { title: value })} maxLength={80} />
                           <div className="mt-3">
-                            <LocalizedField label="Описание шага" value={item.text} onChange={(value) => updatePageCard('tourism', 'routeSteps', index, { text: value })} multiline rows={3} maxLength={220} />
+                            <LocalizedField label="Описание направления" value={item.text} onChange={(value) => updatePageCard('tourism', 'routeSteps', index, { text: value })} multiline rows={3} maxLength={220} />
                           </div>
                         </div>
                       ))}

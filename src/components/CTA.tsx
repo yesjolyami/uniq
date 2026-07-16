@@ -145,7 +145,7 @@ export default function CTA() {
                 <div className="pt-2">
                   <button 
                     type="submit" 
-                    className="w-full rounded-xl bg-primary px-8 py-3.5 text-[14px] font-bold text-white shadow-md transition-colors hover:bg-brand active:scale-[0.99]"
+                    className="w-full rounded-xl bg-cta px-8 py-3.5 text-[14px] font-bold text-white shadow-md shadow-cta/20 transition-colors hover:bg-cta-hover active:scale-[0.99]"
                   >
                     {t('Отправить')}
                   </button>

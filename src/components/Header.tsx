@@ -81,7 +81,7 @@ export default function Header() {
             </a>
             <button 
               onClick={() => scrollToSection('контакты')}
-              className="rounded-full bg-primary px-4 py-3 text-[12px] font-bold text-white shadow-md shadow-[#27272a]/15 transition-colors hover:bg-brand xl:px-5"
+              className="rounded-full bg-cta px-4 py-3 text-[12px] font-bold text-white shadow-md shadow-cta/20 transition-colors hover:bg-cta-hover xl:px-5"
             >
               {t('Оставить заявку')}
             </button>
@@ -130,7 +130,7 @@ export default function Header() {
                 ))}
                 <button 
                   onClick={() => scrollToSection('контакты')}
-                  className="mt-4 rounded-full bg-primary px-6 py-4 text-center font-bold text-white transition-colors hover:bg-brand"
+                  className="mt-4 rounded-full bg-cta px-6 py-4 text-center font-bold text-white transition-colors hover:bg-cta-hover"
                 >
                   {t('Оставить заявку')}
                 </button>

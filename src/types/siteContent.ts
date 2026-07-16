@@ -162,11 +162,20 @@ export const defaultSiteContent: SiteContent = {
       createLocalizedText('Комбинированные туры с городами и природой'),
       createLocalizedText('Короткие weekend-программы и сезонные сборы'),
     ],
-    routeTitle: createLocalizedText('Как собираем поездку'),
+    routeTitle: createLocalizedText('Выберите своё направление'),
     routeSteps: [
-      { title: createLocalizedText('Бриф'), text: createLocalizedText('Формируем задачу поездки, состав группы и ожидания по темпу.') },
-      { title: createLocalizedText('Подбор'), text: createLocalizedText('Собираем маршрут, билеты, проживание и точки программы.') },
-      { title: createLocalizedText('Подтверждение'), text: createLocalizedText('Фиксируем бюджет, документы, логистику и контакт на сопровождение.') },
+      {
+        title: createLocalizedText('Туры по Кыргызстану'),
+        text: createLocalizedText('Иссык-Куль, Сон-Куль, горные ущелья и кочевая культура — готовые и индивидуальные маршруты по стране.'),
+      },
+      {
+        title: createLocalizedText('Туры за рубеж'),
+        text: createLocalizedText('Пляжный отдых, яркие города и насыщенные экскурсионные программы в странах Азии, Европы и не только.'),
+      },
+      {
+        title: createLocalizedText('Авторские путешествия'),
+        text: createLocalizedText('Создадим маршрут под ваши даты, интересы, состав компании и комфортный бюджет — без шаблонных решений.'),
+      },
     ],
     cityImage: '/tourism_germany.jpg',
     natureImage: '/hero.png',

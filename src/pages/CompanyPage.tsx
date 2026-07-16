@@ -268,41 +268,30 @@ export default function CompanyPage() {
               })}
             </div>
 
-            <div className="grid auto-rows-[180px] gap-3 sm:auto-rows-[220px] sm:gap-4 lg:grid-cols-12">
-              {visibleImages.map((image, index) => {
-                const isLarge = image.featured && index % 3 === 0;
-                const isPortrait = image.orientation === 'portrait';
-
-                return (
-                  <button
-                    key={`${image.src}-${activeCategory}`}
-                    type="button"
-                    onClick={() => setSelectedIndex(index)}
-                    className={`group relative overflow-hidden rounded-[1.3rem] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand ${
-                      isLarge
-                        ? 'lg:col-span-7 lg:row-span-2'
-                        : isPortrait
-                          ? 'lg:col-span-5 lg:row-span-2'
-                          : 'lg:col-span-5'
-                    }`}
-                    aria-label={`${t('Открыть фото')}: ${t(image.title)}`}
-                  >
-                    <img
-                      src={image.src}
-                      alt={t(image.alt)}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    />
-                    <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(39,39,42,0.04)_0%,rgba(39,39,42,0.18)_38%,rgba(39,39,42,0.82)_100%)]" />
-                    <span className="absolute right-3 top-3 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
-                      {t(companyGalleryCategories.find((category) => category.id === image.categoryId)?.label ?? '')}
-                    </span>
-                    <span className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
-                      <span className="mb-1 block text-lg font-black leading-tight">{t(image.title)}</span>
-                      <span className="block max-w-xl text-sm leading-5 text-white/85">{t(image.description)}</span>
-                    </span>
-                  </button>
-                );
-              })}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+              {visibleImages.map((image, index) => (
+                <button
+                  key={`${image.src}-${activeCategory}`}
+                  type="button"
+                  onClick={() => setSelectedIndex(index)}
+                  className="group relative min-h-[240px] overflow-hidden rounded-[1.3rem] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:min-h-[280px] lg:min-h-[340px]"
+                  aria-label={`${t('Открыть фото')}: ${t(image.title)}`}
+                >
+                  <img
+                    src={image.src}
+                    alt={t(image.alt)}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(39,39,42,0.04)_0%,rgba(39,39,42,0.18)_38%,rgba(39,39,42,0.82)_100%)]" />
+                  <span className="absolute right-3 top-3 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+                    {t(companyGalleryCategories.find((category) => category.id === image.categoryId)?.label ?? '')}
+                  </span>
+                  <span className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
+                    <span className="mb-1 block text-lg font-black leading-tight">{t(image.title)}</span>
+                    <span className="block max-w-xl text-sm leading-5 text-white/85">{t(image.description)}</span>
+                  </span>
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -310,7 +299,7 @@ export default function CompanyPage() {
 
       <section className="pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand">
+          <Link to="/#контакты" className="inline-flex items-center gap-2 rounded-full bg-cta px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
             {t('Связаться с нами')}
           </Link>
         </div>

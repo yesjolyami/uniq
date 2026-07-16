@@ -136,7 +136,7 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
                   <p className="mb-7 text-base leading-7 text-gray-600 md:text-lg md:leading-relaxed lg:mb-8">{t(opp.description)}</p>
                   <button 
                     onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#f5963b] to-[#e62020] px-8 py-3.5 font-semibold text-white shadow-md transition-all hover:opacity-90 sm:w-fit"
+                    className="inline-flex w-full items-center justify-center rounded-full bg-cta px-8 py-3.5 font-semibold text-white shadow-md shadow-cta/20 transition-colors hover:bg-cta-hover sm:w-fit"
                   >
                     {t('Узнать больше')}
                   </button>
