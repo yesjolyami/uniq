@@ -6,6 +6,7 @@ import { siteContentApi } from '../api/siteContent';
 import { useI18n } from '../i18n/I18nContext';
 import { getLocalizedText } from '../types/localized';
 import { defaultSiteContent, type SiteContent } from '../types/siteContent';
+import KyrgyzOrnament, { KyrgyzMedallion } from '../components/KyrgyzOrnament';
 
 export default function EmploymentPage() {
   const { t, locale } = useI18n();
@@ -34,10 +35,10 @@ export default function EmploymentPage() {
   const supportFeatureIcons = [BriefcaseBusiness, FileText, Globe2, BadgeCheck, Stethoscope, ShieldCheck] as const;
 
   return (
-    <main className="bg-[linear-gradient(180deg,#fcfdfd_0%,#f5f9fc_42%,#ffffff_100%)] pt-24 sm:pt-28">
+    <main className="page-canvas pt-24 sm:pt-28">
       <section className="pb-8 sm:pb-10 md:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-[1.6rem] border border-black/[0.05] bg-[linear-gradient(135deg,#ffffff_0%,#f8fbfd_52%,#eef6fb_100%)] shadow-[0_22px_60px_rgba(15,23,42,0.07)]">
+          <div className="overflow-hidden rounded-[1.75rem] border border-[#b9ddd3] bg-[linear-gradient(135deg,#f0faf7_0%,#ffffff_54%,#fff7eb_100%)] text-[#137f7b] shadow-[0_22px_60px_rgba(15,23,42,0.07)]">
             <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
               <div className="relative p-5 sm:p-7 lg:p-9">
                 <div className="absolute left-0 top-0 h-28 w-28 rounded-br-[2rem] bg-brand/[0.04]" />
@@ -94,27 +95,32 @@ export default function EmploymentPage() {
               <div className="relative min-h-[320px] lg:min-h-[520px]">
                 <img src={employment.intro.image} alt={text(employment.intro.eyebrow)} className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(39,39,42,0.06)_0%,rgba(39,39,42,0.2)_45%,rgba(39,39,42,0.72)_100%)]" />
-                <div className="absolute inset-x-4 bottom-4 rounded-[1.35rem] border border-white/18 bg-[#101828]/72 p-4 text-white backdrop-blur-md sm:inset-x-5 sm:p-5">
+                <KyrgyzMedallion
+                  className="absolute right-4 top-4 h-24 w-24 opacity-80 drop-shadow-[0_12px_24px_rgba(31,75,65,0.18)] sm:h-28 sm:w-28"
+                  tone="cool"
+                  variant="tabak"
+                />
+                <div className="absolute inset-x-4 bottom-4 rounded-[1.35rem] border border-white/75 bg-white/88 p-4 text-primary shadow-[0_18px_45px_rgba(27,58,49,0.16)] backdrop-blur-md sm:inset-x-5 sm:p-5">
                   <div className="mb-4 flex items-center gap-3">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-white">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#137f7b] text-white">
                       <BriefcaseBusiness className="h-5 w-5" />
                     </span>
                     <div>
-                      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/65">{t('Маршрут выезда')}</p>
+                      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#137f7b]">{t('Маршрут выезда')}</p>
                       <p className="text-base font-black leading-tight">{t('Понятная схема до подписания и до выезда')}</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 sm:gap-3">
                     {heroStats.map((item) => (
-                      <div key={item.label} className="rounded-2xl border border-white/10 bg-white/8 px-3 py-3 text-center">
+                      <div key={item.label} className="rounded-2xl border border-[#137f7b]/10 bg-[#edf8f4] px-3 py-3 text-center">
                         <div className="text-lg font-black">{item.value}</div>
-                        <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/65">{item.label}</div>
+                        <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#137f7b]/70">{item.label}</div>
                       </div>
                     ))}
                   </div>
 
-                  <p className="mt-4 max-w-md text-sm leading-5 text-white/75">
+                  <p className="mt-4 max-w-md text-sm leading-5 text-gray-600">
                     {t('Сначала фиксируем вакансию, документы и сроки, а потом двигаемся по этапам без хаоса и лишних посредников.')}
                   </p>
                 </div>
@@ -126,6 +132,11 @@ export default function EmploymentPage() {
 
       <section className="pb-8 sm:pb-10 md:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <KyrgyzOrnament
+            className="mx-auto mb-7 h-20 w-full max-w-lg opacity-85"
+            tone="mixed"
+            variant="kochkorDivider"
+          />
           <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <span className="mb-3 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand">

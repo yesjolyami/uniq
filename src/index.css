@@ -3,23 +3,23 @@
 
 @theme {
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #27272a;
-  --color-primary-light: #3f3f46;
-  --color-brand: #e62020;
-  --color-brand-soft: #fff0eb;
-  --color-cta: #0ea5e9;
-  --color-cta-hover: #0284c7;
-  --color-sand: #f8fafc;
-  --color-sand-light: #ffffff;
-  --color-cream: #fbf6f0;
-  --color-cream-deep: #f3e7da;
-  --color-cocoa: #725447;
+  --color-primary: #263832;
+  --color-primary-light: #3f5b51;
+  --color-brand: #d84b3e;
+  --color-brand-soft: #fff0e9;
+  --color-cta: #137f7b;
+  --color-cta-hover: #0d6865;
+  --color-sand: #f4eee3;
+  --color-sand-light: #fffdf8;
+  --color-cream: #fbf2e6;
+  --color-cream-deep: #efddc7;
+  --color-cocoa: #85604f;
 }
 
 body {
   font-family: var(--font-sans);
   color: #1f2937;
-  background: #ffffff;
+  background: #fffdf8;
   -webkit-font-smoothing: antialiased;
   min-width: 320px;
 }
@@ -30,8 +30,8 @@ html {
 }
 
 ::selection {
-  color: #27272a;
-  background: #f7c4ad;
+  color: #263832;
+  background: #f5c7a6;
 }
 
 button,
@@ -44,7 +44,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid #e62020;
+  outline: 2px solid #d84b3e;
   outline-offset: 3px;
 }
 
@@ -82,6 +82,24 @@ html[lang="de"] {
 }
 
 @layer components {
+  .site-shell {
+    background:
+      radial-gradient(circle at 8% 15%, rgba(216, 75, 62, 0.08), transparent 24rem),
+      radial-gradient(circle at 92% 38%, rgba(19, 127, 123, 0.08), transparent 27rem),
+      linear-gradient(180deg, #fffdf8 0%, #ffffff 26%, #fcfaf5 100%);
+  }
+
+  .page-canvas {
+    background:
+      radial-gradient(circle at 4% 12%, rgba(230, 162, 60, 0.09), transparent 22rem),
+      radial-gradient(circle at 96% 30%, rgba(19, 127, 123, 0.08), transparent 24rem),
+      linear-gradient(180deg, #fffdf8 0%, #f8fbf8 52%, #ffffff 100%);
+  }
+
+  .soft-lift {
+    box-shadow: 0 18px 55px rgba(44, 61, 54, 0.08);
+  }
+
   .admin-input {
     width: 100%;
     min-width: 0;
@@ -95,7 +113,7 @@ html[lang="de"] {
   }
 
   .admin-input:focus {
-    border-color: #e62020;
+    border-color: #d84b3e;
     background: #ffffff;
     outline: none;
   }

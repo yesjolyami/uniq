@@ -51,14 +51,14 @@ export default function CTA() {
   };
 
   return (
-    <section id="cta" className="relative overflow-hidden bg-slate-50 py-20 sm:py-24 md:py-32 lg:py-36">
+    <section id="cta" className="relative overflow-hidden bg-[linear-gradient(135deg,#fff7ec_0%,#edf8f4_100%)] py-20 sm:py-24 md:py-32 lg:py-36">
       <div className="absolute inset-0 z-0">
         <img 
           src="cta.png" 
           alt="Freedom Mountains" 
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#f8fafc_0%,rgba(248,250,252,.96)_72%,rgba(248,250,252,.5)_100%)] md:bg-[linear-gradient(90deg,#f8fafc_0%,rgba(248,250,252,.94)_48%,rgba(248,250,252,.36)_100%)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#fffaf2_0%,rgba(255,250,242,.96)_72%,rgba(238,248,244,.58)_100%)] md:bg-[linear-gradient(90deg,#fffaf2_0%,rgba(255,250,242,.94)_48%,rgba(238,248,244,.4)_100%)]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -84,7 +84,7 @@ export default function CTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mx-auto w-full max-w-md overflow-hidden rounded-[1.25rem] border border-gray-200 bg-white p-5 shadow-sm sm:p-9 lg:ml-auto"
+            className="relative mx-auto w-full max-w-md overflow-hidden rounded-[1.55rem] border border-[#b9ddd3] bg-white/90 p-5 text-[#137f7b] shadow-[0_22px_60px_rgba(35,72,60,0.12)] backdrop-blur-sm sm:p-9 lg:ml-auto"
           >
             {isSubmitted ? (
               <div className="flex flex-col items-center justify-center h-full min-h-[280px] text-center">
@@ -114,7 +114,7 @@ export default function CTA() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border bg-slate-50 px-4 py-3.5 ${errors.name ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-brand focus:outline-none`}
+                    className={`w-full rounded-xl border bg-[#f7f5ef] px-4 py-3.5 ${errors.name ? 'border-red-500' : 'border-[#ded8cc]'} transition-colors focus:border-brand focus:outline-none`}
                     placeholder={t('Иван Иванов')}
                   />
                   {errors.name && (
@@ -132,7 +132,7 @@ export default function CTA() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border bg-slate-50 px-4 py-3.5 ${errors.phone ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-brand focus:outline-none`}
+                    className={`w-full rounded-xl border bg-[#f7f5ef] px-4 py-3.5 ${errors.phone ? 'border-red-500' : 'border-[#ded8cc]'} transition-colors focus:border-brand focus:outline-none`}
                     placeholder="+996 555 000 000"
                   />
                   {errors.phone && (

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { companyAboutCards, companyDocuments, companyGalleryCategories, companyGalleryImages, companyHistory } from '../data/aboutContent';
 import { useI18n } from '../i18n/I18nContext';
+import KyrgyzOrnament, { KyrgyzMedallion } from '../components/KyrgyzOrnament';
 
 export default function CompanyPage() {
   const { t } = useI18n();
@@ -81,13 +82,18 @@ export default function CompanyPage() {
   };
 
   return (
-    <main className="bg-sand-light pt-24 sm:pt-28">
+    <main className="page-canvas pt-24 sm:pt-28">
       <section className="pb-8 sm:pb-10 md:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 rounded-[1.4rem] border border-black/[0.05] bg-white p-5 sm:p-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <div className="soft-lift grid gap-6 rounded-[1.7rem] border border-[#e7c9b7] bg-[linear-gradient(135deg,#fff7ef_0%,#ffffff_52%,#edf8f5_100%)] p-5 text-brand sm:p-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
             <div className="relative min-h-[260px] overflow-hidden rounded-[1.2rem] sm:min-h-[320px] lg:h-full">
               <img src="/work.jpg" alt={t('Участники программы Unique Asia')} className="absolute inset-0 h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#65483c]/85 via-[#65483c]/10 to-transparent" />
+              <KyrgyzMedallion
+                className="absolute right-4 top-4 h-24 w-24 opacity-80 drop-shadow-[0_12px_24px_rgba(75,52,38,0.18)]"
+                tone="warm"
+                variant="rosette"
+              />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
                 <Quote className="mb-3 h-7 w-7 text-[#f5963b]" />
                 <p className="max-w-md text-lg font-bold leading-relaxed">
@@ -133,6 +139,11 @@ export default function CompanyPage() {
 
       <section id="history" className="pb-8 sm:pb-10 md:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <KyrgyzOrnament
+            className="mb-5 h-16 w-full max-w-sm opacity-40"
+            tone="warm"
+            variant="palmette"
+          />
           <div className="mb-5 max-w-2xl">
             <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Как мы развивались')}</span>
             <h2 className="text-2xl font-black text-primary md:text-3xl">{t('История компании')}</h2>

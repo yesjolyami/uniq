@@ -27,7 +27,7 @@ export default function Contacts() {
   const { t } = useI18n();
 
   return (
-    <section id="контакты" className="bg-white py-10 sm:py-12 md:py-14">
+    <section id="контакты" className="overflow-hidden bg-[linear-gradient(145deg,#fffdf8_0%,#f6eee2_48%,#eef8f5_100%)] py-14 sm:py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-5 max-w-2xl">
           <div className="mb-3 flex items-center gap-3">
@@ -50,7 +50,13 @@ export default function Contacts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="group flex min-h-32 flex-col justify-between rounded-[1.15rem] border border-gray-200 bg-white p-4 transition-colors hover:bg-slate-50 sm:p-5"
+              className={`group flex min-h-36 flex-col justify-between rounded-[1.35rem] border p-4 shadow-[0_14px_38px_rgba(45,65,56,0.06)] transition-all hover:-translate-y-1 sm:p-5 ${
+                index === 0
+                  ? 'border-[#edc9bc] bg-[#fff6f1] text-[#d84b3e]'
+                  : index === 1
+                    ? 'border-[#b9ddd3] bg-[#f0f9f6] text-[#137f7b]'
+                    : 'border-[#ead49d] bg-[#fff9e8] text-[#a66c17]'
+              }`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
@@ -73,7 +79,7 @@ export default function Contacts() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-5 grid overflow-hidden rounded-[1.15rem] border border-gray-200 bg-slate-50 lg:grid-cols-[0.76fr_1.24fr]"
+          className="soft-lift mt-5 grid overflow-hidden rounded-[1.5rem] border border-[#d8cbb9] bg-white lg:grid-cols-[0.76fr_1.24fr]"
         >
           <div className="flex flex-col justify-between p-4 sm:p-5">
             <div>

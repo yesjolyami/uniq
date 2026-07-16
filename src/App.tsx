@@ -42,7 +42,7 @@ export default function App() {
         <Route
           path="*"
           element={
-            <div className="min-h-screen bg-[linear-gradient(180deg,#fffdf9_0%,#ffffff_18%,#ffffff_100%)] font-sans">
+            <div className="site-shell min-h-screen font-sans">
               <Header />
               <Routes>
                 <Route path="/" element={<HomePage />} />

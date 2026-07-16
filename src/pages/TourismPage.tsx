@@ -6,6 +6,7 @@ import { siteContentApi } from '../api/siteContent';
 import { useI18n } from '../i18n/I18nContext';
 import { getLocalizedText } from '../types/localized';
 import { defaultSiteContent, type SiteContent } from '../types/siteContent';
+import KyrgyzOrnament, { KyrgyzMedallion } from '../components/KyrgyzOrnament';
 
 export default function TourismPage() {
   const { t, locale } = useI18n();
@@ -30,10 +31,10 @@ export default function TourismPage() {
   ];
 
   return (
-    <main className="bg-[#fbfcfd] pt-24 sm:pt-28">
+    <main className="page-canvas pt-24 sm:pt-28">
       <section className="pb-6 sm:pb-8 md:pb-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-[1.4rem] border border-black/[0.05] bg-white shadow-sm">
+          <div className="soft-lift overflow-hidden rounded-[1.7rem] border border-[#e7c9b7] bg-[linear-gradient(135deg,#fff7ef_0%,#ffffff_54%,#edf8f5_100%)] text-brand">
             <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
               <div className="flex min-w-0 flex-col justify-center p-5 text-primary sm:p-7 lg:p-8">
                 <span className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand">
@@ -64,7 +65,11 @@ export default function TourismPage() {
               <div className="relative min-h-[260px] lg:min-h-[420px]">
                 <img src={tourism.intro.image} alt={text(tourism.intro.eyebrow)} className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#27272a]/30 via-transparent to-transparent" />
-
+                <KyrgyzMedallion
+                  className="absolute right-4 top-4 h-24 w-24 opacity-80 drop-shadow-[0_12px_24px_rgba(75,52,38,0.16)] sm:h-28 sm:w-28"
+                  tone="warm"
+                  variant="kochkor"
+                />
               </div>
             </div>
           </div>
@@ -73,6 +78,11 @@ export default function TourismPage() {
 
       <section className="pb-6 sm:pb-8 md:pb-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <KyrgyzOrnament
+            className="mb-5 h-16 w-full max-w-sm opacity-45"
+            tone="warm"
+            variant="vine"
+          />
           <div className="grid gap-4 lg:grid-cols-3">
             {tourism.benefits.map((item, index) => (
               <motion.article
@@ -81,7 +91,13 @@ export default function TourismPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ delay: index * 0.05 }}
-                className="rounded-[1.2rem] border border-black/[0.05] bg-white p-5"
+                className={`rounded-[1.35rem] border p-5 shadow-[0_12px_34px_rgba(45,65,56,0.05)] ${
+                  index === 0
+                    ? 'border-[#edc9bc] bg-[#fff6f1] text-[#d84b3e]'
+                    : index === 1
+                      ? 'border-[#b9ddd3] bg-[#f0f9f6] text-[#137f7b]'
+                      : 'border-[#ead49d] bg-[#fff9e8] text-[#a66c17]'
+                }`}
               >
                 <div className="mb-3 flex items-center gap-3">
                   {index === 0 && <Compass className="h-5 w-5 shrink-0 text-brand" />}
@@ -99,7 +115,7 @@ export default function TourismPage() {
       <section className="pb-6 sm:pb-8 md:pb-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="rounded-[1.15rem] border border-black/[0.05] bg-[#fff9f4] p-4 sm:p-5">
+            <div className="rounded-[1.4rem] border border-[#ead49d] bg-[#fff8e6] p-4 sm:p-5">
               <div className="mb-4 flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-brand" />
                 <h2 className="text-base font-black text-primary">{text(tourism.routeTitle)}</h2>

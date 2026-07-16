@@ -67,7 +67,7 @@ export default function Testimonials() {
   }, [maxIndex]);
 
   return (
-    <section id="отзывы" className="overflow-hidden border-b border-gray-100 bg-white py-28 md:py-36">
+    <section id="отзывы" className="overflow-hidden border-b border-gray-100 bg-[linear-gradient(180deg,#f3faf7_0%,#fffdf8_100%)] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
@@ -83,7 +83,7 @@ export default function Testimonials() {
             <button type="button" onClick={prevSlide} aria-label={t('Предыдущие отзывы')} className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-primary transition-colors hover:border-brand hover:text-brand">
               <ArrowLeft className="h-5 w-5" />
             </button>
-            <button type="button" onClick={nextSlide} aria-label={t('Следующие отзывы')} className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-brand">
+            <button type="button" onClick={nextSlide} aria-label={t('Следующие отзывы')} className="flex h-12 w-12 items-center justify-center rounded-full bg-cta text-white transition-colors hover:bg-brand">
               <ArrowRight className="h-5 w-5" />
             </button>
           </div>
@@ -104,8 +104,12 @@ export default function Testimonials() {
           >
             {testimonials.map((testimonial, index) => (
               <div key={testimonial.name} className="w-full shrink-0 px-3 md:w-1/2 lg:w-1/3">
-                <article className={`flex h-full min-h-[310px] flex-col justify-between rounded-[1.5rem] border p-7 ${
-                  index % 3 === 1 ? 'border-[#dfc4ad] bg-cream text-primary' : 'border-gray-200 bg-slate-50 text-primary'
+                <article className={`flex h-full min-h-[310px] flex-col justify-between rounded-[1.5rem] border p-7 shadow-[0_14px_38px_rgba(45,65,56,0.06)] ${
+                  index % 3 === 1
+                    ? 'border-[#e1c48b] bg-[#fff7df] text-primary'
+                    : index % 3 === 2
+                      ? 'border-[#b9ddd3] bg-[#edf8f4] text-primary'
+                      : 'border-[#edc9bc] bg-[#fff4ee] text-primary'
                 }`}>
                   <div>
                     <div className="mb-8 flex items-center justify-between">

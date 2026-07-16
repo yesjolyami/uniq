@@ -1,17 +1,22 @@
 import { Mail, MapPin, Phone, Instagram } from 'lucide-react';
 import { useI18n } from '../i18n/I18nContext';
+import KyrgyzOrnament from './KyrgyzOrnament';
 
 export default function Footer() {
   const { t } = useI18n();
 
   return (
-    <footer className="border-t border-gray-200 bg-white pb-8 pt-16 text-primary">
+    <footer className="relative overflow-hidden border-t border-[#eadfce] bg-[linear-gradient(135deg,#fff8ed_0%,#f2f8f4_52%,#fffdf8_100%)] pb-8 pt-20 text-primary">
+      <KyrgyzOrnament className="absolute inset-x-0 top-2 h-16 w-full opacity-25" variant="floral" />
+      <div className="absolute -bottom-24 -left-24 h-60 w-60 rounded-full bg-brand/[0.06]" />
+      <div className="absolute -right-20 top-20 h-48 w-48 rounded-full bg-cta/[0.06]" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
           
           <div className="lg:pr-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/70 font-black text-xl tracking-tighter shadow-sm">
+              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white bg-white/80 font-black text-xl tracking-tighter shadow-sm">
+                <span className="absolute inset-x-0 bottom-0 h-1.5 bg-[linear-gradient(90deg,#d84b3e_0_33%,#e6a23c_33%_66%,#137f7b_66%)]" />
                 <span className="text-[#f5963b]">U</span>
                 <span className="text-[#e62020]">K</span>
                 <span className="text-[#e62020]">G</span>

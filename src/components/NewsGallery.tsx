@@ -47,7 +47,7 @@ export default function NewsGallery() {
 
 
   return (
-    <section id="новости" className="border-y border-black/[0.05] bg-sand-light py-10 sm:py-12 md:py-14">
+    <section id="новости" className="overflow-hidden border-y border-black/[0.05] bg-[linear-gradient(135deg,#fff8ed_0%,#ffffff_48%,#eef8f5_100%)] py-14 sm:py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-5 grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div className="max-w-2xl">
@@ -100,7 +100,7 @@ export default function NewsGallery() {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="group h-full overflow-hidden rounded-[1.15rem] border border-black/[0.06] bg-white"
+                    className="group h-full overflow-hidden rounded-[1.4rem] border border-black/[0.06] bg-white shadow-[0_14px_40px_rgba(46,66,57,0.06)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,66,57,0.1)]"
                   >
                     <div className="h-32 overflow-hidden">
                       <img src={item.image} alt={text(item.title)} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />

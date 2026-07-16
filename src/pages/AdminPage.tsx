@@ -1019,15 +1019,16 @@ export default function AdminPage() {
                     <p className="mb-3 text-xs font-black uppercase tracking-[0.12em] text-brand">Тексты блока «В пакет входит»</p>
                     <div className="grid gap-4">
                       {siteContent.employment.supportIntro.map((item, index) => (
-                        <LocalizedField
-                          key={index}
-                          label={`Вводный текст ${index + 1}`}
-                          value={item}
-                          onChange={(value) => updatePageListItem('employment', 'supportIntro', index, value)}
-                          multiline
-                          rows={2}
-                          maxLength={220}
-                        />
+                        <div key={index}>
+                          <LocalizedField
+                            label={`Вводный текст ${index + 1}`}
+                            value={item}
+                            onChange={(value) => updatePageListItem('employment', 'supportIntro', index, value)}
+                            multiline
+                            rows={2}
+                            maxLength={220}
+                          />
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -1042,15 +1043,16 @@ export default function AdminPage() {
                     <p className="mb-3 text-xs font-black uppercase tracking-[0.12em] text-gray-500">Финальные тексты секции</p>
                     <div className="grid gap-4">
                       {siteContent.employment.supportOutro.map((item, index) => (
-                        <LocalizedField
-                          key={index}
-                          label={`Финальный текст ${index + 1}`}
-                          value={item}
-                          onChange={(value) => updatePageListItem('employment', 'supportOutro', index, value)}
-                          multiline
-                          rows={2}
-                          maxLength={220}
-                        />
+                        <div key={index}>
+                          <LocalizedField
+                            label={`Финальный текст ${index + 1}`}
+                            value={item}
+                            onChange={(value) => updatePageListItem('employment', 'supportOutro', index, value)}
+                            multiline
+                            rows={2}
+                            maxLength={220}
+                          />
+                        </div>
                       ))}
                     </div>
                   </div>
