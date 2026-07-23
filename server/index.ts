@@ -8,10 +8,12 @@ import { newsCategories, type NewsInput } from '../src/types/news';
 import { localeCodes, normalizeLocalizedText } from '../src/types/localized';
 import { createNews, deleteNews, getAllNews, getPublishedNews, updateNews } from './newsStore';
 import { getSiteContent, normalizeSiteContent, updateSiteContent } from './siteContentStore';
+import { createLead } from './leads';
 
 dotenv.config();
 
 const app = express();
+app.set('trust proxy', 1);
 const port = Number(process.env.PORT) || 3001;
 const isProduction = process.env.NODE_ENV === 'production';
 const adminPassword = process.env.ADMIN_PASSWORD || (isProduction ? '' : 'change-me');
@@ -48,6 +50,8 @@ app.use('/uploads', express.static(uploadsDirectory, {
   immutable: true,
   maxAge: '30d',
 }));
+
+app.post('/api/leads', createLead);
 
 function passwordsMatch(received: string, expected: string) {
   const receivedBuffer = Buffer.from(received);

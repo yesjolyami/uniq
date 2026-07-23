@@ -1,12 +1,16 @@
 import { motion } from 'motion/react';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AlertCircle, CheckCircle2, MessageCircle } from 'lucide-react';
 import { useI18n } from '../i18n/I18nContext';
+import { submitLead } from '../api/leads';
 
 export default function CTA() {
-  const [formData, setFormData] = useState({ name: '', phone: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', website: '' });
   const [errors, setErrors] = useState({ name: '', phone: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const submissionId = useRef('');
   const { t } = useI18n();
 
   const validate = () => {
@@ -31,20 +35,50 @@ export default function CTA() {
     return valid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
+    setSubmitError('');
+    if (!validate() || isSubmitting) return;
+
+    if (!submissionId.current) {
+      submissionId.current = globalThis.crypto?.randomUUID?.()
+        || `${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const utm = Object.fromEntries(
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+          .map((key) => [key, searchParams.get(key) || ''])
+          .filter(([, value]) => value),
+      );
+
+      await submitLead({
+        submissionId: submissionId.current,
+        name: formData.name,
+        phone: formData.phone,
+        website: formData.website,
+        pageUrl: window.location.href,
+        utm,
+      });
+
       setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({ name: '', phone: '' });
-      }, 5000);
+      setFormData({ name: '', phone: '', website: '' });
+      submissionId.current = '';
+    } catch (error) {
+      setSubmitError(error instanceof Error
+        ? error.message
+        : t('Не удалось отправить заявку. Попробуйте ещё раз.'));
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setSubmitError('');
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -87,17 +121,17 @@ export default function CTA() {
             className="relative mx-auto w-full max-w-md overflow-hidden rounded-[1.55rem] border border-[#b9ddd3] bg-white/90 p-5 text-[#137f7b] shadow-[0_22px_60px_rgba(35,72,60,0.12)] backdrop-blur-sm sm:p-9 lg:ml-auto"
           >
             {isSubmitted ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[280px] text-center">
-                <CheckCircle2 className="mb-4 h-16 w-16 text-brand" />
+              <div className="flex flex-col items-center justify-center h-full min-h-[280px] text-center" role="status" aria-live="polite" tabIndex={-1}>
+                <CheckCircle2 className="mb-4 h-16 w-16 text-brand" aria-hidden="true" />
                 <h3 className="mb-2 text-2xl font-bold text-primary">{t('Заявка отправлена!')}</h3>
                 <p className="text-gray-600">{t('Мы свяжемся с вами в ближайшее время.')}</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 <div className="mb-5">
                   <div className="mb-2 flex items-center gap-3">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                      <MessageCircle className="h-5 w-5" />
+                      <MessageCircle className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <div>
                       <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-brand">{t('Бесплатная консультация')}</span>
@@ -114,12 +148,16 @@ export default function CTA() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border bg-[#f7f5ef] px-4 py-3.5 ${errors.name ? 'border-red-500' : 'border-[#ded8cc]'} transition-colors focus:border-brand focus:outline-none`}
+                    autoComplete="name"
+                    required
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    className={`w-full rounded-xl border bg-[#f7f5ef] px-4 py-3.5 ${errors.name ? 'border-red-500' : 'border-[#ded8cc]'} transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20`}
                     placeholder={t('Иван Иванов')}
                   />
                   {errors.name && (
-                    <p className="mt-1.5 text-sm text-red-500 flex items-center gap-1">
-                      <AlertCircle className="w-4 h-4" /> {errors.name}
+                    <p id="name-error" className="mt-1.5 text-sm text-red-500 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" aria-hidden="true" /> {errors.name}
                     </p>
                   )}
                 </div>
@@ -132,12 +170,39 @@ export default function CTA() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full rounded-xl border bg-[#f7f5ef] px-4 py-3.5 ${errors.phone ? 'border-red-500' : 'border-[#ded8cc]'} transition-colors focus:border-brand focus:outline-none`}
+                    autoComplete="tel"
+                    inputMode="tel"
+                    required
+                    aria-invalid={Boolean(errors.phone)}
+                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                    className={`w-full rounded-xl border bg-[#f7f5ef] px-4 py-3.5 ${errors.phone ? 'border-red-500' : 'border-[#ded8cc]'} transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20`}
                     placeholder="+996 555 000 000"
                   />
                   {errors.phone && (
-                    <p className="mt-1.5 text-sm text-red-500 flex items-center gap-1">
-                      <AlertCircle className="w-4 h-4" /> {errors.phone}
+                    <p id="phone-error" className="mt-1.5 text-sm text-red-500 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" aria-hidden="true" /> {errors.phone}
+                    </p>
+                  )}
+                </div>
+
+                <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <div aria-live="assertive" aria-atomic="true">
+                  {submitError && (
+                    <p className="flex items-start gap-1.5 rounded-xl bg-red-50 px-3 py-2.5 text-sm text-red-700" role="alert">
+                      <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                      {submitError}
                     </p>
                   )}
                 </div>
@@ -145,9 +210,11 @@ export default function CTA() {
                 <div className="pt-2">
                   <button 
                     type="submit" 
-                    className="w-full rounded-xl bg-cta px-8 py-3.5 text-[14px] font-bold text-white shadow-md shadow-cta/20 transition-colors hover:bg-cta-hover active:scale-[0.99]"
+                    disabled={isSubmitting}
+                    aria-busy={isSubmitting}
+                    className="w-full rounded-xl bg-cta px-8 py-3.5 text-[14px] font-bold text-white shadow-md shadow-cta/20 transition-colors hover:bg-cta-hover focus:outline-none focus:ring-2 focus:ring-cta focus:ring-offset-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
                   >
-                    {t('Отправить')}
+                    {isSubmitting ? t('Отправляем…') : t('Отправить')}
                   </button>
                 </div>
                 <p className="text-xs text-gray-400 text-center mt-4">
