@@ -21,13 +21,17 @@ export default function Header() {
 
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
+    const section = document.getElementById(id.toLowerCase());
+
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
 
     if (location.pathname !== '/') {
       navigate(`/#${id.toLowerCase()}`);
       return;
     }
-
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleNavClick = (item: (typeof navLinks)[number]) => {
@@ -101,7 +105,7 @@ export default function Header() {
           </a>
           <button
             type="button"
-            onClick={() => scrollToSection('контакты')}
+            onClick={() => scrollToSection('cta')}
             className="inline-flex h-10 items-center rounded-full bg-cta px-5 text-[12px] font-bold text-white shadow-md shadow-cta/15 transition-colors hover:bg-cta-hover"
           >
             {t('Оставить заявку')}
@@ -160,7 +164,7 @@ export default function Header() {
               ))}
               <button
                 type="button"
-                onClick={() => scrollToSection('контакты')}
+                onClick={() => scrollToSection('cta')}
                 className="mt-2 rounded-2xl bg-cta px-5 py-4 text-center text-sm font-bold text-white transition-colors hover:bg-cta-hover"
               >
                 {t('Оставить заявку')}

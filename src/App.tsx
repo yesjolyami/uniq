@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import CTA from './components/CTA';
 import HomePage from './pages/HomePage';
 import DirectionPage from './pages/DirectionPage';
 import AdminPage from './pages/AdminPage';
@@ -53,6 +54,7 @@ export default function App() {
                 <Route path="/japan" element={<DirectionPage countryId="japan" />} />
                 <Route path="/germany" element={<DirectionPage countryId="germany" />} />
               </Routes>
+              <CTA />
               <Footer />
               <BackToTop />
             </div>

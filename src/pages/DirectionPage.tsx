@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Briefcase, Plane, GraduationCap } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLocation } from 'react-router-dom';
-import CTA from '../components/CTA';
 import KyrgyzOrnament, { KyrgyzMedallion } from '../components/KyrgyzOrnament';
 import { useI18n } from '../i18n/I18nContext';
 
@@ -163,8 +162,6 @@ export default function DirectionPage({ countryId }: { countryId: 'japan' | 'ger
           </div>
         </div>
       </section>
-
-      <CTA />
     </main>
   );
 }
