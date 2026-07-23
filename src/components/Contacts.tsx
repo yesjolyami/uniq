@@ -1,6 +1,7 @@
 import { Clock3, MapPin, MessageCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useI18n } from '../i18n/I18nContext';
+import CTA from './CTA';
 
 const contactMethods = [
   {
@@ -75,51 +76,55 @@ export default function Contacts() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="soft-lift mt-5 grid overflow-hidden rounded-[1.5rem] border border-[#d8cbb9] bg-white lg:grid-cols-[0.76fr_1.24fr]"
-        >
-          <div className="flex flex-col justify-between p-4 sm:p-5">
-            <div>
-              <div className="mb-3 flex items-center gap-3">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
-                  <MapPin className="h-5 w-5" />
-                </span>
-                <h3 className="text-xl font-black text-primary">{t('Офис в Бишкеке')}</h3>
+        <div className="mt-5 grid items-stretch gap-5 lg:grid-cols-[1.35fr_0.65fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="soft-lift grid overflow-hidden rounded-[1.5rem] border border-[#d8cbb9] bg-white md:grid-cols-[0.76fr_1.24fr]"
+          >
+            <div className="flex flex-col justify-between p-4 sm:p-5">
+              <div>
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-brand shadow-sm">
+                    <MapPin className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-xl font-black text-primary">{t('Офис в Бишкеке')}</h3>
+                </div>
+                <p className="max-w-sm text-sm leading-5 text-gray-600">{t('Личную консультацию лучше согласовать заранее.')}</p>
               </div>
-              <p className="max-w-sm text-sm leading-5 text-gray-600">{t('Личную консультацию лучше согласовать заранее.')}</p>
+              <div className="mt-5 space-y-3">
+                <div className="flex items-start gap-3 text-sm font-bold text-primary">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  {t('г. Бишкек, ул. Московская 164, 720017')}
+                </div>
+                <div className="flex items-start gap-3 text-sm text-gray-600">
+                  <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  <span>@unique_travel_kg / @unique_job_kg</span>
+                </div>
+                <div className="flex items-start gap-3 text-sm text-gray-600">
+                  <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  {t('Пн–Пт, 10:00–18:00')}
+                </div>
+              </div>
             </div>
-            <div className="mt-5 space-y-3">
-              <div className="flex items-start gap-3 text-sm font-bold text-primary">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                {t('г. Бишкек, ул. Московская 164, 720017')}
-              </div>
-              <div className="flex items-start gap-3 text-sm text-gray-600">
-                <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                <span>@unique_travel_kg / @unique_job_kg</span>
-              </div>
-              <div className="flex items-start gap-3 text-sm text-gray-600">
-                <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                {t('Пн–Пт, 10:00–18:00')}
-              </div>
-            </div>
-          </div>
 
-          <div className="min-h-[200px] overflow-hidden bg-gray-200 sm:min-h-[220px]">
-            <iframe
-              src="https://maps.google.com/maps?q=Moskovskaya%20164,%20Bishkek,%20Kyrgyzstan&t=&z=16&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={t('Расположение офиса Unique Asia')}
-            />
-          </div>
-        </motion.div>
+            <div className="min-h-[240px] overflow-hidden bg-gray-200">
+              <iframe
+                src="https://maps.google.com/maps?q=Moskovskaya%20164,%20Bishkek,%20Kyrgyzstan&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={t('Расположение офиса Unique Asia')}
+              />
+            </div>
+          </motion.div>
+
+          <CTA />
+        </div>
       </div>
     </section>
   );

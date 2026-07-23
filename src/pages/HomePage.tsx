@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Contacts from '../components/Contacts';
 import Hero, { HeroDirectionButtons } from '../components/Hero';
 import HomeOverview from '../components/HomeOverview';
 import NewsGallery from '../components/NewsGallery';
@@ -30,7 +29,6 @@ export default function HomePage() {
       <HomeOverview />
       <NewsGallery />
       <Testimonials />
-      <Contacts />
     </main>
   );
 }

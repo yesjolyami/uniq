@@ -85,41 +85,13 @@ export default function CTA() {
   };
 
   return (
-    <section id="cta" className="relative overflow-hidden bg-[linear-gradient(135deg,#fff7ec_0%,#edf8f4_100%)] py-20 sm:py-24 md:py-32 lg:py-36">
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="cta.png" 
-          alt="Freedom Mountains" 
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#fffaf2_0%,rgba(255,250,242,.96)_72%,rgba(238,248,244,.58)_100%)] md:bg-[linear-gradient(90deg,#fffaf2_0%,rgba(255,250,242,.94)_48%,rgba(238,248,244,.4)_100%)]"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_0.72fr]">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-xl"
-          >
-            <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.2em] text-brand">{t('Заявка без продажи в лоб')}</span>
-            <h2 className="mb-5 text-[clamp(2rem,6vw,2.5rem)] font-black leading-tight text-primary md:text-4xl">
-              {t('Сначала уточняем задачу, потом предлагаем маршрут действий')}
-            </h2>
-            <p className="max-w-lg text-sm font-medium leading-6 text-gray-600">
-              {t('Менеджер спросит страну, цель поездки, сроки и текущие документы. После этого вы получите ближайший понятный шаг, а не общий рекламный ответ.')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mx-auto w-full max-w-md overflow-hidden rounded-[1.55rem] border border-[#b9ddd3] bg-white/90 p-5 text-[#137f7b] shadow-[0_22px_60px_rgba(35,72,60,0.12)] backdrop-blur-sm sm:p-9 lg:ml-auto"
-          >
+    <motion.div
+      id="cta"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="relative h-full overflow-hidden rounded-[1.5rem] border border-[#b9ddd3] bg-[#f0f9f6] p-5 text-[#137f7b] shadow-[0_14px_38px_rgba(45,65,56,0.06)] sm:p-6"
+    >
             {isSubmitted ? (
               <div className="flex flex-col items-center justify-center h-full min-h-[280px] text-center" role="status" aria-live="polite" tabIndex={-1}>
                 <CheckCircle2 className="mb-4 h-16 w-16 text-brand" aria-hidden="true" />
@@ -222,9 +194,6 @@ export default function CTA() {
                 </p>
               </form>
             )}
-          </motion.div>
-        </div>
-      </div>
-    </section>
+    </motion.div>
   );
 }
