@@ -127,12 +127,12 @@ export default function Testimonials() {
                   <div className="mt-8 flex items-center gap-4 border-t border-black/[0.07] pt-5">
                     <img
                       src={testimonial.image}
-                      alt={`${t('Фото клиента')}: ${testimonial.name}`}
+                      alt={`${t('Фото клиента')}: ${t(testimonial.name)}`}
                       loading="lazy"
                       className="h-12 w-12 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
                     />
                     <div>
-                      <cite className="not-italic text-base font-black">{testimonial.name}</cite>
+                      <cite className="not-italic text-base font-black">{t(testimonial.name)}</cite>
                       <span className="mt-1 block text-[11px] font-bold uppercase tracking-[0.14em] text-brand">
                         {t(testimonial.category)}
                       </span>
