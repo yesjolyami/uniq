@@ -16,7 +16,9 @@ export default function NewsGallery() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const { t, locale } = useI18n();
-  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => (
+    typeof value === 'string' ? t(value) : value[locale] || t(value.ru)
+  );
 
   useEffect(() => {
     let isMounted = true;
@@ -26,8 +28,8 @@ export default function NewsGallery() {
       .then((items) => {
         if (isMounted) setNewsItems(items);
       })
-      .catch((requestError: Error) => {
-        if (isMounted) setError(requestError.message);
+      .catch(() => {
+        if (isMounted) setError(t('Новости временно недоступны. Попробуйте обновить страницу позже.'));
       })
       .finally(() => {
         if (isMounted) setIsLoading(false);
@@ -36,7 +38,7 @@ export default function NewsGallery() {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [t]);
 
   const filteredNews = useMemo(
     () => newsItems
@@ -77,18 +79,18 @@ export default function NewsGallery() {
 
         <div>
           {isLoading ? (
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label="Загрузка новостей">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label={t('Загрузка новостей')}>
               {[0, 1, 2].map((item) => (
                 <div key={item} className="h-[210px] animate-pulse rounded-[1.5rem] bg-gray-100" />
               ))}
             </div>
           ) : error ? (
             <div className="rounded-2xl border border-red-100 bg-red-50 px-5 py-4 text-sm font-semibold text-red-700">
-              Новости временно недоступны. Попробуйте обновить страницу позже.
+              {error}
             </div>
           ) : filteredNews.length === 0 ? (
             <div className="rounded-2xl border border-black/[0.06] bg-white px-5 py-12 text-center text-sm font-semibold text-gray-500">
-              В этой категории пока нет опубликованных новостей.
+              {t('В этой категории пока нет опубликованных новостей.')}
             </div>
           ) : (
             <AnimatePresence mode="popLayout">

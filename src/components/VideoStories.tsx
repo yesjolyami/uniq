@@ -41,7 +41,9 @@ export default function VideoStories() {
   const [selectedVideo, setSelectedVideo] = useState<VideoSlot | null>(null);
 
   const videos = content.videos.filter((video) => video.enabled);
-  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => (
+    typeof value === 'string' ? t(value) : value[locale] || t(value.ru)
+  );
 
   useEffect(() => {
     siteContentApi.getPublic().then(setContent).catch(() => undefined);

@@ -37,7 +37,7 @@ export const tourPackages: TourPackage[] = [
     duration: '3 дня / 2 ночи',
     dates: '14–16 и 28–30 июня',
     price: 'от 15 500 сом',
-    image: '/hero.png',
+    image: '/kyrgyzstan-mountains-hero.png',
     tags: ['Юрты', 'Питание', 'Гид'],
   },
   {
@@ -46,7 +46,7 @@ export const tourPackages: TourPackage[] = [
     duration: '5 дней / 4 ночи',
     dates: 'По запросу',
     price: 'от 29 900 сом',
-    image: '/cta.png',
+    image: '/kyrgyzstan-song-kul.png',
     tags: ['Авиаперелёт', 'Отель', 'Маршрут'],
   },
 ];

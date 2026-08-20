@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { extendedTranslations } from './extendedTranslations';
+import { extendedTranslations, getSupplementalTranslation } from './extendedTranslations';
 import { type Locale } from '../types/localized';
 
 type Language = {
@@ -10,7 +10,7 @@ type Language = {
 
 export const languages: Language[] = [
   { code: 'ru', short: 'RU', name: 'Русский язык' },
-  { code: 'ky', short: 'KY', name: 'Кыргызский язык' },
+  { code: 'ky', short: 'KY', name: 'Кыргызча' },
   { code: 'en', short: 'EN', name: 'English' },
   { code: 'zh', short: '中文', name: '中文' },
   { code: 'ja', short: '日本', name: '日本語' },
@@ -330,7 +330,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     locale,
     language: languages.find((item) => item.code === locale) ?? languages[0],
     setLocale,
-    t: (text) => (locale === 'ru' ? text : extendedTranslations[locale][text] ?? translations[locale][text] ?? text),
+    t: (text) => (locale === 'ru'
+      ? text
+      : extendedTranslations[locale][text]
+        ?? translations[locale][text]
+        ?? getSupplementalTranslation(locale, text)
+        ?? text),
   }), [locale]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;

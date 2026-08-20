@@ -11,7 +11,9 @@ import KyrgyzOrnament, { KyrgyzMedallion } from '../components/KyrgyzOrnament';
 export default function TourismPage() {
   const { t, locale } = useI18n();
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
-  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => (
+    typeof value === 'string' ? t(value) : value[locale] || t(value.ru)
+  );
 
   useEffect(() => {
     siteContentApi.getPublic().then(setContent).catch(() => undefined);

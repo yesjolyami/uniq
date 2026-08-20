@@ -38,14 +38,13 @@ export default function Hero() {
     <section className="relative flex min-h-[66svh] items-end overflow-hidden bg-[#f7f1e7] pb-14 pt-20 md:min-h-[64vh] md:items-center md:pb-16 md:pt-24">
       <div className="absolute inset-0">
         <img
-          src="/hero.png"
-          alt={t('Путешественники на фоне японского храма')}
+          src="/kyrgyzstan-mountains-hero.png"
+          alt={t('Горный маршрут в Кыргызстане')}
           fetchPriority="high"
           className="h-full w-full object-cover object-center brightness-110 contrast-105 saturate-110 md:object-right"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,253,248,.86)_0%,rgba(255,255,255,.48)_44%,rgba(255,250,241,.92)_100%)] md:bg-[linear-gradient(90deg,rgba(255,253,248,.97)_0%,rgba(255,249,238,.8)_43%,rgba(255,255,255,.18)_74%,rgba(255,255,255,.04)_100%)]" />
       </div>
-      <div className="absolute -left-20 top-28 h-48 w-48 rounded-full border-[32px] border-brand/[0.07] sm:left-[-4rem] sm:h-64 sm:w-64" />
       <KyrgyzMedallion
         className="absolute bottom-10 right-[5%] hidden h-36 w-36 rotate-6 opacity-60 drop-shadow-[0_16px_28px_rgba(78,61,42,0.12)] md:block lg:h-44 lg:w-44"
         tone="warm"

@@ -178,7 +178,7 @@ export const defaultSiteContent: SiteContent = {
       },
     ],
     cityImage: '/tourism_germany.jpg',
-    natureImage: '/hero.png',
+    natureImage: '/kyrgyzstan-mountains-hero.png',
     packageTitle: createLocalizedText('Поездка собирается как цельный маршрут, а не набор случайных бронирований'),
     packageLead: createLocalizedText('Мы соединяем логистику, проживание, впечатления и сопровождение в одну внятную программу, которая выглядит аккуратно и ощущается спокойно ещё до выезда.'),
     packageItems: [
@@ -288,7 +288,7 @@ export const defaultSiteContent: SiteContent = {
       createLocalizedText('Английский язык'),
       createLocalizedText('Японский язык'),
       createLocalizedText('Немецкий язык'),
-      createLocalizedText('Кыргызский язык'),
+      createLocalizedText('Кыргыз тили'),
     ],
     note: createLocalizedText('Подготовка гидов, менеджеров по туризму, а также специалистов по бронированию и продаже авиабилетов.'),
   },

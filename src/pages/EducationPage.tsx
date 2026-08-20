@@ -11,14 +11,16 @@ import KyrgyzOrnament, { KyrgyzMedallion } from '../components/KyrgyzOrnament';
 export default function EducationPage() {
   const { t, locale } = useI18n();
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
-  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => (
+    typeof value === 'string' ? t(value) : value[locale] || t(value.ru)
+  );
 
   useEffect(() => {
     siteContentApi.getPublic().then(setContent).catch(() => undefined);
   }, []);
 
   const education = content.education;
-  const languageBadges = [t('Английский'), t('Немецкий'), t('Японский'), t('Кыргызский')];
+  const languageBadges = [t('Английский'), t('Немецкий'), t('Японский'), t('Кыргыз тили')];
 
   return (
     <main className="page-canvas pt-24 sm:pt-28">

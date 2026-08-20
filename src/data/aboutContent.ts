@@ -220,7 +220,7 @@ export const companyGalleryImages: CompanyGalleryImage[] = [
     orientation: 'portrait',
   },
   {
-    src: '/hero.png',
+    src: '/kyrgyzstan-mountains-hero.png',
     alt: 'Визуальный образ международных возможностей Unique Asia',
     title: 'Масштаб направлений',
     description: 'Работаем на стыке туризма, обучения и международных поездок.',
@@ -228,7 +228,7 @@ export const companyGalleryImages: CompanyGalleryImage[] = [
     orientation: 'landscape',
   },
   {
-    src: '/cta.png',
+    src: '/kyrgyzstan-song-kul.png',
     alt: 'Сопровождение и консультация клиентов Unique Asia',
     title: 'Сервис с сопровождением',
     description: 'Остаемся на связи до старта программы, в процессе и после возвращения.',

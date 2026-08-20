@@ -66,10 +66,8 @@ export default function CTA() {
       setIsSubmitted(true);
       setFormData({ name: '', phone: '', website: '' });
       submissionId.current = '';
-    } catch (error) {
-      setSubmitError(error instanceof Error
-        ? error.message
-        : t('Не удалось отправить заявку. Попробуйте ещё раз.'));
+    } catch {
+      setSubmitError(t('Не удалось отправить заявку. Попробуйте ещё раз.'));
     } finally {
       setIsSubmitting(false);
     }

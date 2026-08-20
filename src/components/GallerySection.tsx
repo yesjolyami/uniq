@@ -10,7 +10,9 @@ export default function GallerySection() {
   const [content, setContent] = useState<SiteContent>(defaultSiteContent);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const { t, locale } = useI18n();
-  const text = (value: Parameters<typeof getLocalizedText>[0]) => getLocalizedText(value, locale);
+  const text = (value: Parameters<typeof getLocalizedText>[0]) => (
+    typeof value === 'string' ? t(value) : value[locale] || t(value.ru)
+  );
 
   useEffect(() => {
     siteContentApi.getPublic().then(setContent).catch(() => undefined);
