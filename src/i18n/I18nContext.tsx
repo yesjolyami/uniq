@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { extendedTranslations, getSupplementalTranslation } from './extendedTranslations';
+import { getInitialTranslation } from './initialTranslations';
 import { type Locale } from '../types/localized';
 
 type Language = {
@@ -335,6 +336,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       : extendedTranslations[locale][text]
         ?? translations[locale][text]
         ?? getSupplementalTranslation(locale, text)
+        ?? getInitialTranslation(locale, text)
         ?? text),
   }), [locale]);
 

@@ -26,13 +26,13 @@ export default function LanguageSwitcher({ mobile = false }: { mobile?: boolean 
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label={t('Выбрать язык')}
-        className={`flex h-10 items-center justify-center gap-2 rounded-full border border-gray-200 bg-white text-xs font-bold text-primary transition-colors hover:border-brand/30 ${
+        className={`flex h-10 items-center justify-center gap-2 rounded-full border border-gray-200 bg-white text-xs font-bold leading-none text-primary transition-colors hover:border-brand/30 ${
           mobile ? 'w-full px-4' : 'w-[100px] px-3'
         }`}
       >
         <LanguageFlag locale={language.code} />
-        <span className="w-7 text-center">{language.short}</span>
-        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="inline-flex h-4 w-7 items-center justify-center text-center leading-none">{language.short}</span>
+        <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       <AnimatePresence>

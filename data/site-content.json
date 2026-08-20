@@ -1,37 +1,114 @@
 {
   "hero": {
-    "eyebrow": "ОсОО «Юник Азия» / Бишкек",
-    "title": "Путешествие начинается с «Unique Asia»",
-    "subtitle": "Организуем поездки, трудоустройство и обучение за рубежом с сопровождением на каждом этапе.",
-    "primaryCta": "Оставить заявку",
-    "secondaryCta": "Выбрать услугу",
+    "eyebrow": {
+      "ru": "ОсОО «Юник Азия» / Бишкек",
+      "ky": "«Уникалдуу Азия» ЖЧКсы / Бишкек",
+      "en": "Unique Asia LLC / Bishkek",
+      "zh": "Unique Asia LLC / 比什凯克",
+      "ja": "Unique Asia LLC / ビシュケク",
+      "de": "Unique Asia LLC / Bischkek"
+    },
+    "title": {
+      "ru": "Путешествие начинается с «Unique Asia»",
+      "ky": "Саякат Уникалдуу Азиядан башталат",
+      "en": "The journey begins with Unique Asia",
+      "zh": "旅程从Unique Asia开始",
+      "ja": "旅はユニークなアジアから始まります",
+      "de": "Die Reise beginnt mit Unique Asia"
+    },
+    "subtitle": {
+      "ru": "Организуем поездки, трудоустройство и обучение за рубежом с сопровождением на каждом этапе.",
+      "ky": "Ар бир этапта колдоо көрсөтүү менен чет өлкөгө саякаттарды, ишке орноштурууну жана окутууну уюштурабыз.",
+      "en": "We organize trips, employment and training abroad with support at every stage.",
+      "zh": "我们组织出国旅行、就业和培训，并在每个阶段提供支持。",
+      "ja": "海外旅行、就職、研修を企画し、あらゆる段階でサポートします。",
+      "de": "Wir organisieren Reisen, Einsätze und Schulungen im Ausland und unterstützen Sie in jeder Phase."
+    },
+    "primaryCta": {
+      "ru": "Оставить заявку",
+      "ky": "Өтүнүч калтырыңыз",
+      "en": "Leave a request",
+      "zh": "留下请求",
+      "ja": "リクエストを残す",
+      "de": "Hinterlassen Sie eine Anfrage"
+    },
+    "secondaryCta": {
+      "ru": "Выбрать услугу",
+      "ky": "Кызматты тандаңыз",
+      "en": "Select a service",
+      "zh": "选择服务",
+      "ja": "サービスを選択してください",
+      "de": "Wählen Sie einen Dienst aus"
+    },
     "whatsappLabel": "WhatsApp",
     "facts": [
       {
         "value": "2019",
-        "label": "год начала работы"
+        "label": {
+          "ru": "год начала работы",
+          "ky": "иш башталган жылы",
+          "en": "year of start of work",
+          "zh": "开始工作年份",
+          "ja": "仕事を始めた年",
+          "de": "Jahr des Arbeitsbeginns"
+        }
       },
       {
         "value": "6",
-        "label": "стран для трудоустройства"
+        "label": {
+          "ru": "стран для трудоустройства",
+          "ky": "иш менен камсыз кылуу үчүн өлкөлөр",
+          "en": "countries for employment",
+          "zh": "就业国家",
+          "ja": "雇用のための国",
+          "de": "Länder für Beschäftigung"
+        }
       },
       {
         "value": "3",
-        "label": "основных направления"
+        "label": {
+          "ru": "основных направления",
+          "ky": "негизги багыттары",
+          "en": "main directions",
+          "zh": "主要方向",
+          "ja": "主な方向性",
+          "de": "Hauptrichtungen"
+        }
       }
     ]
   },
   "videos": [
     {
-      "title": "О компании за 60 секунд",
+      "title": {
+        "ru": "О компании за 60 секунд",
+        "ky": "60 секунданын ичинде компания жөнүндө",
+        "en": "About the company in 60 seconds",
+        "zh": "60秒了解公司",
+        "ja": "60秒でわかる会社概要",
+        "de": "Über das Unternehmen in 60 Sekunden"
+      },
       "label": "Unique Asia",
       "image": "/work.jpg",
       "videoUrl": "",
       "enabled": true
     },
     {
-      "title": "Как проходит сопровождение",
-      "label": "Туризм / работа / обучение",
+      "title": {
+        "ru": "Как проходит сопровождение",
+        "ky": "Эскорт кантип жүргүзүлөт?",
+        "en": "How is the escort carried out?",
+        "zh": "护送是如何进行的？",
+        "ja": "エスコートはどのように行われるのですか？",
+        "de": "Wie erfolgt die Begleitung?"
+      },
+      "label": {
+        "ru": "Туризм / работа / обучение",
+        "ky": "Туризм / жумуш / окуу",
+        "en": "Tourism / work / study",
+        "zh": "旅游/工作/学习",
+        "ja": "観光・仕事・勉強",
+        "de": "Tourismus / Arbeit / Studium"
+      },
       "image": "/tourism.jpg",
       "videoUrl": "",
       "enabled": true
@@ -40,163 +117,716 @@
   "gallery": [
     {
       "src": "/tourism.jpg",
-      "alt": "Путешествие по горным маршрутам Кыргызстана"
+      "alt": {
+        "ru": "Путешествие по горным маршрутам Кыргызстана",
+        "ky": "Кыргызстандын тоо маршруттары боюнча саякаттоо",
+        "en": "Traveling along the mountain routes of Kyrgyzstan",
+        "zh": "沿着吉尔吉斯斯坦的山区路线旅行",
+        "ja": "キルギスの山岳ルートを旅する",
+        "de": "Reisen entlang der Bergrouten Kirgisistans"
+      }
     },
     {
       "src": "/learn.jpg",
-      "alt": "Участники образовательной программы"
+      "alt": {
+        "ru": "Участники образовательной программы",
+        "ky": "Билим берүү программасынын катышуучулары",
+        "en": "Participants of the educational program",
+        "zh": "教育计划的参与者",
+        "ja": "教育プログラムの参加者",
+        "de": "Teilnehmer des Bildungsprogramms"
+      }
     },
     {
       "src": "/tourism_germany.jpg",
-      "alt": "Городской тур по Германии"
+      "alt": {
+        "ru": "Городской тур по Германии",
+        "ky": "Германия шаарын кыдыруу",
+        "en": "City tour of Germany",
+        "zh": "德国城市游览",
+        "ja": "ドイツ市内観光",
+        "de": "Stadtrundfahrt durch Deutschland"
+      }
     },
     {
       "src": "/work_germany.jpg",
-      "alt": "Групповая поездка с Unique Asia"
+      "alt": {
+        "ru": "Групповая поездка с Unique Asia",
+        "ky": "Уникалдуу Азия менен топтук саякат",
+        "en": "Group trip with Unique Asia",
+        "zh": "与Unique Asia一起团体旅行",
+        "ja": "ユニークアジアのグループ旅行",
+        "de": "Gruppenreise mit Unique Asia"
+      }
     },
     {
       "src": "/learn_germany.jpg",
-      "alt": "Языковая программа за рубежом"
+      "alt": {
+        "ru": "Языковая программа за рубежом",
+        "ky": "Чет өлкөдө тил программасы",
+        "en": "Language program abroad",
+        "zh": "国外语言项目",
+        "ja": "海外語学プログラム",
+        "de": "Sprachprogramm im Ausland"
+      }
     },
     {
       "src": "/work.jpg",
-      "alt": "Сопровождение участников программы"
+      "alt": {
+        "ru": "Сопровождение участников программы",
+        "ky": "Программанын катышуучуларынын коштоосу",
+        "en": "Accompaniment of program participants",
+        "zh": "节目参与者的陪同",
+        "ja": "プログラム参加者の同行",
+        "de": "Begleitung der Programmteilnehmer"
+      }
     }
   ],
   "tourism": {
     "intro": {
-      "eyebrow": "Туризм",
-      "title": "Туризм как вдохновение и искусство планирования",
-      "description": "Каждая поездка — это новая история, новый ракурс и новый взгляд на себя. Мы подбираем маршруты, которые заставляют сердце биться чаще и дарят воспоминания на всю жизнь. Мы превращаем хаос маршрутов, виз и билетов в изящную симфонию. Каждая деталь продумана, каждый этап находится под контролем. Вам остаётся только наслаждаться путешествием.",
+      "eyebrow": {
+        "ru": "Туризм",
+        "ky": "Туризм",
+        "en": "Tourism",
+        "zh": "旅游",
+        "ja": "観光",
+        "de": "Tourismus"
+      },
+      "title": {
+        "ru": "Туризм как вдохновение и искусство планирования",
+        "ky": "Туризм илхам жана пландаштыруу искусствосу катары",
+        "en": "Tourism as inspiration and the art of planning",
+        "zh": "旅游作为灵感和规划的艺术",
+        "ja": "インスピレーションとしての観光と計画の芸術",
+        "de": "Tourismus als Inspiration und Planungskunst"
+      },
+      "description": {
+        "ru": "Каждая поездка — это новая история, новый ракурс и новый взгляд на себя. Мы подбираем маршруты, которые заставляют сердце биться чаще и дарят воспоминания на всю жизнь. Мы превращаем хаос маршрутов, виз и билетов в изящную симфонию. Каждая деталь продумана, каждый этап находится под контролем. Вам остаётся только наслаждаться путешествием.",
+        "ky": "Ар бир сапар - бул жаңы окуя, жаңы көз караш жана өзүңө жаңы көз караш. Жүрөгүңүздүн согушун тездеткен жана өмүр бою сакталып кала турган эстеликтерди тартуулаган жолдорду тандайбыз. Маршруттардын, визалардын жана билеттердин башаламандыгын кооз симфонияга айландырабыз. Ар бир майда-чүйдөсүнө чейин ойлонулган, ар бир этап көзөмөлгө алынган. Болгону саякаттан ырахат алуу керек.",
+        "en": "Each trip is a new story, a new perspective and a new look at yourself. We select routes that make your heart beat faster and give you memories that will last a lifetime. We turn the chaos of routes, visas and tickets into an elegant symphony. Every detail is thought out, every stage is under control. All you have to do is enjoy the journey.",
+        "zh": "每一次旅行都是一个新的故事、一个新的视角和一个新的自我审视。我们选择的路线能让您心跳加快，并给您留下终生难忘的回忆。我们将混乱的路线、签证和机票变成一首优雅的交响乐。每个细节都经过深思熟虑，每个阶段都在掌控之中。您所要做的就是享受旅程。",
+        "ja": "それぞれの旅は新しい物語、新しい視点、そして自分自身への新しい見方です。心臓が高鳴る、一生残る思い出を与えてくれるルートを選択します。ルート、ビザ、チケットの混乱をエレガントな交響曲に変えます。あらゆる細部が考え抜かれ、あらゆる段階が管理されています。あなたがしなければならないのは、旅を楽しむことだけです。",
+        "de": "Jede Reise ist eine neue Geschichte, eine neue Perspektive und ein neuer Blick auf sich selbst. Wir wählen Routen aus, die Ihr Herz höher schlagen lassen und Ihnen unvergessliche Erinnerungen bescheren. Wir verwandeln das Chaos aus Routen, Visa und Tickets in eine elegante Symphonie. Jedes Detail ist durchdacht, jeder Schritt ist unter Kontrolle. Alles was Sie tun müssen, ist die Reise zu genießen."
+      },
       "image": "/tourism.jpg"
     },
     "highlights": [
-      "Маршрут, авиабилеты, отели и визы",
-      "Поездки по Кыргызстану и за рубеж",
-      "Опытные гиды, переводчики и сопровождающие"
+      {
+        "ru": "Маршрут, авиабилеты, отели и визы",
+        "ky": "Маршрут, авиабилеттер, мейманканалар жана визалар",
+        "en": "Route, air tickets, hotels and visas",
+        "zh": "路线、机票、酒店和签证",
+        "ja": "ルート、航空券、ホテル、ビザ",
+        "de": "Route, Flugtickets, Hotels und Visa"
+      },
+      {
+        "ru": "Поездки по Кыргызстану и за рубеж",
+        "ky": "Кыргызстанда жана чет өлкөлөргө саякат",
+        "en": "Trips in Kyrgyzstan and abroad",
+        "zh": "吉尔吉斯斯坦及国外旅行",
+        "ja": "キルギス国内および海外旅行",
+        "de": "Reisen in Kirgisistan und im Ausland"
+      },
+      {
+        "ru": "Опытные гиды, переводчики и сопровождающие",
+        "ky": "Тажрыйбалуу гиддер, котормочулар жана эскорттор",
+        "en": "Experienced guides, translators and escorts",
+        "zh": "经验丰富的导游、翻译和陪同人员",
+        "ja": "経験豊富なガイド、通訳、エスコート",
+        "de": "Erfahrene Guides, Übersetzer und Begleitpersonen"
+      }
     ],
     "benefits": [
       {
-        "title": "Туры по всему миру",
-        "text": "Туры по всему миру — от идеи до собранного чемодана. Вы называете страну, а мы формируем полный пакет путешествия: перелёт, проживание, трансферы, страховку и экскурсии."
+        "title": {
+          "ru": "Туры по всему миру",
+          "ky": "Дүйнө жүзү боюнча турлар",
+          "en": "Tours around the world",
+          "zh": "世界各地旅游",
+          "ja": "世界中のツアー",
+          "de": "Touren rund um die Welt"
+        },
+        "text": {
+          "ru": "Туры по всему миру — от идеи до собранного чемодана. Вы называете страну, а мы формируем полный пакет путешествия: перелёт, проживание, трансферы, страховку и экскурсии.",
+          "ky": "Дүйнө жүзү боюнча турлар - идеядан пакеттелген чемоданга чейин. Сиз өлкөнү атайсыз, биз толук туристтик пакетти түзөбүз: каттамдар, жатакана, трансферлер, камсыздандыруу жана экскурсиялар.",
+          "en": "Tours around the world - from idea to packed suitcase. You name the country, and we create a complete travel package: flights, accommodation, transfers, insurance and excursions.",
+          "zh": "环游世界——从想法到收拾行李。您指定国家/地区，我们就会为您创建完整的旅行套餐：航班、住宿、接送、保险和短途旅行。",
+          "ja": "アイデアからスーツケースに詰めるまで、世界中を旅します。国の名前を指定していただければ、航空券、宿泊施設、送迎、保険、小旅行などの完全な旅行パッケージを作成します。",
+          "de": "Touren rund um die Welt – von der Idee bis zum gepackten Koffer. Sie nennen das Land und wir erstellen ein komplettes Reisepaket: Flüge, Unterkunft, Transfers, Versicherungen und Ausflüge."
+        }
       },
       {
-        "title": "После консультации",
-        "text": "После консультации у вас будет чёткое понимание будущей поездки: куда лучше поехать, когда бронировать, сколько потребуется средств и какие документы необходимо подготовить. "
+        "title": {
+          "ru": "После консультации",
+          "ky": "Консультациядан кийин",
+          "en": "After consultation",
+          "zh": "咨询后",
+          "ja": "相談の上",
+          "de": "Nach Rücksprache"
+        },
+        "text": {
+          "ru": "После консультации у вас будет чёткое понимание будущей поездки: куда лучше поехать, когда бронировать, сколько потребуется средств и какие документы необходимо подготовить. ",
+          "ky": "Консультациядан кийин келечектеги саякатыңыз тууралуу так түшүнүккө ээ болосуз: кайда барууга эң жакшы жер, качан заказ кылуу керек, канча акча талап кылынат жана кандай документтерди даярдоо керек.",
+          "en": "After the consultation, you will have a clear understanding of your future trip: where is the best place to go, when to book, how much money will be required and what documents need to be prepared.",
+          "zh": "咨询后，您将对您未来的旅行有一个清晰的了解：去哪里最好，什么时候预订，需要多少钱，需要准备什么文件。",
+          "ja": "相談後は、どこに行くのが最適か、いつ予約すればよいか、費用はいくらかかるか、準備が必要な書類は何かなど、今後の旅行について明確に理解できるようになります。",
+          "de": "Nach der Beratung haben Sie eine klare Vorstellung von Ihrer zukünftigen Reise: Wohin reisen Sie am besten, wann buchen Sie, wie viel Geld wird dafür benötigt und welche Dokumente müssen vorbereitet werden."
+        }
       },
       {
-        "title": "Фокус",
-        "text": "Не шаблонный тур, а поездка под конкретный сценарий: учитываем цель поездки, ритм отдыха, состав группы, бюджет и те впечатления, которые человек действительно хочет получить."
+        "title": {
+          "ru": "Фокус",
+          "ky": "Фокус",
+          "en": "Focus",
+          "zh": "焦点",
+          "ja": "フォーカス",
+          "de": "Konzentrieren Sie sich"
+        },
+        "text": {
+          "ru": "Не шаблонный тур, а поездка под конкретный сценарий: учитываем цель поездки, ритм отдыха, состав группы, бюджет и те впечатления, которые человек действительно хочет получить.",
+          "ky": "Үлгү тур эмес, белгилүү бир сценарийге ылайыкталган саякат: биз сапардын максатын, майрамдын ритмин, топтун курамын, бюджетти жана адам чындап эле алгысы келген таасирлерди эске алабыз.",
+          "en": "Not a template tour, but a trip tailored to a specific scenario: we take into account the purpose of the trip, the rhythm of the holiday, the composition of the group, the budget and the impressions that a person really wants to get.",
+          "zh": "不是模板旅行，而是针对特定场景量身定制的旅行：我们考虑旅行的目的、假期的节奏、团体的组成、预算以及一个人真正想要获得的印象。",
+          "ja": "テンプレート的なツアーではなく、旅の目的、休日のリズム、グループ構成、予算、本当に得たい印象などを考慮し、シナリオに合わせた旅をご提案します。",
+          "de": "Keine Mustertour, sondern eine Reise, die auf ein bestimmtes Szenario zugeschnitten ist: Wir berücksichtigen den Zweck der Reise, den Rhythmus des Urlaubs, die Zusammensetzung der Gruppe, das Budget und die Eindrücke, die jemand wirklich haben möchte."
+        }
       }
     ],
-    "formatsTitle": "Форматы поездок",
-    "formatsLead": "Подбираем формат под цель поездки",
+    "formatsTitle": {
+      "ru": "Форматы поездок",
+      "ky": "Сапар форматтары",
+      "en": "Trip formats",
+      "zh": "旅行形式",
+      "ja": "旅行形式",
+      "de": "Reiseformate"
+    },
+    "formatsLead": {
+      "ru": "Подбираем формат под цель поездки",
+      "ky": "Биз сапардын максатына жараша форматты тандайбыз",
+      "en": "We select the format for the purpose of the trip",
+      "zh": "我们根据旅行目的选择形式",
+      "ja": "旅行の目的に合わせて形式を選択します",
+      "de": "Wir wählen das Format entsprechend dem Zweck der Reise aus"
+    },
     "formats": [
-      "Семейные поездки и спокойный отдых",
-      "Групповые выезды и корпоративные маршруты",
-      "Комбинированные туры с городами и природой",
-      "Короткие weekend-программы и сезонные сборы"
+      {
+        "ru": "Семейные поездки и спокойный отдых",
+        "ky": "Үй-бүлөлүк сапарлар жана эс алуу",
+        "en": "Family trips and relaxing holidays",
+        "zh": "家庭旅行和轻松假期",
+        "ja": "家族旅行やリラックスした休日",
+        "de": "Familienausflüge und erholsame Ferien"
+      },
+      {
+        "ru": "Групповые выезды и корпоративные маршруты",
+        "ky": "Топтук сапарлар жана корпоративдик маршруттар",
+        "en": "Group trips and corporate routes",
+        "zh": "团体旅行和公司路线",
+        "ja": "団体旅行・法人向け路線",
+        "de": "Gruppenreisen und Firmenrouten"
+      },
+      {
+        "ru": "Комбинированные туры с городами и природой",
+        "ky": "Шаарлар жана жаратылыш менен айкалышкан турлар",
+        "en": "Combined tours with cities and nature",
+        "zh": "城市与自然的结合之旅",
+        "ja": "都市と自然を組み合わせたツアー",
+        "de": "Kombinierte Touren mit Stadt und Natur"
+      },
+      {
+        "ru": "Короткие weekend-программы и сезонные сборы",
+        "ky": "Кыска дем алыш программалары жана сезондук лагерлер",
+        "en": "Short weekend programs and seasonal camps",
+        "zh": "短期周末计划和季节性营地",
+        "ja": "週末の短いプログラムと季節限定のキャンプ",
+        "de": "Kurze Wochenendprogramme und saisonale Camps"
+      }
     ]
   },
   "employment": {
     "intro": {
-      "eyebrow": "Трудоустройство за рубежом",
-      "title": "Легальная работа или обучение за рубежом с понятными этапами до выезда",
-      "description": "Трудоустройство под ключ. Оставьте нам бюрократию — займитесь мечтой.",
+      "eyebrow": {
+        "ru": "Трудоустройство за рубежом",
+        "ky": "Чет өлкөдө жумушка орношуу",
+        "en": "Employment abroad",
+        "zh": "国外就业",
+        "ja": "海外での雇用",
+        "de": "Beschäftigung im Ausland"
+      },
+      "title": {
+        "ru": "Легальная работа или обучение за рубежом с понятными этапами до выезда",
+        "ky": "Чет өлкөгө кетээр алдында так кадамдар менен юридикалык жумуш же окуу",
+        "en": "Legal work or study abroad with clear steps before departure",
+        "zh": "合法工作或出国留学，出发前有明确的步骤",
+        "ja": "出発前に明確な手順を踏んで法律上の仕事や留学をする",
+        "de": "Juristische Arbeit oder Studium im Ausland mit klaren Schritten vor der Abreise"
+      },
+      "description": {
+        "ru": "Трудоустройство под ключ. Оставьте нам бюрократию — займитесь мечтой.",
+        "ky": "Ачкыч тапшыруу жумушу. Бюрократияны бизге тапшырыңыз - өз кыялдарыңызга жетиңиз.",
+        "en": "Turnkey employment. Leave the bureaucracy to us - get on with your dreams.",
+        "zh": "交钥匙就业。把官僚主义交给我们——继续你的梦想。",
+        "ja": "ターンキー雇用。官僚主義は私たちにお任せください。夢に向かって進みましょう。",
+        "de": "Schlüsselfertiger Einsatz. Überlassen Sie uns die Bürokratie – verwirklichen Sie Ihre Träume."
+      },
       "image": "/work_germany.jpg"
     },
     "countries": [
-      "Япония",
-      "Германия",
-      "Словакия",
-      "Венгрия",
-      "Эстония",
-      "Монголия"
+      {
+        "ru": "Япония",
+        "ky": "Япония",
+        "en": "Japan",
+        "zh": "日本",
+        "ja": "日本",
+        "de": "Japan"
+      },
+      {
+        "ru": "Германия",
+        "ky": "Германия",
+        "en": "Germany",
+        "zh": "德国",
+        "ja": "ドイツ",
+        "de": "Deutschland"
+      },
+      {
+        "ru": "Словакия",
+        "ky": "Словакия",
+        "en": "Slovakia",
+        "zh": "斯洛伐克",
+        "ja": "スロバキア",
+        "de": "Slowakei"
+      },
+      {
+        "ru": "Венгрия",
+        "ky": "Венгрия",
+        "en": "Hungary",
+        "zh": "匈牙利",
+        "ja": "ハンガリー",
+        "de": "Ungarn"
+      },
+      {
+        "ru": "Эстония",
+        "ky": "Эстония",
+        "en": "Estonia",
+        "zh": "爱沙尼亚",
+        "ja": "エストニア",
+        "de": "Estland"
+      },
+      {
+        "ru": "Монголия",
+        "ky": "Монголия",
+        "en": "Mongolia",
+        "zh": "蒙古",
+        "ja": "モンゴル",
+        "de": "Mongolei"
+      }
     ],
     "advantages": [
       {
-        "title": "Легальный процесс",
-        "text": "Работаем только по понятной схеме с документами, подтверждёнными этапами и прозрачным сопровождением."
+        "title": {
+          "ru": "Легальный процесс",
+          "ky": "Юридикалык процесс",
+          "en": "Legal process",
+          "zh": "法律程序",
+          "ja": "法的手続き",
+          "de": "Rechtlicher Prozess"
+        },
+        "text": {
+          "ru": "Работаем только по понятной схеме с документами, подтверждёнными этапами и прозрачным сопровождением.",
+          "ky": "Биз документтер, ырасталган этаптар жана ачык колдоо менен так схема боюнча гана иштейбиз.",
+          "en": "We work only according to a clear scheme with documents, confirmed stages and transparent support.",
+          "zh": "我们仅根据明确的计划进行工作，并提供文件、确定的阶段和透明的支持。",
+          "ja": "私たちは、文書、確認された段階、透明性のあるサポートを備えた明確なスキームに従ってのみ作業します。",
+          "de": "Wir arbeiten ausschließlich nach einem klaren Schema mit Dokumenten, bestätigten Etappen und transparenter Unterstützung."
+        }
       },
       {
-        "title": "Контроль документов",
-        "text": "Проверяем анкеты, договоры, разрешения и список бумаг до подачи и выезда."
+        "title": {
+          "ru": "Контроль документов",
+          "ky": "Документти көзөмөлдөө",
+          "en": "Document control",
+          "zh": "文件控制",
+          "ja": "文書管理",
+          "de": "Dokumentenkontrolle"
+        },
+        "text": {
+          "ru": "Проверяем анкеты, договоры, разрешения и список бумаг до подачи и выезда.",
+          "ky": "Арыздарды, контракттарды, уруксаттарды жана документтердин тизмесин тапшырып, кетер алдында текшеребиз.",
+          "en": "We check applications, contracts, permits and a list of papers before submitting and leaving.",
+          "zh": "在提交和离开之前，我们会检查申请、合同、许可证和文件清单。",
+          "ja": "私たちは申請書、契約書、許可書、書類のリストを提出して出発する前にチェックします。",
+          "de": "Wir prüfen Anträge, Verträge, Genehmigungen und eine Dokumentenliste vor der Einreichung und Abreise."
+        }
       },
       {
-        "title": "Страны и направления",
-        "text": "Подбираем вакансии и формат переезда под опыт, язык, ожидания по доходу и сроки выезда."
+        "title": {
+          "ru": "Страны и направления",
+          "ky": "Өлкөлөр жана багыттар",
+          "en": "Countries and destinations",
+          "zh": "国家和目的地",
+          "ja": "国と目的地",
+          "de": "Länder und Reiseziele"
+        },
+        "text": {
+          "ru": "Подбираем вакансии и формат переезда под опыт, язык, ожидания по доходу и сроки выезда.",
+          "ky": "We select vacancies and relocation format based on experience, language, income expectations and departure dates.",
+          "en": "We select vacancies and relocation format based on experience, language, income expectations and departure dates.",
+          "zh": "我们根据经验、语言、收入预期和出发日期选择职位空缺和搬迁形式。",
+          "ja": "経験、言語、期待収入、出発日に基づいて、求人と転勤の形式を選択します。",
+          "de": "Wir wählen offene Stellen und Umzugsformate basierend auf Erfahrung, Sprache, Einkommensvorstellungen und Abreisedaten aus."
+        }
       }
     ],
-    "processTitle": "Как проходит процесс",
+    "processTitle": {
+      "ru": "Как проходит процесс",
+      "ky": "Процесс кантип иштейт?",
+      "en": "How does the process work?",
+      "zh": "这个过程是如何进行的？",
+      "ja": "プロセスはどのように機能しますか?",
+      "de": "Wie funktioniert der Prozess?"
+    },
     "steps": [
-      "Поиск работодателя и организация собеседования",
-      "Разрешение на работу, контракт и анкеты",
-      "Подача документов, визовая поддержка и страховка",
-      "Медосмотр, предмиграционная подготовка, логистика и авиабилеты"
+      {
+        "ru": "Поиск работодателя и организация собеседования",
+        "ky": "Жумуш берүүчү табуу жана интервьюну уюштуруу",
+        "en": "Finding an employer and organizing an interview",
+        "zh": "寻找雇主并组织面试",
+        "ja": "雇用主を見つけて面接を企画する",
+        "de": "Einen Arbeitgeber finden und ein Vorstellungsgespräch organisieren"
+      },
+      {
+        "ru": "Разрешение на работу, контракт и анкеты",
+        "ky": "Жумушка уруксат, келишим жана анкета формалары",
+        "en": "Work permit, contract and application forms",
+        "zh": "工作许可证、合同和申请表",
+        "ja": "労働許可証、契約書、申請書",
+        "de": "Arbeitserlaubnis, Vertrags- und Antragsformulare"
+      },
+      {
+        "ru": "Подача документов, визовая поддержка и страховка",
+        "ky": "Submission of documents, visa support and insurance",
+        "en": "Submission of documents, visa support and insurance",
+        "zh": "提交文件、签证支持和保险",
+        "ja": "書類提出、ビザサポート、保険",
+        "de": "Einreichung von Dokumenten, Visaunterstützung und Versicherung"
+      },
+      {
+        "ru": "Медосмотр, предмиграционная подготовка, логистика и авиабилеты",
+        "ky": "Медициналык текшерүү, миграцияга чейинки даярдык, логистика жана авиабилеттер",
+        "en": "Medical examination, pre-migration preparation, logistics and air tickets",
+        "zh": "体检、移民前准备、后勤和机票",
+        "ja": "健康診断、移住前の準備、物流、航空券",
+        "de": "Ärztliche Untersuchung, Vorbereitung vor der Migration, Logistik und Flugtickets"
+      }
     ],
-    "supportTitle": "В пакет входит",
+    "supportTitle": {
+      "ru": "В пакет входит",
+      "ky": "Пакет камтыйт",
+      "en": "Package includes",
+      "zh": "套餐包括",
+      "ja": "パッケージ内容",
+      "de": "Das Paket beinhaltet"
+    },
     "supportIntro": [
-      "Трудоустройство под ключ.",
-      "Оставьте нам бюрократию — займитесь мечтой."
+      {
+        "ru": "Трудоустройство под ключ.",
+        "ky": "Ачкыч тапшыруу жумушу.",
+        "en": "Turnkey employment.",
+        "zh": "交钥匙就业。",
+        "ja": "ターンキー雇用。",
+        "de": "Schlüsselfertiger Einsatz."
+      },
+      {
+        "ru": "Оставьте нам бюрократию — займитесь мечтой.",
+        "ky": "Бюрократияны бизге тапшырыңыз - өз кыялдарыңызга жетиңиз.",
+        "en": "Leave the bureaucracy to us - get on with your dreams.",
+        "zh": "把官僚主义交给我们——继续你的梦想。",
+        "ja": "官僚主義は私たちにお任せください。夢に向かって進みましょう。",
+        "de": "Überlassen Sie uns die Bürokratie – verwirklichen Sie Ihre Träume."
+      }
     ],
     "supportItems": [
-      "Поиск подходящей вакансии и организация собеседования",
-      "Визовая поддержка: заполнение анкет, подготовка документов и сопровождение при обращении в посольство",
-      "Перевод дипломов и паспортов с нотариальным заверением",
-      "Языковые курсы перед выездом",
-      "Организация медицинского осмотра",
-      "Оформление медицинской страховки",
-      "Подбор и приобретение авиабилетов с выгодными стыковками и бонусами",
-      "Предвыездная миграционная подготовка: законы, обычаи и особенности быта в стране назначения"
+      {
+        "ru": "Поиск подходящей вакансии и организация собеседования",
+        "ky": "Ылайыктуу вакансияны табуу жана интервьюну уюштуруу",
+        "en": "Finding a suitable vacancy and organizing an interview",
+        "zh": "寻找合适的职位空缺并组织面试",
+        "ja": "適切な求人を見つけて面接を手配する",
+        "de": "Eine passende Stelle finden und ein Vorstellungsgespräch organisieren"
+      },
+      {
+        "ru": "Визовая поддержка: заполнение анкет, подготовка документов и сопровождение при обращении в посольство",
+        "ky": "Визалык колдоо: бланктарды толтуруу, документтерди даярдоо жана элчиликке кайрылууда колдоо көрсөтүү",
+        "en": "Visa support: filling out forms, preparing documents and support when contacting the embassy",
+        "zh": "签证支持：填写表格、准备文件并在联系大使馆时提供支持",
+        "ja": "ビザサポート：フォームへの記入、書類の準備、大使館への連絡時のサポート",
+        "de": "Visa-Unterstützung: Ausfüllen von Formularen, Vorbereitung von Dokumenten und Unterstützung bei der Kontaktaufnahme mit der Botschaft"
+      },
+      {
+        "ru": "Перевод дипломов и паспортов с нотариальным заверением",
+        "ky": "Дипломдорду жана паспортторду нотариалдык күбөлөндүрүү менен которуу",
+        "en": "Translation of diplomas and passports with notarization",
+        "zh": "文凭和护照的翻译及公证",
+        "ja": "公証による卒業証書とパスポートの翻訳",
+        "de": "Übersetzung von Diplomen und Reisepässen mit notarieller Beglaubigung"
+      },
+      {
+        "ru": "Языковые курсы перед выездом",
+        "ky": "Кеткенге чейин тил курстары",
+        "en": "Language courses before departure",
+        "zh": "出发前的语言课程",
+        "ja": "出発前の語学コース",
+        "de": "Sprachkurse vor der Abreise"
+      },
+      {
+        "ru": "Организация медицинского осмотра",
+        "ky": "Медициналык кароону уюштуруу",
+        "en": "Organization of medical examination",
+        "zh": "组织体检",
+        "ja": "健康診断の組織",
+        "de": "Organisation der ärztlichen Untersuchung"
+      },
+      {
+        "ru": "Оформление медицинской страховки",
+        "ky": "Ден соолук камсыздандырууга кайрылуу",
+        "en": "Applying for health insurance",
+        "zh": "申请健康保险",
+        "ja": "健康保険の申請",
+        "de": "Beantragung einer Krankenversicherung"
+      },
+      {
+        "ru": "Подбор и приобретение авиабилетов с выгодными стыковками и бонусами",
+        "ky": "Selection and purchase of air tickets with favorable connections and bonuses",
+        "en": "Selection and purchase of air tickets with favorable connections and bonuses",
+        "zh": "选择和购买具有优惠转机和奖励的机票",
+        "ja": "乗り継ぎや特典が充実した航空券の選択・購入",
+        "de": "Auswahl und Kauf von Flugtickets mit günstigen Verbindungen und Prämien"
+      },
+      {
+        "ru": "Предвыездная миграционная подготовка: законы, обычаи и особенности быта в стране назначения",
+        "ky": "Кетүү алдындагы миграциялык даярдык: бара турган өлкөнүн мыйзамдары, каада-салттары жана жашоо өзгөчөлүктөрү",
+        "en": "Pre-departure migration preparation: laws, customs and features of life in the country of destination",
+        "zh": "出发前移民准备：目的地国家的法律、习俗和生活特点",
+        "ja": "出発前の移住準備：目的国の法律、習慣、生活の特徴",
+        "de": "Migrationsvorbereitung vor der Abreise: Gesetze, Bräuche und Besonderheiten des Lebens im Zielland"
+      }
     ],
     "supportOutro": [
-      "Всё это — в одной компании. Никакой беготни по городу.",
-      "Просто скажите нам «да», и мы запустим процесс."
+      {
+        "ru": "Всё это — в одной компании. Никакой беготни по городу.",
+        "ky": "Мунун баары - бир компанияда. Шаарды айланып чуркоо болбойт.",
+        "en": "All this - in one company. No running around the city.",
+        "zh": "所有这一切 - 在一家公司内。没有在城市里跑来跑去。",
+        "ja": "これらすべてが 1 つの会社で行われます。街中を走ることはありません。",
+        "de": "Das alles – in einem Unternehmen. Kein Laufen durch die Stadt."
+      },
+      {
+        "ru": "Просто скажите нам «да», и мы запустим процесс.",
+        "ky": "Бизге жөн гана ооба деп айтыңыз жана биз процессти баштайбыз.",
+        "en": "Just tell us yes and we'll get the process started.",
+        "zh": "只要告诉我们“是”，我们就会开始这个过程。",
+        "ja": "「はい」と答えていただければ、手続きを開始いたします。",
+        "de": "Sagen Sie uns einfach „Ja“ und wir starten den Prozess."
+      }
     ]
   },
   "education": {
     "intro": {
-      "eyebrow": "Обучение",
-      "title": "Обучение языкам и туристическим профессиям с понятной программой занятий и получением сертификата.",
-      "description": "Наши курсы — это не просто уроки. Организуем языковые курсы и обучение для гидов, менеджеров по туризму, бронированию и продаже авиабилетов по эффективным программам.",
+      "eyebrow": {
+        "ru": "Обучение",
+        "ky": "Тренинг",
+        "en": "Training",
+        "zh": "培训",
+        "ja": "トレーニング",
+        "de": "Ausbildung"
+      },
+      "title": {
+        "ru": "Обучение языкам и туристическим профессиям с понятной программой занятий и получением сертификата.",
+        "ky": "Тил жана туризм кесиптери боюнча так сабак программасы менен окутуу жана сертификат алуу.",
+        "en": "Training in languages and tourism professions with a clear lesson program and obtaining a certificate.",
+        "zh": "语言和旅游专业培训，具有明确的课程计划并获得证书。",
+        "ja": "明確なレッスンプログラムで語学と観光業のトレーニングを行い、証明書を取得します。",
+        "de": "Ausbildung in Sprachen und Tourismusberufen mit klarem Unterrichtsprogramm und Erlangung eines Zertifikats."
+      },
+      "description": {
+        "ru": "Наши курсы — это не просто уроки. Организуем языковые курсы и обучение для гидов, менеджеров по туризму, бронированию и продаже авиабилетов по эффективным программам.",
+        "ky": "Биздин курстар жөн гана сабак эмес. Биз тил курстарын жана гиддер, туризм менеджерлери үчүн тренингдерди уюштуруп, эффективдүү программалар боюнча авиа билеттерди брондоо жана сатууну уюштурабыз.",
+        "en": "Our courses are not just lessons. We organize language courses and training for guides, tourism managers, booking and selling air tickets according to effective programs.",
+        "zh": "我们的课程不仅仅是课程。我们根据有效的方案为导游、旅游经理、预订和销售机票组织语言课程和培训。",
+        "ja": "私たちのコースは単なるレッスンではありません。私たちは、効果的なプログラムに従ってガイド、観光マネージャー、航空券の予約と販売のための語学コースとトレーニングを企画しています。",
+        "de": "Unsere Kurse sind nicht nur Unterricht. Wir organisieren Sprachkurse und Schulungen für Reiseführer und Tourismusmanager sowie die Buchung und den Verkauf von Flugtickets nach effektiven Programmen."
+      },
       "image": "/learn_germany.jpg"
     },
     "benefits": [
       {
-        "title": "Языковые курсы",
-        "text": "Изучение иностранных языков даёт колоссальные преимущества: это образование, международный опыт, свобода общения и новые карьерные перспективы."
+        "title": {
+          "ru": "Языковые курсы",
+          "ky": "Тил курстары",
+          "en": "Language courses",
+          "zh": "语言课程",
+          "ja": "語学コース",
+          "de": "Sprachkurse"
+        },
+        "text": {
+          "ru": "Изучение иностранных языков даёт колоссальные преимущества: это образование, международный опыт, свобода общения и новые карьерные перспективы.",
+          "ky": "Чет тилдерин үйрөнүү эбегейсиз артыкчылыктарды берет: билим, эл аралык тажрыйба, баарлашуу эркиндиги жана жаңы карьералык перспективалар.",
+          "en": "Learning foreign languages provides enormous benefits: education, international experience, freedom of communication and new career prospects.",
+          "zh": "学习外语可以带来巨大的好处：教育、国际经验、沟通自由和新的职业前景。",
+          "ja": "外国語を学ぶことは、教育、国際経験、コミュニケーションの自由、新たなキャリアの可能性など、多大なメリットをもたらします。",
+          "de": "Das Erlernen von Fremdsprachen bietet enorme Vorteile: Bildung, internationale Erfahrung, Kommunikationsfreiheit und neue berufliche Perspektiven."
+        }
       },
       {
-        "title": "Изучение языков и развитие мышления",
-        "text": "Кроме того, изучение языков является отличным тренажёром для мозга. Знание иностранных языков меняет не только мировоззрение человека, но и помогает развивать память, внимание и мышление."
+        "title": {
+          "ru": "Изучение языков и развитие мышления",
+          "ky": "Тил үйрөнүү жана ой жүгүртүүнү өнүктүрүү",
+          "en": "Learning languages and developing thinking",
+          "zh": "学习语言和发展思维",
+          "ja": "言語を学び、思考力を養う",
+          "de": "Sprachen lernen und Denken entwickeln"
+        },
+        "text": {
+          "ru": "Кроме того, изучение языков является отличным тренажёром для мозга. Знание иностранных языков меняет не только мировоззрение человека, но и помогает развивать память, внимание и мышление.",
+          "ky": "Кошумчалай кетсек, тил үйрөнүү мээ үчүн эң сонун көнүгүү. Чет тилдерди билүү адамдын дүйнө таанымын гана өзгөртпөстөн, эс тутумун, көңүлүн жана ой жүгүртүүсүн өнүктүрүүгө жардам берет.",
+          "en": "In addition, learning languages is a great exercise for the brain. Knowledge of foreign languages ​​not only changes a person’s worldview, but also helps develop memory, attention and thinking.",
+          "zh": "此外，学习语言对大脑来说也是一种很好的锻炼。掌握外语不仅可以改变一个人的世界观，还有助于发展记忆力、注意力和思维能力。",
+          "ja": "さらに、言語を学ぶことは脳にとって素晴らしい訓練です。外国語の知識は人の世界観を変えるだけでなく、記憶力、注意力、思考力の発達にも役立ちます。",
+          "de": "Darüber hinaus ist das Erlernen von Sprachen eine tolle Übung für das Gehirn. Fremdsprachenkenntnisse verändern nicht nur die Weltanschauung eines Menschen, sondern tragen auch zur Entwicklung von Gedächtnis, Aufmerksamkeit und Denken bei."
+        }
       },
       {
-        "title": "Особенность обучения в компании «Юник Азия»",
-        "text": "Главная особенность обучения в компании «Юник Азия» заключается в том, что языковые курсы комбинируются с другими направлениями деятельности компании."
+        "title": {
+          "ru": "Особенность обучения в компании «Юник Азия»",
+          "ky": "Уникалдуу Азияда машыгуунун өзгөчөлүктөрү",
+          "en": "Features of training at Unique Asia",
+          "zh": "Unique Asia的培训特色",
+          "ja": "ユニークアジアの研修の特徴",
+          "de": "Merkmale der Ausbildung bei Unique Asia"
+        },
+        "text": {
+          "ru": "Главная особенность обучения в компании «Юник Азия» заключается в том, что языковые курсы комбинируются с другими направлениями деятельности компании.",
+          "ky": "Уникалдуу Азияда окутуунун негизги өзгөчөлүгү – бул тил курстары компаниянын ишмердүүлүгүнүн башка багыттары менен айкалышкан.",
+          "en": "The main feature of training at Unique Asia is that language courses are combined with other areas of the company’s activities.",
+          "zh": "Unique Asia培训的主要特点是语言课程与公司其他领域的活动相结合。",
+          "ja": "Unique Asia でのトレーニングの主な特徴は、語学コースが会社の活動の他の分野と組み合わされていることです。",
+          "de": "Das Hauptmerkmal der Ausbildung bei Unique Asia besteht darin, dass Sprachkurse mit anderen Tätigkeitsbereichen des Unternehmens kombiniert werden."
+        }
       }
     ],
     "tracks": [
       {
-        "title": "Курсы в сфере туризма",
-        "text": "Это направление является уникальным проектом компании, поскольку ранее аналогичного комплексного подхода к обучению специалистов туристической сферы в Кыргызстане не было."
+        "title": {
+          "ru": "Курсы в сфере туризма",
+          "ky": "Туризм курстары",
+          "en": "Tourism courses",
+          "zh": "旅游课程",
+          "ja": "観光コース",
+          "de": "Tourismuskurse"
+        },
+        "text": {
+          "ru": "Это направление является уникальным проектом компании, поскольку ранее аналогичного комплексного подхода к обучению специалистов туристической сферы в Кыргызстане не было.",
+          "ky": "Бул багыт компаниянын уникалдуу долбоору болуп саналат, анткени буга чейин Кыргызстанда туризм тармагында адистерди даярдоого окшош комплекстүү мамиле болгон эмес.",
+          "en": "This direction is a unique project of the company, since previously there was no similar comprehensive approach to training specialists in the tourism sector in Kyrgyzstan.",
+          "zh": "这个方向是该公司的一个独特项目，因为此前吉尔吉斯斯坦没有类似的综合方法来培训旅游部门的专家。",
+          "ja": "これまでキルギスタンには観光分野の専門家を訓練するための同様の包括的なアプローチがなかったため、この方向性は同社のユニークなプロジェクトである。",
+          "de": "Diese Richtung ist ein einzigartiges Projekt des Unternehmens, da es in Kirgisistan bisher keinen ähnlich umfassenden Ansatz zur Ausbildung von Fachkräften im Tourismussektor gab."
+        }
       },
       {
-        "title": "Почему это важно",
-        "text": "Кыргызстан ежегодно привлекает тысячи иностранных туристов. Международные издания и туристические платформы регулярно включают страну в подборки рекомендуемых направлений для путешествий. Развитие туристической отрасли создаёт спрос на квалифицированных специалистов, которые знают иностранные языки, понимают особенности работы с туристами и умеют профессионально организовывать поездки."
+        "title": {
+          "ru": "Почему это важно",
+          "ky": "Бул эмне үчүн маанилүү",
+          "en": "Why is this important",
+          "zh": "为什么这很重要",
+          "ja": "これがなぜ重要なのか",
+          "de": "Warum ist das wichtig?"
+        },
+        "text": {
+          "ru": "Кыргызстан ежегодно привлекает тысячи иностранных туристов. Международные издания и туристические платформы регулярно включают страну в подборки рекомендуемых направлений для путешествий. Развитие туристической отрасли создаёт спрос на квалифицированных специалистов, которые знают иностранные языки, понимают особенности работы с туристами и умеют профессионально организовывать поездки.",
+          "ky": "Кыргызстан жыл сайын миңдеген чет элдик туристтерди өзүнө тартып турат. Эл аралык басылмалар жана саякат платформалары өлкөнү сунуш кылынган саякат багыттарынын тизмесине дайыма киргизет. Туризм тармагынын өнүгүшү чет тилдерди билген, туристтер менен иштөөнүн өзгөчөлүктөрүн түшүнгөн жана саякаттарды профессионалдуу уюштура алган квалификациялуу адистерге суроо-талапты жаратууда.",
+          "en": "Kyrgyzstan attracts thousands of foreign tourists every year. International publications and travel platforms regularly include the country in their lists of recommended travel destinations. The development of the tourism industry creates a demand for qualified specialists who know foreign languages, understand the peculiarities of working with tourists and are able to professionally organize trips.",
+          "zh": "吉尔吉斯斯坦每年吸引成千上万的外国游客。国际出版物和旅游平台定期将该国列入推荐旅游目的地列表。旅游业的发展创造了对懂外语、了解与游客合作的特殊性并能够专业组织旅行的合格专家的需求。",
+          "ja": "キルギスには毎年何千人もの外国人観光客が訪れます。国際出版物や旅行プラットフォームでは、推奨される旅行先のリストに定期的にこの国が含まれています。観光産業の発展により、外国語を理解し、観光客との仕事の特殊性を理解し、専門的に旅行を企画できる資格のある専門家の需要が生まれています。",
+          "de": "Kirgisistan zieht jedes Jahr Tausende ausländische Touristen an. Internationale Publikationen und Reiseplattformen nehmen das Land regelmäßig in ihre Listen empfohlener Reiseziele auf. Die Entwicklung der Tourismusbranche schafft einen Bedarf an qualifizierten Fachkräften, die Fremdsprachen beherrschen, die Besonderheiten der Arbeit mit Touristen verstehen und Reisen professionell organisieren können."
+        }
       },
       {
-        "title": "Направления подготовки",
-        "text": "Компания «Юник Азия» предлагает обучение по трём основным направлениям: • Подготовка менеджеров по туризму • Подготовка гидов • Подготовка менеджеров по бронированию и продаже авиабилетов"
+        "title": {
+          "ru": "Направления подготовки",
+          "ky": "Окутуунун багыттары",
+          "en": "Areas of training",
+          "zh": "培训领域",
+          "ja": "トレーニング分野",
+          "de": "Ausbildungsbereiche"
+        },
+        "text": {
+          "ru": "Компания «Юник Азия» предлагает обучение по трём основным направлениям: • Подготовка менеджеров по туризму • Подготовка гидов • Подготовка менеджеров по бронированию и продаже авиабилетов",
+          "ky": "Unique Asia компаниясы үч негизги багыт боюнча окутууну сунуштайт: • Туризм боюнча менеджерлерди окутуу • Гиддерди окутуу • Авиа билеттерди брондоо жана сатуу боюнча менеджерлерди окутуу",
+          "en": "The Unique Asia company offers training in three main areas: • Training of tourism managers • Training of guides • Training of managers for booking and selling air tickets",
+          "zh": "Unique Asia 公司提供三个主要领域的培训： • 旅游管理人员培训 • 导游培训 • 机票预订和销售管理人员培训",
+          "ja": "Unique Asia 社は、次の 3 つの主要分野でトレーニングを提供しています。 • 観光マネージャーのトレーニング • ガイドのトレーニング • 航空券の予約と販売のマネージャーのトレーニング",
+          "de": "Das Unternehmen Unique Asia bietet Schulungen in drei Hauptbereichen an: • Schulung von Tourismusmanagern • Schulung von Reiseführern • Schulung von Managern für die Buchung und den Verkauf von Flugtickets"
+        }
       }
     ],
-    "formatsTitle": "Какие языки мы преподаём",
-    "formatsLead": "Вы можете изучать язык для конкретной цели — туристической поездки, учёбы, работы, адаптации или трудоустройства за границей.",
+    "formatsTitle": {
+      "ru": "Какие языки мы преподаём",
+      "ky": "Биз кайсы тилдерди үйрөтөбүз?",
+      "en": "What languages do we teach?",
+      "zh": "我们教什么语言？",
+      "ja": "私たちはどのような言語を教えていますか?",
+      "de": "Welche Sprachen unterrichten wir?"
+    },
+    "formatsLead": {
+      "ru": "Вы можете изучать язык для конкретной цели — туристической поездки, учёбы, работы, адаптации или трудоустройства за границей.",
+      "ky": "Тилди белгилүү бир максат үчүн - туристтик саякат, окуу, иштөө, адаптациялоо же чет өлкөдө ишке орноштуруу үчүн үйрөнө аласыз.",
+      "en": "You can learn a language for a specific purpose - a tourist trip, study, work, adaptation or employment abroad.",
+      "zh": "您可以为了特定目的学习语言 - 出国旅游、学习、工作、适应或就业。",
+      "ja": "観光旅行、留学、仕事、適応、海外での雇用など、特定の目的に合わせて言語を学ぶことができます。",
+      "de": "Sie können eine Sprache für einen bestimmten Zweck lernen – eine Touristenreise, ein Studium, eine Arbeit, eine Anpassung oder eine Anstellung im Ausland."
+    },
     "formats": [
-      "Английский язык",
-      "Японский язык",
-      "Немецкий язык",
-      "Кыргыз тили"
+      {
+        "ru": "Английский язык",
+        "ky": "Англис тили",
+        "en": "English language",
+        "zh": "英语语言",
+        "ja": "英語",
+        "de": "Englische Sprache"
+      },
+      {
+        "ru": "Японский язык",
+        "ky": "япон тили",
+        "en": "Japanese language",
+        "zh": "日语",
+        "ja": "日本語",
+        "de": "Japanische Sprache"
+      },
+      {
+        "ru": "Немецкий язык",
+        "ky": "немис тили",
+        "en": "German language",
+        "zh": "德语",
+        "ja": "ドイツ語",
+        "de": "Deutsche Sprache"
+      },
+      {
+        "ru": "Кыргыз тили",
+        "ky": "Кыргыз тили",
+        "en": "Kyrgyz Tili",
+        "zh": "吉尔吉斯提利",
+        "ja": "キルギス・ティリ",
+        "de": "Kirgisischer Tili"
+      }
     ],
-    "note": "Подготовка гидов, менеджеров по туризму, а также специалистов по бронированию и продаже авиабилетов."
+    "note": {
+      "ru": "Подготовка гидов, менеджеров по туризму, а также специалистов по бронированию и продаже авиабилетов.",
+      "ky": "Training of guides, tourism managers, as well as specialists in booking and selling air tickets.",
+      "en": "Training of guides, tourism managers, as well as specialists in booking and selling air tickets.",
+      "zh": "培训导游、旅游经理以及预订和销售机票的专家。",
+      "ja": "ガイド、観光マネージャー、航空券の予約と販売の専門家のトレーニング。",
+      "de": "Ausbildung von Reiseführern, Tourismusmanagern sowie Spezialisten für die Buchung und den Verkauf von Flugtickets."
+    }
   }
 }

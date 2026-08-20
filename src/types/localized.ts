@@ -15,7 +15,7 @@ export const languageLabels: Record<Locale, string> = {
 
 export function createLocalizedText(value = ''): LocalizedText {
   return localeCodes.reduce((result, locale) => {
-    result[locale] = locale === 'ru' ? value : '';
+    result[locale] = locale === 'ru' ? value : getInitialTranslation(locale, value) || '';
     return result;
   }, {} as LocalizedText);
 }
@@ -42,3 +42,4 @@ export function getLocalizedText(value: string | Partial<LocalizedText>, locale:
   if (typeof value === 'string') return value;
   return value[locale] || value.ru || '';
 }
+import { getInitialTranslation } from '../i18n/initialTranslations';
